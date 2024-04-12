@@ -1,5 +1,6 @@
-# MPM Projekt Team 2
-
+# MPM Projekt Team 2 2024
+- SSH Zugang
+- Teammitglieder eintragen:
 
 
 ## Getting started
