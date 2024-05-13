@@ -1,0 +1,134 @@
+/* CSS */
+@font-face {
+    font-family: "space";
+    src: url("./font/Jersey10-Regular.woff2") format("woff2"),
+         url("./font/Jersey10-Regular.woff2") format("woff");
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "space", sans-serif;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-color: #000000; /* Hintergrundfarbe für den Bereich um den Feed */
+}
+
+#feed {
+    position: relative;
+    height: 750px;
+    background: url(./images/space.jpg);
+    background-size: cover;   
+    overflow: scroll;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    scroll-snap-type: y mandatory;
+}
+
+#feed ::-webkit-scrollbar {
+    display: none;
+}
+#feed {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.container {
+    display: grid;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    scroll-snap-align: start;
+    
+}
+.planet {
+    width: 20em;
+    height: 20em;
+    box-shadow: inset -2em -2em 2em #000,
+                -0.5em -0.5em 1em #f0d08b;
+    position: relative;
+    animation: rotate 60s linear infinite;  
+    cursor: pointer;
+}
+
+#planet1 {
+    background: url(./images/jupiter.jpg); /* Blau wie die Erde */
+}
+#planet2 {
+    background: url(./images/greenplanet.jpg); /* Blau wie die Erde */
+}
+
+.moon {
+    background: url(./images/mercury.jpg) ;
+    box-shadow: inset -1.5em -1.5em 1.5em #000, -0.2em -0.2em 0.5em #ccc;
+    width: 6em;
+    height: 6em;
+    position: absolute;
+    left: -11em;
+    top: 50%;
+    transform: translateY(-50%);
+    animation:  orbit 20s infinite ease-in-out,
+                rotate 5s linear infinite;
+    z-index: 1;   
+}
+
+.planet, .moon {
+    border-radius: 50%;
+    background-repeat: repeat;
+    background-size: 200% 100%;
+}
+@keyframes rotate {
+    to { 
+        background-position: -200% 0;
+    }
+}
+
+@keyframes orbit {
+    49% {
+        z-index: 1;
+    }
+    50% {
+        left: 25em;
+        z-index: -1;   
+    }
+    99% {
+        z-index: -1;
+    }
+    100% {
+        left: -11em;
+        z-index: 1;
+    }
+}
+
+.title {
+    color: white;
+    position: absolute;
+    top: 13%; /* Anpassen der Positionierung des Titels */
+}
+
+
+ .planet.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgb(255, 255, 255), transparent); /* Weiße Vignette */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9998; /* Über dem Planeten */
+  }
