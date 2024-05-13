@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototyp Levelauswahl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="overlay"></div>
+<h1 id="level"></h1>
+<svg id="motionPath" viewBox="-20 0 557 190">
+    <path id="path" stroke-dasharray="5,5" fill="none" d="M8,102 C15,83 58,25 131,24 206,24 233,63 259,91 292,125 328,155 377,155 464,155 497,97 504,74"/>
+
+    <g id="spaceship">
+        <image href="images/spaceship.svg" width="50" transform="rotate(90)"/>
+    </g>
+    <g class="meteoridcontainer" transform="translate(100,50)">
+        <image class="meteorid" id="meteorid1" href="images/meteorid.svg" width="100" />
+        <text id="labelLevel1" x="50" y="45" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="12" fill="white">Level 1</text>
+    </g>
+    <g class="meteoridcontainer" id="meteorid2" transform="translate(320,30)">
+        <image class="meteorid" id="meteorid2" href="images/meteorid.svg" width="100" />
+        <text id="labelLevel2" x="50" y="45" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="12" fill="white">Level 2</text>
+    </g>
+</svg>
+<button id="start">Start</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
