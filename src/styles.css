@@ -40,7 +40,7 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background-image: url('./bilder/landingpage_background.svg');
+    background-image: url('./bilder/landingpage/landingpage_background.svg');
     background-size:cover;
     background-repeat: repeat;
     background-position: top;
@@ -89,23 +89,23 @@ text-shadow:
 }
 
 #planet1 {
-    background-image: url('./bilder/1.png');
+    background-image: url('./bilder/landingpage/1.png');
     box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #f0d08b;
 }
 #planet2 {
-    background-image: url('./bilder/2.png');
+    background-image: url('./bilder/landingpage/2.png');
     box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #8be1f0;
 }
 #planet3 {
-    background-image: url('./bilder/3.png');
+    background-image: url('./bilder/landingpage/3.png');
     box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #f08bd7;
 }
 #planet4 {
-    background-image: url('./bilder/4.png');
+    background-image: url('./bilder/landingpage/4.png');
     box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #a8f08b;
 }
 #planet5 {
-    background-image: url('./bilder/5.png');
+    background-image: url('./bilder/landingpage/5.png');
     box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #f0e98b;
 }
 @keyframes rotate {
