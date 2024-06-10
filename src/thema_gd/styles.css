@@ -5,7 +5,7 @@ html, body {
   }
   
   body {
-    background-image: url("..\bilder\gd\planet_background.svg");
+    background-image: url("..\bilder\planet_background.svg");
     background-size: cover;
     background-position: center;
     position: relative;
