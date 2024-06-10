@@ -130,7 +130,17 @@ levelItem.forEach((item, index) => {
 });
 
 startButton.addEventListener("click", function () {
-    // animateToLevel(currentLevel);
+    switch (currentLevel) {
+        case 0:
+            window.location.href = "level1.html";
+            break;
+        case 1:
+            window.location.href = "level2.html";
+            break;
+        case 2:
+            window.location.href = "level3.html";
+            break;
+    }
 });
 
 gsap.to("#spaceship", {
