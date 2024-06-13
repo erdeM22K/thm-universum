@@ -118,7 +118,7 @@ svg {
     }
 }
 
-@media (max-width: 480px) {
+@media only screen and (max-width: 480px) {
     /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
     #startButton {
         position: absolute; /* Ändere die Position auf absolut */
