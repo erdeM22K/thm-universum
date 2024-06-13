@@ -118,7 +118,7 @@ svg {
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 640px) {
     /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
     #startButton {
         position: absolute; /* Ändere die Position auf absolut */
@@ -128,12 +128,16 @@ svg {
         margin-top: 20px; /* Füge einen oberen Abstand hinzu, um den Button unter der SVG zu platzieren */
         width: auto; /* Setze die Breite auf automatisch */
         height: auto;
+        font-size: 2rem;
     }
     header {
         padding: 20px 0;
     }
     header h1{
-        color: red;
+        font-size: 2rem;
+    }
+    header img{
+        width:200px;
     }
     .back-to-home {
         font-size: 3rem; /* Größerer Schriftgrad für mobile Ansicht */
