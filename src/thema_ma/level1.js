@@ -213,8 +213,8 @@ function displayFeedback(message, isCorrect) {
                     currentQuestionIndex = 0;
                     gsap.to("#text", {
                         duration: 3,
-                        delay: 15,
-                        text: "Du hast alle Fragen richtig beantwortet und somit das erste Level erfolgreich beendet! Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
+                        delay: 10,
+                        text: "Du hast alle Fragen richtig beantwortet und somit das erste Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
                     });
                 }
             }

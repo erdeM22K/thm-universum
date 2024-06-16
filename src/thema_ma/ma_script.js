@@ -5,11 +5,11 @@ const levelItem = document.querySelectorAll(".level");
 const numberOfIcons = levelItem.length;
 const iconSpacing = pathLength / numberOfIcons;
 const startButton = document.getElementById('startButton');
-const levels = ["Android Studio"];
+const levels = ["Softwareplatformen", "Appdesign", "Sensoren"];
 let currentLevel = 0;
 
 for (let i = 0; i < numberOfIcons; i++) {
-    const distance = pathLength/2;
+    const distance = pathStart + i * iconSpacing;
     const point = path.getPointAtLength(distance);
     levelItem[i].setAttribute('transform', `translate(${point.x - 8}, ${point.y - 8})`);
 }
@@ -19,7 +19,7 @@ gsap.registerPlugin(TextPlugin);
 
 let spaceship = document.querySelector("#spaceship");
 let start = 0;
-let breakpointLevel = [0.42];
+let breakpointLevel = [0.14, 0.43, 0.72];
 
 function placeSpaceshipOnPath() {
     gsap.to("#spaceship", {
@@ -134,12 +134,12 @@ startButton.addEventListener("click", function () {
         case 0:
             window.location.href = "level1.html";
             break;
-        /*case 1:
+        case 1:
             window.location.href = "level2.html";
             break;
         case 2:
             window.location.href = "level3.html";
-            break;*/
+            break;
     }
 });
 

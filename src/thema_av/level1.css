@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-    background-image: url("../bilder/planet_background.svg");
+    background-image: url("../bilder/background_av.svg");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -35,7 +35,23 @@ body {
     z-index: 1;
     border: #000 solid;
     border-radius: 1em;
+    overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+    padding: 1em; /* Fügt Innenabstand hinzu, um den Text vom Rand zu entfernen */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite und -höhe */
 }
+
+#text {
+    font-family: "Press Start 2P";
+    margin: 1em 10em 1em 1em;
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+    line-height: 2em;
+}
+
 
 .copilot {
     height: 60vh;
@@ -59,18 +75,6 @@ body {
     width: 80%;
 }
 
-#text {
-    font-family: "Press Start 2P";
-    margin: 2em;
-    margin-right: 15em;
-    color: white;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px  1px 0 #000,
-            1px  1px 0 #000;
-    line-height: 2em;
-}
 
 #dots {
     display: none;
@@ -143,4 +147,46 @@ body {
     text-align: center;
     transform: translate(-50%, 50%);
     z-index: 2;
+}
+
+/* Stil für den Pfeil-Button */
+.back-to-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.back-to-home:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.back-to-home:hover {
+    color: #80ba24;
+}
+
+/* Stil für die Scrollleiste */
+.textfeld::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
 }
