@@ -109,16 +109,6 @@ svg {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 1000px) {
-    header h1 {
-        font-size: 3rem;
-        color: #f1f1f1;
-    }
-    header img {
-        width: 500px;
-    }
-}
-
 .textfeld {
     position: absolute;
     bottom: 1%;
@@ -175,6 +165,16 @@ svg {
     background: black;
     opacity: 0;
     z-index: 5; /* Über allen anderen Inhalten */
+}
+
+@media only screen and (max-width: 1000px) {
+    header h1 {
+        font-size: 3rem;
+        color: #f1f1f1;
+    }
+    header img {
+        width: 500px;
+    }
 }
 
 @media only screen and (max-width: 480px) {

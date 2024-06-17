@@ -5,8 +5,11 @@ const levelItem = document.querySelectorAll(".level");
 const numberOfIcons = levelItem.length;
 const iconSpacing = pathLength / numberOfIcons;
 const startButton = document.getElementById('startButton');
+const textfeld = document.querySelector(".textfeld");
+const copilotContainer = document.querySelector(".copilot_container");
 const levels = ["Modellierung", "Shading", "Animation"];
 let currentLevel = 0;
+let text1 = "Wir landen auf dem Planeten der Grafischen Datenverarbeitung. Hier kannst du die Stationen \"Modellierung\", \"Shading\" und \"Animation\" besuchen.";
 
 for (let i = 0; i < numberOfIcons; i++) {
     const distance = pathStart + i * iconSpacing;
@@ -120,6 +123,96 @@ function setButtonAnimation(id, button) {
     });
 }
 
+
+
+function startAnimation() {
+    textfeld.style.display = "block";
+    copilotContainer.style.display = "block";
+    gsap.from(".textfeld", {
+        y: 1500,
+        duration: 3,
+        ease: 'power4.out',
+    });
+    gsap.from(".copilot_container", {
+        x: 1500,
+        duration: 3,
+        ease: 'power4.out',
+    });
+}
+function clearText() {
+    gsap.to("#text", {
+        duration: 0.5,
+        text: "",
+        onComplete: function() {
+            console.log("Textfeld geleert");
+        }
+    });
+    document.getElementById("dots").style.display = "none";
+}
+function showNextText(text) {
+    gsap.to("#text", {
+        duration: 3,
+        delay: 1,
+        text: text,
+        onComplete: function() {
+            startDotsAnimation(text);
+            console.log("Text wird ausgeführt");
+        }
+    });
+}
+function startDotsAnimation(lastText) {
+    if (document.getElementById("text").innerText === lastText) {
+        document.getElementById("dots").style.display = "none";
+    } else {
+        document.getElementById("dots").style.display = "block";
+        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        gsap.to("#dots", {
+            duration: 2,
+            repeat: -1,
+            text: "...",
+            onComplete: function() {
+
+                console.log("Textfeld geleert");
+            }
+        });
+    }
+}
+document.querySelectorAll('.textfeld').forEach(function(element) {
+    element.addEventListener('click', function() {
+        const textElement = document.getElementById("text");
+        if (textElement.innerText === text1) {
+            //clearText();
+            //showNextText(text2);
+            gsap.to(".textfeld", {
+                y: 1500,
+                duration: 3,
+                ease: 'power4.out',
+                opacity: 0,
+                onComplete: function () {
+                    textfeld.style.display = "none";
+                }
+            });
+            gsap.to(".copilot_container", {
+                x: 1500,
+                duration: 3,
+                ease: 'power4.out',
+                opacity: 0,
+                onComplete: function () {
+                    copilotContainer.style.display = "none";
+                }
+            });
+            gsap.to("#overlay", {
+                duration: 0.5,
+                opacity: 0,
+                onComplete: function () {
+                    document.querySelector("#overlay").style.display = "none";
+                }
+            });
+            localStorage.setItem('gd_visited', 'true');
+        }
+    });
+});
+
 placeSpaceshipOnPath();
 setButtonAnimation("#startButton", startButton);
 
@@ -149,4 +242,25 @@ gsap.to("#spaceship", {
     ease: "power1.inOut",
     repeat: -1,
     yoyo: true
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('gd_visited')) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.5
+        });
+        startAnimation();
+        gsap.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: text1,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Text 1 ausgeführt");
+            }
+        });
+    }
 });

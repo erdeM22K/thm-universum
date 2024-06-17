@@ -206,7 +206,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                     document.querySelector("#overlay").style.display = "none";
                 }
             });
-            localStorage.setItem('visited', 'true');
+            localStorage.setItem('wpr_visited', 'true');
         }
     });
 });
@@ -243,7 +243,7 @@ gsap.to("#spaceship", {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (!localStorage.getItem('visited')) {
+    if (!localStorage.getItem('wpr_visited')) {
         document.querySelector("#overlay").style.display = "block";
         gsap.to("#overlay", {
             duration: 1,
