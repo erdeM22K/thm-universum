@@ -34,7 +34,7 @@ body {
     color: #80ba24;
 }
 
-.overlay {
+#darkBackground {
     z-index: -100;
     position: absolute;
     top: 0;
@@ -50,6 +50,7 @@ header {
     flex-direction: column;
     align-items: center;
     padding: 2rem 0 0 ;
+    z-index: 10;
 }
 
 header h1 {
@@ -118,6 +119,64 @@ svg {
     }
 }
 
+.textfeld {
+    position: absolute;
+    bottom: 1%;
+    width: 80%;
+    height: 25%;
+    left: 10%;
+    background-color: rgba(255, 255, 255, 0.5); /* Schwarz mit 50% Transparenz */
+    z-index: 10;
+    border: #000 solid;
+    border-radius: 1em;
+    display: none;
+}
+
+.copilot {
+    height: 60vh;
+    width: 60vh;
+}
+
+.copilot_container {
+    position: absolute;
+    right: 1%;
+    bottom: 2%;
+    z-index: 15;
+    display: none;
+}
+
+#text {
+    font-family: "Press Start 2P";
+    margin: 2em;
+    margin-right: 15em;
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+    line-height: 2em;
+}
+
+#dots {
+    display: none;
+    font-family: "Press Start 2P";
+    color: white;
+    margin: 2em;
+    margin-right: 15em;
+}
+#overlay {
+    display: none; /* Standardmäßig versteckt */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: 5; /* Über allen anderen Inhalten */
+}
+
 @media only screen and (max-width: 480px) {
     /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
     #startButton {
@@ -131,5 +190,14 @@ svg {
     }
     header {
         padding: 20px 0;
+    }
+
+    .copilot {
+        height: 40vh;
+        width: 40vh;
+    }
+    .copilot_container {
+        top: 30%;
+        z-index: 1;
     }
 }
