@@ -57,6 +57,9 @@ body {
     z-index: 1;
     border: #000 solid;
     border-radius: 1em;
+    overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+    padding: 1em; /* Fügt Innenabstand hinzu, um den Text vom Rand zu entfernen */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite und -höhe */
 }
 
 .copilot {
@@ -84,9 +87,27 @@ body {
     z-index: 2;
 }
 
+.image_wrapper {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+}
+
 .centered_image {
     max-width: 100%;
     height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.overlay_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Verhindert, dass das Overlay-Bild anklickbar ist */
 }
 
 #blur_slider {
@@ -131,7 +152,7 @@ body {
     background-color: #80BA24;
 }
 
-#submit_button:hover{
+#submit_button:hover {
     scale: 1.05;
 }
 
@@ -155,14 +176,24 @@ body {
         overflow: hidden;
     }
     .centered_image_container {
-        height: auto;
-        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image_wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     #submit_button{
         font-size: 12px;
     }
     .centered_image{
         width: 100%;
-        height: 10em;
+        height: 8em;
+    }
+    .overlay_image{
+        width: 100%;
+        height: 8em;
     }
 }
