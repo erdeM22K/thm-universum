@@ -1,9 +1,5 @@
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const feed = document.getElementById('planeten_container');
-
-
 
     // Funktion, um die Inhalte am Ende zu duplizieren
     function duplicateContent() {
@@ -12,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const clone = container.cloneNode(true);
             feed.appendChild(clone);
         });
+        console.log('Content duplicated');
     }
 
     // Funktion zur Initialisierung des Skripts
@@ -20,31 +17,41 @@ document.addEventListener('DOMContentLoaded', function () {
         duplicateContent();
 
         feed.addEventListener('scroll', () => {
+            console.log('Scroll event detected');
+            console.log('scrollTop:', feed.scrollTop);
+            console.log('clientHeight:', feed.clientHeight);
+            console.log('scrollHeight:', feed.scrollHeight);
+
             // Wenn der Benutzer sich dem Ende nähert, weitere Inhalte hinzufügen
             if (feed.scrollTop + feed.clientHeight >= feed.scrollHeight - 50) {
+                console.log('Near bottom, duplicating content');
                 duplicateContent();
             }
         });
     }
 
-
-
-    function starAnimationDesktop () {
+    function startAnimationDesktop() {
         gsap.from('.planet', {
-            y: -1500,
+            y: -2500,
             duration: 6,
             stagger: 2,
             ease: 'power4.out',
-            delay: 3
+            delay: 5
         });
         gsap.from('.planet_title', {
-            y: -1500,
+            y: -2500,
             duration: 6,
             stagger: 2,
             ease: 'power4.out',
-            delay: 3
+            delay: 5
         });
         gsap.from('#title', {
+            y: -1500,
+            duration: 4,
+            ease: 'power4.out',
+            delay: 2
+        });
+        gsap.from('#title2', {
             y: -1500,
             duration: 4,
             ease: 'power4.out',
@@ -56,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ease: 'power4.out'
         });
     }
-    function starAnimationMobile () {
+
+    function startAnimationMobile() {
         gsap.from('.planet', {
             x: -1500,
             duration: 3,
@@ -77,6 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
             ease: 'power4.out',
             delay: 1
         });
+        gsap.from('#title2', {
+            y: -2500,
+            duration: 4,
+            ease: 'power4.out',
+            delay: 1
+        });
         gsap.from('#logo', {
             x: 500,
             duration: 3,
@@ -86,38 +100,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Medienabfrage für Bildschirmbreiten ab 768px
     const mediaQuery = window.matchMedia('(max-width: 480px)');
+    const mediaQuery2 = window.matchMedia('(min-width: 481px)');
 
-    // Eventlistener, um die Funktion zu initialisieren, wenn die Medienabfrage erfüllt ist
+    // Initialer Check und Hinzufügen des Eventlisteners
     function handleMediaQueryChange(event) {
         if (event.matches) {
             init();
-            starAnimationMobile ()
-            
+            startAnimationMobile();
         }
     }
 
-    // Initialer Check und Hinzufügen des Eventlisteners
+    function handleMediaQueryChange2(event) {
+        if (event.matches) {
+            startAnimationDesktop();
+        }
+    }
+
     if (mediaQuery.matches) {
         init();
-        starAnimationMobile ()
+        startAnimationMobile();
     }
     mediaQuery.addListener(handleMediaQueryChange);
 
-    const mediaQuery2 = window.matchMedia('(min-width: 481px)');
-
-    // Eventlistener, um die Funktion zu initialisieren, wenn die Medienabfrage erfüllt ist
-    function handleMediaQueryChange2(event) {
-        if (event.matches) {
-        starAnimationDesktop ()
-            
-        }
-    }
-
-    // Initialer Check und Hinzufügen des Eventlisteners
     if (mediaQuery2.matches) {
-
-        starAnimationDesktop ()
+        startAnimationDesktop();
     }
     mediaQuery2.addListener(handleMediaQueryChange2);
 });
-
