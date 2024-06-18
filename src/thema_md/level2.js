@@ -4,39 +4,39 @@ var text3 = "Lass uns mit der ersten Frage beginnen und dein Wissen über Softwa
 
 var questions = [
     {
-        question: "1. Was ist eine Softwareplattform von Google?",
-        answers: ["Android", "iOS", "Windows"],
-        correct: 0,
-        logo: "../bilder/Swipe.png",
-        explanation: "Richtig! <br> Android ist ein Betriebssystem von Google, das auf Mobilgeräten weit verbreitet ist. Es bietet eine offene Plattform für Entwickler und eine Vielzahl von Anpassungsmöglichkeiten.<br>"
-    },
-    {
-        question: "2. Welches Betriebssystem wird von Apple verwendet?",
-        answers: ["Android", "iOS", "Linux"],
-        correct: 1,
-        logo: "../bilder/pulsmesser.png",
-        explanation: "Richtig! <br> iOS ist das Betriebssystem von Apple, das auf iPhones, iPads und iPods verwendet wird. Es zeichnet sich durch eine hohe Benutzerfreundlichkeit und ein geschlossenes Ökosystem aus.<br>"
-    },
-    {
-        question: "3. Wer entwickelt das Android-Betriebssystem?",
-        answers: ["Apple", "Microsoft", "Google"],
+        question: "1. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
+        answers: ["Xiaomi", "Samsung", "Apple"],
         correct: 2,
-        logo: "../bilder/gps.png",
-        explanation: "Richtig! <br> Google entwickelt das Android-Betriebssystem und ist für dessen Weiterentwicklung verantwortlich. Es wird auf einer Vielzahl von Geräten verschiedener Hersteller eingesetzt.<br>"
+        logo: "../bilder/apfel_logo.png",
+        explanation: "Richtig! <br> Das abgebildete Logo gehört zu Apple. Apple ist bekannt für seine innovative Technologie und seine hochwertigen Produkte wie das iPhone, iPad und Mac. Das Betriebssystem iOS ist speziell für ihre mobilen Geräte entwickelt worden.<br>"
     },
     {
-        question: "4. Welche Programmiersprache wird hauptsächlich für iOS-Apps verwendet?",
-        answers: ["Java", "Swift", "Python"],
+        question: "2. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
+        answers: ["FILA", "Adidas", "Puma"],
         correct: 1,
-        logo: "../bilder/face-id.png",
-        explanation: "Richtig! <br> Swift ist eine von Apple entwickelte Programmiersprache, die hauptsächlich für die Entwicklung von iOS- und macOS-Apps verwendet wird. Sie kombiniert Leistungsfähigkeit mit Sicherheit und Modernität.<br>"
+        logo: "../bilder/adidas_logo.png",
+        explanation: "Richtig! <br> Das Logo gehört zu Adidas. Adidas ist ein weltweit führender Hersteller von Sportartikeln. Ihre Produkte sind für ihre Qualität und ihr innovatives Design bekannt.<br>"
     },
     {
-        question: "5. Welche Plattform hat den größten Marktanteil im Bereich mobiler Betriebssysteme?",
-        answers: ["Android", "iOS", "Windows Phone"],
+        question: "3. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
+        answers: ["Reebok", "Wilson", "Nike"],
+        correct: 2,
+        logo: "../bilder/nike_logo.png",
+        explanation: "Richtig! <br> Das bekannte 'Swoosh'-Logo gehört zu Nike. Nike ist ein führender Anbieter von Sportbekleidung, Schuhen und Accessoires und ist bekannt für seine markanten Marketingkampagnen und Sponsoring von Sportlern und Teams weltweit.<br>"
+    },
+    {
+        question: "4. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
+        answers: ["IKEA", "XXXLutz", "Bauhaus"],
         correct: 0,
-        logo: "../bilder/finger-id.png",
-        explanation: "Richtig! <br> Android hat weltweit den größten Marktanteil im Bereich mobiler Betriebssysteme. Dies liegt an seiner Vielseitigkeit, der Unterstützung durch eine Vielzahl von Geräten und einer großen Entwicklergemeinschaft.<br>"
+        logo: "../bilder/ikea_logo.png",
+        explanation: "Richtig! <br> Das Logo gehört zu IKEA. IKEA ist ein schwedisches multinationales Unternehmen, das für seine erschwinglichen und gut gestalteten Möbel bekannt ist. Sie bieten auch Haushaltswaren und Dekorationsartikel an.<br>"
+    },
+    {
+        question: "5. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
+        answers: ["Fritz-Cola", "Pepsi", "Coca-Cola"],
+        correct: 1,
+        logo: "../bilder/pepsi_logo.png",
+        explanation: "Richtig! <br> Das abgebildete Logo gehört zu Pepsi. Pepsi ist eine weltweit bekannte Marke für Erfrischungsgetränke und konkurriert direkt mit Coca-Cola. Sie bieten eine Vielzahl von Getränken, einschließlich Softdrinks, Säften und Tee.<br>"
     }
 ];
 
