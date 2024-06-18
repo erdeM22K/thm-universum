@@ -1,43 +1,30 @@
-var text1 = "Willkommen beim zweiten Level des Moduls Mediendesign! In diesem Abschnitt wirst du dein Wissen über die verschiedenen Logos und ihre charakteristischen Farben testen. Tauche ein in die faszinierende Welt der Markenidentität und sieh, wie gut du die Logos bekannter Unternehmen erkennst.";
-var text2 = "Wir alle kennen das Phänomen: Viele Produkte und Marken können wir allein anhand ihrer Form oder ihres Logos sofort identifizieren. In diesem Level wirst du auf mehrere bekannte Produkte und Designelemente stoßen, die dir wahrscheinlich vertraut sind. Deine Aufgabe wird es sein, die richtige Marke oder das richtige Unternehmen zu identifizieren, die hinter diesen Symbolen stehen.";
-var text3 = "Dieses Level ist darauf ausgelegt, dir zu zeigen, wie tief sich Logos und Marken in unser Gedächtnis eingebrannt haben. Oftmals genügt schon ein kurzer Blick auf die Form oder Farbe eines Produkts, um den Namen des Herstellers zu erkennen. Tauche ein in die Welt der visuellen Identität und vertiefe dein Verständnis für die Erkennungsmerkmale und Markenidentitäten im Modul Mediendesign!";
+var text1 = "Willkommen beim dritten Level des Moduls Mediendesign! In diesem Level wirst du dein Wissen über mobile Formen und die dazugehörigen Marken testen. Es geht darum, wie gut du verschiedene Marken und deren Produkte anhand von Bildern und Logos erkennen kannst.";
+var text2 = "Wir alle erkennen inzwischen viele Produkte und Marken allein anhand ihrer Form oder ihres Logos. Du wirst hier mehrere Produkte und Elemente gezeigt bekommen, die dir bestimmt bekannt vorkommen. Deine Aufgabe ist es, die richtige Marke oder das richtige Unternehmen zu identifizieren.";
+var text3 = "Dieses Level soll dir zeigen, wie sehr wir Menschen uns Logos und Marken einprägen und wie wir oft nur durch die Form eines Produktes den Namen oder den Hersteller erkennen können. Tauche ein in die Welt der visuellen Identität und vertiefe dein Verständnis für Marken und ihre Erkennungsmerkmale im Modul Mediendesign!";
+
 
 var questions = [
     {
-        question: "1. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
-        answers: ["Xiaomi", "Samsung", "Apple"],
-        correct: 2,
-        logo: "../bilder/apfel_logo.png",
-        explanation: "Richtig! <br> Das abgebildete Logo gehört zu Apple. Der ikonische Apfel mit dem Biss steht für innovative Technologie und hochwertigen Minimalismus. Apples einprägsames Logo in Verbindung mit seiner schlichten Farbpalette trägt dazu bei, dass es leicht wiedererkannt und mit Qualität und Innovation assoziiert wird.<br>"
-    },
-    {
-        question: "2. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
-        answers: ["FILA", "Adidas", "Puma"],
+        question: "1. An welche Marke denkst du, wenn du dieses Bild siehst?",
+        answers: ["Pepsi", "Coca-Cola", "Fritz-Cola"],
         correct: 1,
-        logo: "../bilder/adidas_logo.png",
-        explanation: "Richtig! <br> Das Logo gehört zu Adidas. Die drei Streifen sind ein einfaches, aber starkes Symbol, das weltweit bekannt ist. Die klare und konsistente Verwendung der Streifen und die typischen Farben Schwarz und Weiß machen es unverwechselbar und leicht erkennbar.<br>"
+        logo: "../bilder/cola_logo.png",
+        explanation: "Richtig! <br> Das abgebildete Logo gehört zu Coca-Cola. Die Marke ist weltweit bekannt und das rote, weiße Design ihres Logos sowie die ikonische Flaschenform sind sofort erkennbar. Coca-Cola hat es geschafft, dass wir allein durch die Silhouette der Flasche und die Farbgebung die Marke direkt identifizieren können.<br>"
     },
     {
-        question: "3. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
-        answers: ["Reebok", "Wilson", "Nike"],
-        correct: 2,
-        logo: "../bilder/nike_logo.png",
-        explanation: "Richtig! <br> Das bekannte 'Swoosh'-Logo gehört zu Nike. Der einfache, geschwungene Haken ist eines der bekanntesten Symbole der Welt. Nikes cleveres Branding und die wiederkehrende Verwendung des Swoosh in Kombination mit der dominanten Farbe Schwarz tragen dazu bei, dass das Logo sofort wiedererkannt wird und für sportliche Leistung und Stil steht.<br>"
-    },
-    {
-        question: "4. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
-        answers: ["IKEA", "XXXLutz", "Bauhaus"],
+        question: "2. An welche Marke denkst du, wenn du dieses Bild siehst?",
+        answers: ["Nutella", "Mr.Choc", "NussPli"],
         correct: 0,
-        logo: "../bilder/ikea_logo.png",
-        explanation: "Richtig! <br> Das Logo gehört zu IKEA. Die blaue und gelbe Farbpalette spiegelt die schwedischen Wurzeln des Unternehmens wider und macht das Logo leicht wiedererkennbar. IKEAs Logo steht für erschwingliche, gut gestaltete Möbel und hat durch seine Farbkombination und Klarheit eine starke visuelle Identität geschaffen.<br>"
+        logo: "../bilder/nutella_logo.png",
+        explanation: "Richtig! <br> Das Logo gehört zu Nutella. Die Marke ist berühmt für ihre unverwechselbare Glasform und das markante Design des Etiketts. Nutella ist leicht an der weißen Kappe, dem breiten Glas und den roten und weißen Farbtönen des Logos zu erkennen. Diese visuellen Merkmale machen es einfach, Nutella im Supermarktregal sofort zu finden.<br>"
     },
     {
-        question: "5. An welches Unternehmen denkst du, wenn du dieses Bild siehst?",
-        answers: ["Fritz-Cola", "Pepsi", "Coca-Cola"],
-        correct: 1,
-        logo: "../bilder/pepsi_logo.png",
-        explanation: "Richtig! <br> Das abgebildete Logo gehört zu Pepsi. Die markante Kombination aus Rot, Weiß und Blau ist weltweit bekannt und vermittelt Frische und Lebendigkeit. Pepsis Logo, zusammen mit den Farben, ist so einprägsam, dass es oft sofort mit dem Erfrischungsgetränk assoziiert wird und sich stark von Konkurrenten abhebt.<br>"
-    }
+        question: "3. An welche Marke denkst du, wenn du dieses Bild siehst?",
+        answers: ["ChipZ", "Chip-Star", "Pringles"],
+        correct: 2,
+        logo: "../bilder/pringels_logo.png",
+        explanation: "Richtig! <br> Das Logo gehört zu Pringles. Pringles ist bekannt für seine unverwechselbare zylindrische Verpackung und das Gesicht des Pringles-Maskottchens auf der Dose. Die Form der Dose und das lächelnde Gesicht machen die Marke sofort erkennbar, selbst ohne den Schriftzug zu lesen. Die stapelbaren Chips in der ikonischen Röhre sind ein weiteres einzigartiges Merkmal der Marke.<br>"
+    },
 ];
 
 
