@@ -120,4 +120,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     mediaQuery2.addListener(handleMediaQueryChange2);
 });
-

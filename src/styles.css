@@ -42,7 +42,6 @@ body {
     overflow: hidden;
     background-image: url('./bilder/landingpage/landingpage_background.svg');
     background-size:cover;
-    background-repeat: repeat;
     background-position: top;
 }
 #logo {

@@ -124,12 +124,12 @@ svg {
 
 .copilot {
     height: 60vh;
-    width: 60vh;
+    width: auto;
 }
 
 .copilot_container {
     position: absolute;
-    right: 1%;
+    right: 10%;
     bottom: 2%;
     z-index: 15;
     display: none;
@@ -193,9 +193,10 @@ svg {
     }
 
     .copilot {
-        height: 40vh;
-        width: 40vh;
+        height: 30vh;
+        width: auto;
     }
+
     .copilot_container {
         top: 30%;
         z-index: 1;
