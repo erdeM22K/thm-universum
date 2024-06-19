@@ -1,48 +1,48 @@
-<THMUniversum>
-    <Titel>THM Universum</Titel>
-    <JavaScriptFunktion> showPlanet() </JavaScriptFunktion>
-    <Planet id="1" name="Webentwicklung">
-        <Modul id="1" title="Front-End">
-            <Beschreibung>
-                Das Designen von Webseiten mit Figma, HTML, CSS, JS.
-            </Beschreibung>
-            <JavaScriptFunktion>
-                showFrontEndDetails()
-            </JavaScriptFunktion>
-            <Inhalt>
-                <Textfeld>
-                    Informationen zur Front-End...
-                </Textfeld>
-                <Grafik>
-                    <SVG>meteorid.svg</SVG>
-                </Grafik>
-                <Video>
-                    <Datei></Datei>
-                </Video>
-            </Inhalt>
-        </Modul>
-        <Modul id="2" title="Back-End">
-            <Beschreibung>
-                Datenbanken, Debian...
-            </Beschreibung>
-            <JavaScriptFunktion>
-                showSoftwareentwicklungDetails()
-            </JavaScriptFunktion>
-            <Inhalt>
-                <Textfeld>
-                    Informationen zur Back-End
-                </Textfeld>
-                <Grafik>
-                    <SVG>meteorid.svg</SVG>
-                </Grafik>
-                <Video>
-                    <Datei></Datei>
-                </Video>
-            </Inhalt>
-        </Modul>
-    </Planet>
-    <Planet id="2" name="Grafischedatenverarbeitung">
-        <!-- Modul-Informationen -->
-    </Planet>
-    <!-- Weitere Planeten und deren Module -->
-</Webseite>
+<content>
+    <logo>./bilder/THM_Logo_4c.png</logo>
+    <title1>MEDIENINFORMATIK</title1>
+    <title2>UNIVERSUM</title2>
+    <background>./bilder/lp_bg.png</background>
+    <planets>
+        <planet id="1" name="webentwicklung">
+            <title>WEBENTWICKLUNG</title>
+            <image>./bilder/1.png</image>
+            <link>./thema_webentwicklung/wpr.html</link>
+            <background></background>
+        </planet>
+        <planet id="2" name="audiovisuellemedien">
+            <title>AUDIOVISUELLE MEDIEN</title>
+            <image>./bilder/2.png</image>
+            <link>./thema_av/av.html</link>
+            <background></background>
+        </planet>
+        <planet id="3" name="grafischedatenverarbeitung">
+            <title>3D: GRAFISCHE DATENVERARBEITUNG</title>
+            <image>./bilder/3.png</image>
+            <link>./thema_gd/gd.html</link>
+            <background></background>
+        </planet>
+        <planet id="4" name="mobileapps">
+            <title>MOBILE APPS</title>
+            <image>./bilder/4.png</image>
+            <link>./thema_ma/ma.html</link>
+            <background></background>
+        </planet>
+        <planet id="5" name="mediendesigne">
+            <title>MEDIENDESIGNE</title>
+            <image>./bilder/5.png</image>
+            <link>./thema_gamedev/level1.html</link>
+            <background></background>
+        </planet>
+        <planet id="6" name="gamedevelopment">
+            <title>GAMEDEVELOPMENT</title>
+            <image>./bilder/6.png</image>
+            <link>./thema_gamedev/level1.html</link>
+            <background></background>
+        </planet>
+    </planets>
+    <links>
+        <impressum>Impressum</impressum>
+        <copyright>©THM</copyright>
+    </links>
+</content>
