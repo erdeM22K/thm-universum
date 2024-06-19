@@ -5,25 +5,39 @@ var text3 = "Dieses Level soll dir zeigen, wie sehr wir Menschen uns Logos und M
 
 var questions = [
     {
-        question: "1. An welche Marke denkst du, wenn du dieses Bild siehst?",
-        answers: ["Pepsi", "Coca-Cola", "Fritz-Cola"],
+        question: "1. Was für eine Wirkung hat das Symbol (Quadrat) auf dich?",
+        answers: ["Ordnung", "Beständigkeit", "Übersichtlichkeit"],
         correct: 1,
-        logo: "../bilder/cola_logo.png",
-        explanation: "Richtig! <br> Das abgebildete Logo gehört zu Coca-Cola. Die Marke ist weltweit bekannt und das rote, weiße Design ihres Logos sowie die ikonische Flaschenform sind sofort erkennbar. Coca-Cola hat es geschafft, dass wir allein durch die Silhouette der Flasche und die Farbgebung die Marke direkt identifizieren können.<br>"
+        logo: "../bilder/quadrat.png",
+        explanation: "Das Quadrat symbolisiert Beständigkeit durch seine klaren und gleichmäßigen Seiten. Es vermittelt ein Gefühl von Sicherheit und Zuverlässigkeit."
     },
     {
-        question: "2. An welche Marke denkst du, wenn du dieses Bild siehst?",
-        answers: ["Nutella", "Mr.Choc", "NussPli"],
+        question: "2. Was für eine Wirkung hat dieses Symbol (Rechteck) auf dich?",
+        answers: ["Stabilität", "Zuverlässigkeit", "Ordnung"],
         correct: 0,
-        logo: "../bilder/nutella_logo.png",
-        explanation: "Richtig! <br> Das Logo gehört zu Nutella. Die Marke ist berühmt für ihre unverwechselbare Glasform und das markante Design des Etiketts. Nutella ist leicht an der weißen Kappe, dem breiten Glas und den roten und weißen Farbtönen des Logos zu erkennen. Diese visuellen Merkmale machen es einfach, Nutella im Supermarktregal sofort zu finden.<br>"
+        logo: "../bilder/rechteck.png",
+        explanation: "Das Rechteck vermittelt Stabilität durch seine festen und gleichmäßigen Seitenverhältnisse. Es strahlt Verlässlichkeit und Festigkeit aus."
     },
     {
-        question: "3. An welche Marke denkst du, wenn du dieses Bild siehst?",
-        answers: ["ChipZ", "Chip-Star", "Pringles"],
+        question: "3. Was für eine Wirkung hat dieses Symbol (Dreieck) auf dich?",
+        answers: ["Harmonie", "Einheit", "Standhaftigkeit"],
         correct: 2,
-        logo: "../bilder/pringels_logo.png",
-        explanation: "Richtig! <br> Das Logo gehört zu Pringles. Pringles ist bekannt für seine unverwechselbare zylindrische Verpackung und das Gesicht des Pringles-Maskottchens auf der Dose. Die Form der Dose und das lächelnde Gesicht machen die Marke sofort erkennbar, selbst ohne den Schriftzug zu lesen. Die stapelbaren Chips in der ikonischen Röhre sind ein weiteres einzigartiges Merkmal der Marke.<br>"
+        logo: "../bilder/dreieck.png",
+        explanation: "Das Dreieck strahlt Standhaftigkeit aus durch seine feste Basis und spitz zulaufende Form. Es symbolisiert Entschlossenheit und Stärke."
+    },
+    {
+        question: "4. Was für eine Wirkung hat dieses Symbol (Kreis) auf dich?",
+        answers: ["Ruhe", "Ordnung", "Ganzheit"],
+        correct: 2,
+        logo: "../bilder/kreis.png",
+        explanation: "Der Kreis symbolisiert Ganzheit und Vollkommenheit durch seine kontinuierliche und geschlossene Form. Er steht für Unendlichkeit und Einheit."
+    },
+    {
+        question: "5. Was für eine Wirkung hat dieses Symbol (Linie) auf dich?",
+        answers: ["Stabil", "Beständigkeit", "Übersichtlichkeit"],
+        correct: 2,
+        logo: "../bilder/linie.png",
+        explanation: "Die Linie steht für Übersichtlichkeit durch ihre klare und einfache Form. Sie vermittelt Klarheit und Struktur."
     },
 ];
 
@@ -205,7 +219,6 @@ function displayFeedback(message, isCorrect) {
                 currentQuestionIndex++;
                 if (currentQuestionIndex < questions.length) {
                     var currentQuestion = questions[currentQuestionIndex - 1];
-                    showNextText(currentQuestion.explanation + " " + "Klicke unten, um die nächste Frage zu sehen.");
                 } else {
                     currentQuestionIndex = 0;
                     gsap.to("#text", {
