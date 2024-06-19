@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const sliderValue = parseInt(slider.value);
         if (sliderValue >= -1 && sliderValue <= 1) {
             clearText();
-            showNextText("Sehr gut, deine Eingabe war korrekt :)");
+            showNextText("Sehr gut, deine Eingabe war korrekt :)  <br> Über den Pfeil in der oberen linken Ecke gelangst du zurück auf die Startseite!");
         } else {
             clearText();
-            showNextText("Das sieht noch nicht gut genug aus, du kannst das besser. Versuch es noch einmal :)!");
+            showNextText("Das sieht noch nicht gut genug aus, du kannst das besser.  <br> Versuch es noch einmal :)!");
         }
     });
 });

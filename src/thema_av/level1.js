@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const sliderValue = parseFloat(slider.value);
         if (sliderValue >= 75 && sliderValue <= 125) {
             clearText();
-            showNextText("Sehr gut, deine Eingabe war korrekt :)");
+            showNextText("Sehr gut, deine Eingabe war korrekt :) <br> Über den Pfeil in der oberen linken Ecke gelangst du zurück auf die Startseite!");
         } else {
             clearText();
-            showNextText("Das sieht noch nicht gut genug aus, du kannst das besser. Versuch es noch einaml :)!");
+            showNextText("Das sieht noch nicht gut genug aus, du kannst das besser.  <br> Versuch es noch einaml :)!");
         }
     });
 });
