@@ -211,6 +211,8 @@ function displayFeedback(message, isCorrect) {
                     showNextText(currentQuestion.explanation + " " + "Klicke unten, um die nächste Frage zu sehen.");
                 } else {
                     currentQuestionIndex = 0;
+                    console.log("MA Level 1 fertig");
+                    localStorage.setItem("ma_level1_done", 'true');
                     gsap.to("#text", {
                         duration: 3,
                         delay: 10,

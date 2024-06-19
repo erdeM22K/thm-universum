@@ -9,7 +9,12 @@ const levels = ["Softwareplatformen", "Appdesign", "Sensoren"];
 const textfeld = document.querySelector(".textfeld");
 const copilotContainer = document.querySelector(".copilot_container");
 let currentLevel = 0;
-let text1 = "Wir landen auf dem Planeten der Mobilen Anwendungen. Hier kannst du die Stationen \"Softwareplattformen\", \"Appdesign\" und \"Sensoren\" besuchen.";
+let startText = "Wir landen auf dem Planeten der Mobilen Anwendungen. Hier kannst du die Stationen \"Softwareplattformen\", \"Appdesign\" und \"Sensoren\" besuchen.";
+let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Mobilen Anwendungen abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
+let finishText2 = "Als <i>App-Entwickler</i> kannst du innovative mobile Anwendungen für iOS und Android entwickeln. Als <i>Softwareentwickler</i> stehen dir allgemeinere Softwareprojekte offen, während du als <i>UX/UI Designer</i> an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces arbeitest.";
+let finishText3 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
+
+
 
 
 for (let i = 0; i < numberOfIcons; i++) {
@@ -65,8 +70,10 @@ function hideButton(delay) {
             updateButtonText();
         }
     });
+    startButton.style.display = "hidden";
 }
 function showButton(delay) {
+    startButton.style.display = "block";
     gsap.to("#startButton", {
         opacity: 1,
         scale: 1,
@@ -155,7 +162,7 @@ function showNextText(text) {
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text);
+            startDotsAnimation();
             console.log("Text wird ausgeführt");
         }
     });
@@ -177,12 +184,83 @@ function startDotsAnimation(lastText) {
         });
     }
 }
+
+function allLevelsDone() {
+    if (localStorage.getItem('ma_level1_done') && localStorage.getItem('ma_level2_done') && localStorage.getItem('ma_level3_done')) {
+        localStorage.setItem('module3_done', 'true');
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function showSkills() {
+    let skills = ["Webentwicklung", "Audiovisuelle Medien", "Grafische Datenverarbeitung", "Mobile Apps", "Mediendesign", "Game Development"];
+    let skillValues = [];
+
+    const skillHeadline = document.createElement('h1');
+    skillHeadline.id = "skillHeadline";
+    skillHeadline.innerHTML = "Deine Skills";
+    document.querySelector("body").appendChild(skillHeadline);
+    const skillContainer = document.createElement('div');
+    skillContainer.id = "skillContainer";
+    document.querySelector("body").appendChild(skillContainer);
+
+    for (let i = 0; i < skills.length; i++) {
+        let skillName = document.createElement('div');
+        skillName.className = "skillName";
+        skillName.className = "skillName";
+        skillName.innerHTML = skills[i];
+        skillContainer.appendChild(skillName);
+        let skillValue = document.createElement('div');
+        skillValue.className = "skillValue";
+        skillContainer.appendChild(skillValue);
+
+        //Prüfen, ob ein Modul fertig ist und Eintragen des skillValues
+
+
+    }
+    skillValues[5] = 0;
+    for (let i = 0; i < skills.length - 1; i++) {
+        let skillBonusGameDesign = 0.2;
+        if(localStorage.getItem('module' + i + '_done')) {
+            console.log("Modul " + i + " fertig.");
+            skillValues[i] = 1;
+            skillValues[5] += skillBonusGameDesign;
+        } else {
+            console.log("Modul " + i + " nicht fertig.");
+            skillValues[i] = 0.05;
+        }
+    }
+
+    gsap.from('#skillHeadline', {
+        y: -50,
+        opacity: 0,
+        duration: 1
+    });
+
+    gsap.from('#skillContainer div:nth-child(odd)', {
+       x: -100,
+       opacity: 0,
+       stagger: 0.1,
+        duration: 1
+    });
+
+    for (let i = 0; i < skillValues.length; i++) {
+        let staggerFactor = 0.25;
+        gsap.to(".skillValue:nth-child(" + (i * 2 + 2) + ")", {
+            delay: 0.5 + i * staggerFactor,
+            width: skillValues[i] * 100 + "%",
+            duration: 2,
+            ease: "power2.out"
+        });
+    }
+}
+
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            //clearText();
-            //showNextText(text2);
+        if (textElement.innerHTML === startText || textElement.innerHTML === finishText3) {
             gsap.to(".textfeld", {
                 y: 1500,
                 duration: 3,
@@ -209,6 +287,33 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 }
             });
             localStorage.setItem('ma_visited', 'true');
+            if (textElement.innerHTML === finishText3) {
+                gsap.to('#skillContainer div', {
+                    x: -100,
+                    opacity: 0,
+                    stagger: 0.015,
+                    duration: 0.5,
+                    onComplete: function () {
+                        document.querySelector("#skillContainer").remove();
+                    }
+                });
+                gsap.to('#skillHeadline', {
+                    y: -50,
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: function () {
+                        document.querySelector("#skillHeadline").remove();
+                    }
+                });
+            }
+        }
+        else if(textElement.innerHTML === finishText1) {
+            clearText();
+            showNextText(finishText2);
+        }
+        else if(textElement.innerHTML === finishText2) {
+            clearText();
+            showNextText(finishText3);
         }
     });
 });
@@ -245,7 +350,30 @@ gsap.to("#spaceship", {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (!localStorage.getItem('ma_visited')) {
+    if (allLevelsDone()) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.9,
+            onComplete: function () {
+                showSkills();
+            }
+        });
+        let copilotImg = document.querySelector(".copilot");
+        copilotImg.src = "../bilder/copilot_sassy.svg";
+        startAnimation();
+        gsap.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: finishText1,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Finish Text wird ausgeführt");
+            }
+        });
+    }
+    else if (!localStorage.getItem('ma_visited')) {
         document.querySelector("#overlay").style.display = "block";
         gsap.to("#overlay", {
             duration: 1,
@@ -256,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gsap.to("#text", {
             duration: 3,
             delay: 2,
-            text: text1,
+            text: startText,
             onComplete: function() {
                 startDotsAnimation();
                 console.log("Text 1 ausgeführt");

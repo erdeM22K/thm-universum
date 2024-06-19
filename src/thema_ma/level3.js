@@ -63,6 +63,8 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             clearText();
             showNextText(textende, ".bild5"); // Hier Bild 2 einblenden
             updateTitleText(title_bildende); // Titeltext aktualisieren
+            console.log("MA Level 3 fertig");
+            localStorage.setItem("ma_level3_done", 'true');
         }
     });
 });

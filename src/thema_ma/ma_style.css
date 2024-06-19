@@ -103,6 +103,7 @@ svg {
     border-radius: 10px;
     cursor: pointer;
     opacity: 0;
+    display: none;
 }
 
 .level {
@@ -165,6 +166,36 @@ svg {
     background: black;
     opacity: 0;
     z-index: 5; /* Über allen anderen Inhalten */
+}
+
+div#skillContainer {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 40%;
+    z-index: 10; /* Über allen anderen Inhalten */
+    color: white;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 16% 16% 16% 16% 16% 16%;
+    justify-items: start;
+    align-items: center;
+}
+
+div.skillValue {
+    background-color: white;
+    height: 20px;
+    width: 0;
+}
+
+#skillHeadline {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    color: white;
 }
 
 @media only screen and (max-width: 1000px) {
