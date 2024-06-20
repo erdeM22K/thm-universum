@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const slider = document.getElementById('blur_slider');
     const image = document.getElementById('gamma_picture');
+    const copilotImage = document.querySelector('.copilot');
 
     // Funktion, um einen zufälligen Wert für den Slider zu generieren
     function setRandomSliderValue() {
@@ -28,9 +29,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (sliderValue >= -1 && sliderValue <= 1) {
             clearText();
             showNextText("Sehr gut, deine Eingabe war korrekt :)  <br> Über den Pfeil in der oberen linken Ecke gelangst du zurück auf die Startseite!");
+            copilotImage.src = '../bilder/copilot_lachen.svg';
         } else {
             clearText();
             showNextText("Das sieht noch nicht gut genug aus, du kannst das besser.  <br> Versuch es noch einmal :)!");
+            copilotImage.src = '../bilder/copilot_sad.svg';
         }
     });
 });
