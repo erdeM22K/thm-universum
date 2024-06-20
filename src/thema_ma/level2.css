@@ -182,7 +182,7 @@ body {
         height: 420px;
     }
     .bild1_container .bild3{
-        width: 300px;
+        width: 245px;
         height: 420px;
     }
 }
@@ -245,8 +245,18 @@ body {
     align-items: center;
 }
 
-.bild1_container .bild3{
+.bild1_container .bild1{
     width: 300px;
+    height: 420px;
+}
+
+.bild1_container .bild2{
+    width: 300px;
+    height: 420px;
+}
+
+.bild1_container .bild3{
+    width: 450px;
     height: 420px;
 }
 
