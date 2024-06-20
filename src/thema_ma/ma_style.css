@@ -13,25 +13,62 @@ body {
 }
 
 /* Stil für den Pfeil-Button */
-.back-to-home {
+.menu {
     position: absolute;
     top: 10px;
-    left: 10px;
     font-size: 2rem;
     color: white;
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 5px;
     transition: background 0.3s ease;
+    cursor: pointer;
 }
 
-.back-to-home:visited{
+.menu:visited{
     text-decoration: none;
     color: white;
 }
 
-.back-to-home:hover {
+.menu:hover {
     color: #80ba24;
+}
+
+#back-to-home {
+    left: 10px;
+}
+
+#skillbars, #close {
+    right: 10px;
+}
+
+#skillbars svg {
+    height: 40px;
+}
+
+#close svg {
+    width: 30px;
+}
+
+#skillbars svg path {
+    fill: white;
+}
+
+#close svg path {
+    fill: white;
+}
+
+#skillbars:hover svg path {
+    fill: #80ba24;
+}
+
+#close:hover svg path {
+    fill: #80ba24;
+}
+
+#close {
+    display: none;
+    z-index: 15;
 }
 
 .overlay {
@@ -79,7 +116,12 @@ svg {
 }
 
 #spaceship {
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
+}
+
+.labelLevel {
+    font-size: 0.3rem;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
 }
 
 .main {
@@ -91,12 +133,14 @@ svg {
 }
 
 #startButton {
-    position: fixed; /* Ändere die Position auf fixiert */
+    font-family: "Press Start 2P";
+    font-size: 1rem;
+    position: absolute; /* Ändere die Position auf fixiert */
     bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
-    left: 50%; /* Zentriere den Button horizontal */
-    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    transform-origin: center center;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 20px 30px;
-    font-size: 1.5rem;
     background-color: #80ba24;
     color: white;
     border: none;
@@ -104,7 +148,10 @@ svg {
     cursor: pointer;
     opacity: 0;
     display: none;
+    text-align: center;
 }
+
+
 
 .level {
     cursor: pointer;
@@ -113,15 +160,40 @@ svg {
 .textfeld {
     position: absolute;
     bottom: 1%;
+    left: 10%;
     width: 80%;
     height: 25%;
-    left: 10%;
-    background-color: rgba(255, 255, 255, 0.5); /* Schwarz mit 50% Transparenz */
+    max-height: 25%; /* maximal erlaubte Höhe */
+    background-color: rgba(255, 255, 255, 0.5);
     z-index: 10;
-    border: #000 solid;
+    border: 2px solid #000; /* Korrektur der Border-Deklaration */
     border-radius: 1em;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
+    padding: 10px; /* Innenabstand für den Inhalt */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite */
     display: none;
 }
+
+
+.textfeld::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
+}
+
 
 .copilot {
     height: 60vh;
@@ -138,7 +210,7 @@ svg {
 
 #text {
     font-family: "Press Start 2P";
-    margin: 2em;
+    margin-left: 0.5rem;
     margin-right: 15em;
     color: white;
     text-shadow:
@@ -210,16 +282,94 @@ div.skillValue {
 
 @media only screen and (max-width: 480px) {
     /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
+    body {
+        height: 100vh;
+        overflow: hidden;
+        touch-action: none;
+    }
+    header h1 {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #f1f1f1;
+        text-shadow:
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px  2px 0 #000,
+                2px  2px 0 #000;
+    }
+
+    header img {
+        width: 150px;
+    }
     #startButton {
+        font-size: 1rem;
         position: absolute; /* Ändere die Position auf absolut */
-        bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+        bottom: 2.5%; /* Platziere den Button 25px über dem unteren Rand */
+        transform-origin: center center;
         left: 50%; /* Zentriere den Button horizontal */
         transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
-        margin-top: 20px; /* Füge einen oberen Abstand hinzu, um den Button unter der SVG zu platzieren */
         width: auto; /* Setze die Breite auf automatisch */
         height: auto;
+        text-align: center;
     }
     header {
         padding: 20px 0;
+    }
+    .copilot {
+        height: 40vh;
+        width: 40vh;
+    }
+    .copilot_container {
+        right: -30%;
+        z-index: 10;
+    }
+    .textfeld {
+        left:0%;
+        width: 100%;
+
+    }
+    #text {
+        margin-right: 2em;
+        font-size: 0.7rem;
+    }
+
+    #dots {
+        font-size: 0.7rem;
+    }
+    div#skillContainer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 25%;
+        width: 80%;
+        height: 40%;
+        z-index: 10; /* Über allen anderen Inhalten */
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-size: 0.8rem;
+    }
+
+
+    div.skillValue {
+        background-color: white;
+        height: 10px;
+        width: 0;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    #skillHeadline {
+        position: absolute;
+        top: 10%;
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 15;
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
     }
 }

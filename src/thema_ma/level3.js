@@ -20,6 +20,7 @@ var title_bildende = "Vielen Dank!"
 
 gsap.registerPlugin(TextPlugin);
 
+localStorage.setItem("lastLevel", "ma3");
 // Anfangs Text anzeigen
 gsap.to("#text", {
     duration: 3,
