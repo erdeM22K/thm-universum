@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-    background-image: url("../bilder/background_ma.svg");
+    background-image: url("../bilder/background_gamed.svg");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -165,11 +165,6 @@ body {
     .question_container {
         width: 90%;
     }
-    .bild-container .bild1{
-        height: 100%;
-        display: flex;
-        align-items: center;
-    }
     .h1-bilder{
         font-size: 16px;
     }
@@ -178,10 +173,6 @@ body {
         height: 420px;
     }
     .bild1_container .bild2{
-        width: 245px;
-        height: 420px;
-    }
-    .bild1_container .bild3{
         width: 245px;
         height: 420px;
     }
@@ -246,26 +237,26 @@ body {
 }
 
 .bild1_container .bild1{
-    width: 300px;
-    height: 420px;
+    width: 350px;
+    height: auto;
 }
 
 .bild1_container .bild2{
-    width: 300px;
-    height: 420px;
+    width: 350px;
+    height: auto;
 }
 
 .bild1_container .bild3{
-    width: 450px;
-    height: 420px;
+    width: 350px;
+    height: auto;
 }
 
 .bild1_container .bild4{
-    width: 400px;
-    height: 200px;
+    width: 350px;
+    height: auto;
 }
 
 .bild1_container .bild5{
-    width: 400px;
-    height: 200px;
+    width: 350px;
+    height: auto;
 }

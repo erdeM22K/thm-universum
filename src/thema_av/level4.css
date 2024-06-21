@@ -123,10 +123,21 @@ body {
 }
 
 .video_container iframe {
-    width: 50em;
-    height: 50em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    bottom: -10vh;
 }
 
+.copilot_container {
+    position: relative;
+    left: 35%;
+    top: 20%;
+    z-index: 2;
+}
 
 @media (max-width: 480px) {
     .video_container {
@@ -136,5 +147,6 @@ body {
     .video_container iframe {
         width: 25em;
         height: 25em;
+        bottom: 20vh;
     }
 }

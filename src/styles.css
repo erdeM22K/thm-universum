@@ -51,7 +51,6 @@ body {
     height: 100vw;
     width: 100vw;
     overflow: hidden;
-    background-image: url('./bilder/landingpage/lp_bg.png');
     background-size:cover;
     background-position: top;
     background-repeat: no-repeat;
@@ -112,28 +111,22 @@ text-shadow:
 }
 
 #planet1 {
-    background-image: url('./bilder/1.png');
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f0d08b;
 }
 #planet2 {
-    background-image: url('./bilder/2.png');
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #8be1f0;
 }
 #planet3 {
-    background-image: url('./bilder/3.png');
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f08bd7;
 }
 #planet4 {
-    background-image: url('./bilder/4.png');
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #a8f08b;
 }
 #planet5 {
-    background-image: url('./bilder/5.png');
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f0e98b;
 }
 #planet6 {
-    background-image: url('./bilder/5.png');
-    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f0e98b;
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #ffffff;
 }
 @keyframes rotate {
     from {

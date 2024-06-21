@@ -219,7 +219,6 @@ function displayFeedback(message, isCorrect) {
                 currentQuestionIndex++;
                 if (currentQuestionIndex < questions.length) {
                     var currentQuestion = questions[currentQuestionIndex - 1];
-                    showNextText(currentQuestion.explanation + " " + "Klicke unten, um die nächste Frage zu sehen.");
                 } else {
                     currentQuestionIndex = 0;
                     console.log("MA Level 1 fertig");

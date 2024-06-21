@@ -2,7 +2,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
     if (event.key === 'Enter') {  // Überprüfen, ob die Enter-Taste gedrückt wurde
         var text = event.target.value;
 
-        if (text === "startRocket(){}") {
+        if (text === "startRocket();") {
             gsap.to(".rocket_container", {
                 x: 1500,
                 y: -1500,

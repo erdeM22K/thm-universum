@@ -62,7 +62,6 @@ body {
     box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite */
 }
 
-
 .textfeld::-webkit-scrollbar {
     display: none; /* Für Webkit-basierte Browser (Chrome, Safari) */
 }
@@ -121,6 +120,27 @@ body {
     text-align: center;
 }
 
+.logo-answers-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#answers {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #question {
     font-family: "Press Start 2P";
     color: black;
@@ -137,6 +157,11 @@ body {
     border-radius: 0.5em;
     text-align: center;
     cursor: pointer;
+    width: 90%;
+}
+
+.answer:focus{
+    background-color: #80ba24;
 }
 
 .answer:hover{
@@ -165,107 +190,11 @@ body {
     .question_container {
         width: 90%;
     }
-    .bild-container .bild1{
-        height: 100%;
-        display: flex;
+    .logo-answers-container {
+        flex-direction: column;
         align-items: center;
     }
-    .h1-bilder{
-        font-size: 16px;
+    #answers {
+        width: 100%;
     }
-    .bild1_container .bild1{
-        width: 245px;
-        height: 420px;
-    }
-    .bild1_container .bild2{
-        width: 245px;
-        height: 420px;
-    }
-    .bild1_container .bild3{
-        width: 245px;
-        height: 420px;
-    }
-}
-
-#image-container {
-    position: absolute;
-    top: 35%; /* Zentriert vertikal */
-    left: 50%; /* Zentriert horizontal */
-    transform: translate(-50%, -50%); /* Zentriert den Container relativ zu sich selbst */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#image-container img {
-    display: none; /* Alle Bilder standardmäßig ausblenden */
-    border-radius: 5px;
-}
-
-.title-bilder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 8em; /* Zum Beispiel 10px vom oberen Rand */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2; /* Höherer Z-Index, um über den Bildern zu liegen */
-    text-align: center; /* Optional, falls der Text innerhalb zentriert werden soll */
-    width: 100%; /* Vollständige Breite des übergeordneten Containers */
-
-}
-
-.h1-bilder {
-    font-family: "Press Start 2P";
-    color: white;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px  1px 0 #000,
-            1px  1px 0 #000;
-    line-height: 2em;
-    display: block;
-    text-align: center;
-}
-
-.bild-container img{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 35vh;
-    height: 55vh;
-}
-
-.bild1_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.bild1_container .bild1{
-    width: 300px;
-    height: 420px;
-}
-
-.bild1_container .bild2{
-    width: 300px;
-    height: 420px;
-}
-
-.bild1_container .bild3{
-    width: 450px;
-    height: 420px;
-}
-
-.bild1_container .bild4{
-    width: 400px;
-    height: 200px;
-}
-
-.bild1_container .bild5{
-    width: 400px;
-    height: 200px;
 }

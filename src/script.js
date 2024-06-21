@@ -33,33 +33,33 @@ document.addEventListener('DOMContentLoaded', function () {
     function startAnimationDesktop() {
         gsap.from('.planet', {
             y: -2500,
-            duration: 6,
-            stagger: 2,
+            duration: 2,
+            stagger: 0.5,
             ease: 'power4.out',
-            delay: 5
+            delay: 3
         });
         gsap.from('.planet_title', {
             y: -2500,
-            duration: 6,
-            stagger: 2,
+            duration: 3,
+            stagger: 0.5,
             ease: 'power4.out',
-            delay: 5
+            delay: 3
         });
         gsap.from('#title', {
             y: -1500,
-            duration: 4,
+            duration: 2,
             ease: 'power4.out',
             delay: 2
         });
         gsap.from('#title2', {
             y: -1500,
-            duration: 4,
+            duration: 2,
             ease: 'power4.out',
             delay: 1
         });
         gsap.from('#logo', {
             x: 1500,
-            duration: 3,
+            duration: 2,
             ease: 'power4.out'
         });
     }

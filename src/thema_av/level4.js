@@ -1,8 +1,7 @@
 //Grundstruktur Animation + Interaktion
 
 var text1 = "Du bist nun im letzten Level dieses Moduls angekommen. Dank deiner erfolgreichen Lösung der vorherigen Level weißt du nun, was im Modul Audiovisuelle Medien behandelt wird. Alle vorherigen Aufgaben werden in der Postproduktion (dem Schnitt) zu einem funktionsfähigen Video zusammengeführt. Klicke auf \"Kamera\", um das Endprodukt zu sehen! :) Viel Spaß!";
-var text2 = "Dies ist eine Grundstruktur.";
-var text3 = "Und dies ist ein Beispiel Text.";
+
 
 // Fügen Sie diese Codezeilen in Ihr vorhandenes JavaScript-Skript ein
 

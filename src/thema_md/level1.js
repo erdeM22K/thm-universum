@@ -1,26 +1,22 @@
 
-var text1 = "Willkommen zu unserem interaktiven Tutorial! Heute werden wir verschiedene Sensoren von Handys untersuchen, die in modernen Smartphones verwendet werden. Unser Ziel ist es, dir einen klaren Überblick über diese wichtigen Sensoren zu geben und ihre Einsatzmöglichkeiten zu zeigen.";
-var text2 = "In dieser Sitzung wirst du mehrere wichtige Sensoren und deren Funktionen kennenlernen, die eine zentrale Rolle in modernen Smartphones spielen. Durch Klicken auf die Textbox kannst du schrittweise die nächsten Themen anzeigen und dich durch die Inhalte navigieren. Viel Spaß!";
-var text3 = "Das Handy-GPS ist eine Funktion, die Satellitensignale nutzt, um den genauen Standort eines mobilen Geräts zu bestimmen. GPS ermöglicht Navigation, Standortverfolgung und ortsbasierte Dienste wie Kartenanwendungen, Wetterberichte und Notfallhilfe. Es arbeitet unabhängig von Mobilfunknetzen und bietet weltweit präzise Standortinformationen.";
-var text4 = "Face ID ist eine biometrische Authentifizierungsmethode, die Gesichtserkennungstechnologie verwendet, um das Gerät zu entsperren und sichere Transaktionen zu autorisieren. Mithilfe einer Kombination aus Infrarotkamera und Punktprojektor erstellt Face ID eine detaillierte 3D-Karte des Gesichts des Benutzers. Diese Technologie bietet eine hohe Sicherheit und Benutzerfreundlichkeit.";
-var text5 = "Der Fingerabdrucksensor ist eine weitere biometrische Authentifizierungsmethode, die den einzigartigen Abdruck eines Fingers verwendet, um das Gerät zu entsperren oder Zahlungen zu bestätigen. Der Sensor scannt und speichert die Fingerabdruckdaten des Benutzers und vergleicht diese bei jeder Nutzung. Diese Methode ist schnell, bequem und bietet eine hohe Sicherheit.";
-var text6 = "Ein Pulsmesser im Handy verwendet optische Sensoren oder Infrarotsensoren, um den Herzschlag des Benutzers zu messen. Diese Funktion findet sich häufig in Fitness- und Gesundheits-Apps und ermöglicht die Überwachung der Herzfrequenz in Echtzeit. Sie hilft Benutzern, ihre Fitnessaktivitäten zu verfolgen, ihre Gesundheit zu überwachen und ihre Trainingsintensität zu optimieren."
+var text1 = "Willkommen zu unserem interaktiven Tutorial über Typografie! Heute werden wir grundlegende Funktionen und UI-Elemente durchgehen, die oft in modernen Web- und Mobilanwendungen verwendet werden. Unser Ziel ist es, Ihnen einen klaren Überblick über die Bedeutung von Typografie zu geben und deren entscheidenden Einfluss auf das Benutzererlebnis zu zeigen.";
+var text2 = "In dieser Sitzung wirst du mehrere wichtige Elemente und Funktionen kennenlernen, die eine zentrale Rolle in modernen Web- und Mobilanwendungen spielen. Durch Klicken auf die Textbox kannst du schrittweise die verschiedenen Aspekte der Typografie erkunden und verstehen, wie sie die Lesbarkeit, Ästhetik und Benutzerinteraktion beeinflussen.";
+var text3 = "Serifen-Schriftarten haben kleine Linien oder Verzierungen an den Enden der Buchstabenstriche, die ihnen ein traditionelles und oft elegantes Aussehen verleihen.";
+var text4 = "Serifenlose Schriftarten fehlen diese zusätzlichen Linien und sind oft moderner und minimalistischer im Design, was sie für Bildschirmanwendungen gut geeignet macht.";
+var text5 = "Handgeschriebene Schriftarten ahmen oft menschliche Handschrift nach und vermitteln ein persönliches und kreatives Gefühl in Designs.";
+var text6 = "Monospace-Schriftarten haben eine feste Breite für jeden Buchstaben, was sie ideal für Programmierungen und Quelltexte macht, da sie eine klare Struktur bieten.";
+var text7 = "Serifen können einen signifikanten Einfluss auf die Wahrnehmung von Texten und Produkten haben. Sie werden häufig in Printmedien und Logos verwendet, um Eleganz und Tradition zu vermitteln, während serifenlose Schriften für ihre Lesbarkeit auf Bildschirmen geschätzt werden.";
 
-var textende = "Du bist am Ende des Levels angekommen. Über den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite"
-
-//-----------------------------------------------------------------
-
-var title_bild1 = "GPS";
-var title_bild2 = "Face-ID";
-var title_bild3 = "Finger-Scan";
-var title_bild4 = "Pulsmesser"
-
-var title_bildende = "Vielen Dank!"
+var title_bild1 = "Serifen-Schriftart";
+var title_bild2 = "Serifenlose-Schriftart";
+var title_bild3 = "Handgeschrieben";
+var title_bild4 = "Monospace";
+var title_bild5 = "Anwendung in der Praxis";
+var title_bild6 = "Vielen Dank!";
 
 
 gsap.registerPlugin(TextPlugin);
 
-localStorage.setItem("lastLevel", "ma3");
 // Anfangs Text anzeigen
 gsap.to("#text", {
     duration: 3,
@@ -62,10 +58,12 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             updateTitleText(title_bild4); // Titeltext aktualisieren
         } else if (textElement.innerText === text6) {
             clearText();
-            showNextText(textende, ".bild5"); // Hier Bild 2 einblenden
-            updateTitleText(title_bildende); // Titeltext aktualisieren
-            console.log("MA Level 3 fertig");
-            localStorage.setItem("ma_level3_done", 'true');
+            showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
+            updateTitleText(title_bild5); // Titeltext aktualisieren
+        } else if (textElement.innerText === text7) {
+            clearText();
+            showNextText(text8, ".bild6"); // Hier Bild 2 einblenden
+            updateTitleText(title_bild6); // Titeltext aktualisieren
         }
     });
 });
@@ -139,7 +137,7 @@ function showNextText(text, imageSelector) {
 
 function showImage(imageSelector) {
     // Alle Bilder ausblenden
-    gsap.set(".bild1, .bild2, .bild3, .bild4, .bild5", { display: "none" });
+    gsap.set(".bild1, .bild2, .bild3, .bild4, .bild5, .bild6", { display: "none" });
 
     // Gewünschtes Bild animiert einblenden
     gsap.fromTo(imageSelector, { opacity: 0, scale: 0.5 }, { display: "block", opacity: 1, scale: 1, duration: 1 });

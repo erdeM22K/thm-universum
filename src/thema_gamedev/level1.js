@@ -1,26 +1,20 @@
 
-var text1 = "Willkommen zu unserem interaktiven Tutorial! Heute werden wir verschiedene Sensoren von Handys untersuchen, die in modernen Smartphones verwendet werden. Unser Ziel ist es, dir einen klaren Überblick über diese wichtigen Sensoren zu geben und ihre Einsatzmöglichkeiten zu zeigen.";
-var text2 = "In dieser Sitzung wirst du mehrere wichtige Sensoren und deren Funktionen kennenlernen, die eine zentrale Rolle in modernen Smartphones spielen. Durch Klicken auf die Textbox kannst du schrittweise die nächsten Themen anzeigen und dich durch die Inhalte navigieren. Viel Spaß!";
-var text3 = "Das Handy-GPS ist eine Funktion, die Satellitensignale nutzt, um den genauen Standort eines mobilen Geräts zu bestimmen. GPS ermöglicht Navigation, Standortverfolgung und ortsbasierte Dienste wie Kartenanwendungen, Wetterberichte und Notfallhilfe. Es arbeitet unabhängig von Mobilfunknetzen und bietet weltweit präzise Standortinformationen.";
-var text4 = "Face ID ist eine biometrische Authentifizierungsmethode, die Gesichtserkennungstechnologie verwendet, um das Gerät zu entsperren und sichere Transaktionen zu autorisieren. Mithilfe einer Kombination aus Infrarotkamera und Punktprojektor erstellt Face ID eine detaillierte 3D-Karte des Gesichts des Benutzers. Diese Technologie bietet eine hohe Sicherheit und Benutzerfreundlichkeit.";
-var text5 = "Der Fingerabdrucksensor ist eine weitere biometrische Authentifizierungsmethode, die den einzigartigen Abdruck eines Fingers verwendet, um das Gerät zu entsperren oder Zahlungen zu bestätigen. Der Sensor scannt und speichert die Fingerabdruckdaten des Benutzers und vergleicht diese bei jeder Nutzung. Diese Methode ist schnell, bequem und bietet eine hohe Sicherheit.";
-var text6 = "Ein Pulsmesser im Handy verwendet optische Sensoren oder Infrarotsensoren, um den Herzschlag des Benutzers zu messen. Diese Funktion findet sich häufig in Fitness- und Gesundheits-Apps und ermöglicht die Überwachung der Herzfrequenz in Echtzeit. Sie hilft Benutzern, ihre Fitnessaktivitäten zu verfolgen, ihre Gesundheit zu überwachen und ihre Trainingsintensität zu optimieren."
+var text1 = "Willkommen im letzten Level des Medieninformatik-Studiums an der THM. Die Themen, die du bisher behandelt hast, sind von entscheidender Bedeutung für die Welt des Game Developments. Im finalen Abschnitt wirst du erfahren, wie diese Konzepte und Techniken in der Praxis angewendet werden können.";var text2 = "THM bietet eine breite Palette an Kursen für Game Development, insbesondere für die Entwicklung von Indie Games. Diese beinhalten spezialisierte Workshops, die alle Aspekte der Spieleentwicklung abdecken – von der Konzeption bis zur Programmierung. Du profitierst von modernster Software und Hardware sowie der Unterstützung erfahrener Dozenten und Gastredner aus der Industrie, um eigene Indie Games erfolgreich zu entwickeln.";
+var text3 = "Programmierung ist in der Spieleentwicklung unverzichtbar, um die Logik, Mechanik und Interaktivität der Spiele zu gestalten. Sie ermöglicht Charakterbewegungen, Spielwelt-Reaktionen und die Implementierung komplexer Algorithmen wie KI und Physik. Die erlernten Fähigkeiten in Web-Programmierung und Software Engineering (SWE) sind ebenfalls entscheidend. Web-Programmierkenntnisse unterstützen bei der Entwicklung von Online-Multiplayer-Funktionen und webbasierten Spielen, während SWE-Prinzipien wie Softwarearchitektur und Qualitätssicherung eine effiziente und fehlerfreie Entwicklung gewährleisten.";
+var text4 = "In der Spieleentwicklung spielt audiovisuelles Design (AV) eine zentrale Rolle bei der Schaffung der visuellen und akustischen Atmosphäre eines Spiels. AV umfasst Grafikdesign, Animationen, Soundeffekte und Musik, die das Spielerlebnis entscheidend beeinflussen. Die erlernten AV-Fähigkeiten in Grafikdesign, Animation, Sounddesign und Musikkomposition sind wertvoll für die Entwicklung ansprechender visueller und auditiver Inhalte, die ein fesselndes Spielerlebnis ermöglichen.";
+var text5 = "Grafikdesign (GD) ist in der Spieleentwicklung von großer Bedeutung, um visuell ansprechende und benutzerfreundliche Spieloberflächen zu gestalten. GD umfasst die Gestaltung von Charakteren, Umgebungen, Benutzeroberflächen und visuellen Effekten, die das Spielerlebnis maßgeblich prägen. Die erlernten GD-Fähigkeiten in Farbtheorie, Typografie und Layout sowie im Umgang mit Design-Software sind essenziell für die Erstellung hochwertiger Grafiken und Animationen.";
+var text6 = "Mediendesign (MD) ist entscheidend für die ästhetische Gestaltung und visuelle Kommunikation in der Spieleentwicklung. MD umfasst die Erstellung von Grafiken, Animationen und Benutzeroberflächen, die das Spielerlebnis verbessern. Die erlernten MD-Fähigkeiten in Designprinzipien, Farbtheorie und Typografie sowie im Einsatz von Designsoftware sind unerlässlich für die Entwicklung professioneller Grafiken und Animationen.";
+var text7 = "Ich hoffe, diese Anwendung hat dir einen tiefen Einblick in den Studiengang Medieninformatik (IEM) an der THM gegeben. Medieninformatik bietet vielversprechende Zukunftsaussichten, da sie wesentliche Fähigkeiten in Bereichen wie Game Development, Grafikdesign, audiovisuelle Gestaltung und mehr vermittelt. Diese Kompetenzen sind von entscheidender Bedeutung für die Gestaltung zukünftiger digitaler Medienlandschaften.";
 
-var textende = "Du bist am Ende des Levels angekommen. Über den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite"
-
-//-----------------------------------------------------------------
-
-var title_bild1 = "GPS";
-var title_bild2 = "Face-ID";
-var title_bild3 = "Finger-Scan";
-var title_bild4 = "Pulsmesser"
-
-var title_bildende = "Vielen Dank!"
+var title_bild1 = "Programmierung";
+var title_bild2 = "Aduio-Visuelle Medien";
+var title_bild3 = "Grafische Datenverarbeitung";
+var title_bild4 = "Mediendesign"
+var title_bild5 = "Game Development"
 
 
 gsap.registerPlugin(TextPlugin);
 
-localStorage.setItem("lastLevel", "ma3");
 // Anfangs Text anzeigen
 gsap.to("#text", {
     duration: 3,
@@ -62,10 +56,8 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             updateTitleText(title_bild4); // Titeltext aktualisieren
         } else if (textElement.innerText === text6) {
             clearText();
-            showNextText(textende, ".bild5"); // Hier Bild 2 einblenden
-            updateTitleText(title_bildende); // Titeltext aktualisieren
-            console.log("MA Level 3 fertig");
-            localStorage.setItem("ma_level3_done", 'true');
+            showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
+            updateTitleText(title_bild5); // Titeltext aktualisieren
         }
     });
 });
