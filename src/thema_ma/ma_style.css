@@ -202,7 +202,7 @@ svg {
 
 .copilot_container {
     position: absolute;
-    right: 1%;
+    right: 2%;
     bottom: 2%;
     z-index: 15;
     display: none;
@@ -210,7 +210,7 @@ svg {
 
 #text {
     font-family: "Press Start 2P";
-    margin-left: 0.5rem;
+    margin: 1em;
     margin-right: 15em;
     color: white;
     text-shadow:
@@ -263,7 +263,7 @@ div.skillValue {
 
 #skillHeadline {
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 15;
@@ -320,7 +320,7 @@ div.skillValue {
         width: 40vh;
     }
     .copilot_container {
-        right: -30%;
+        right: -25%;
         z-index: 10;
     }
     .textfeld {
@@ -329,7 +329,7 @@ div.skillValue {
 
     }
     #text {
-        margin-right: 2em;
+        margin-right: 0;
         font-size: 0.7rem;
     }
 

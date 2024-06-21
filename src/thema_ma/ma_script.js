@@ -33,8 +33,7 @@ let spaceship = document.querySelector("#spaceship");
 let start = 0;
 let breakpointLevel = [0.14, 0.43, 0.72];
 
-console.log("Letzter Breakpoint" + getLastLevelBreakpoint());
-function getLastLevelBreakpoint() {
+function setLastLevelBreakpoint() {
     switch (localStorage.getItem("lastLevel")) {
         case "ma1":
             start = breakpointLevel[0];
@@ -108,7 +107,6 @@ function animateToLevel(level) {
             start: start,
             end: breakpointLevel[level],
         }
-
     });
     start = breakpointLevel[level];
     currentLevel = level;
@@ -272,9 +270,9 @@ function showSkills(delay) {
     for (let i = 0; i < skillValues.length; i++) {
         let staggerFactor = 0.1;
         gsap.to(".skillValue:nth-child(" + (i * 2 + 2) + ")", {
-            delay: delay + 0.5 + i * staggerFactor,
+            delay: delay + 0.3 + i * staggerFactor,
             width: skillValues[i] * 100 + "%",
-            duration: 1,
+            duration: 0.5,
             ease: "power2.out"
         });
     }
@@ -307,15 +305,18 @@ function hideSkills() {
     });
 }
 
+setLastLevelBreakpoint()
+
 skillIcon.addEventListener('click', function () {
-    showSkills();
+    showSkills(0);
     skillIcon.style.display = "none";
     closeSkills.style.display = "block";
-    closeSkills.addEventListener('click', function () {
-       hideSkills();
-        skillIcon.style.display = "block";
-        closeSkills.style.display = "none";
-    });
+});
+
+closeSkills.addEventListener('click', function () {
+    hideSkills();
+    skillIcon.style.display = "block";
+    closeSkills.style.display = "none";
 });
 
 document.querySelectorAll('.textfeld').forEach(function(element) {
@@ -323,8 +324,6 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
         const textElement = document.getElementById("text");
         if (textAnimation.isActive() && textAnimation.progress() < 1) {
             textAnimation.progress(1);
-            console.log(textAnimation.progress() + "progress");
-            console.log("hit");
         }
         else {
             if (textElement.innerHTML === startText || textElement.innerHTML === finishText3) {
