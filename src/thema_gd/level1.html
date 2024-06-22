@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="styles.css">
     <title>Level 1 - Modellierung</title>
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
     <div class="black_transparent">
 
-        <a href="../thema_gd/gd.html" class="back-to-home" title="Zurück zur Startseite">
+        <a onclick="backPlanet('../thema_gd/gd.html')" class="back-to-home" title="Zurück zur Startseite">
             &#8592;
         </a>
 
@@ -51,7 +54,7 @@
 
     <script>
     //Grundstruktur Animation + Interaktion
-
+    const whiteOverlay = document.querySelector('.white-overlay-start');
         var text1 = "Hallo ich bin dein Copilot, Willkommen auf dem Level!";
         var text2 = "Dies ist eine Grundstruktur.";
         var text3 = "Und dies ist ein Beispiel Text.";
@@ -93,6 +96,16 @@
         //Funktionen ---------------------------------------------------
 
         function startLevel() {
+            gsap.to(".white-overlay-start", {
+        y: 0,
+        duration: 1,
+        opacity: 0,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            whiteOverlay.style.display ="none";
+    }
+});
             gsap.to(".black_transparent", {
                 duration: 2, 
                 backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz

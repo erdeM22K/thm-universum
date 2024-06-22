@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Webentwicklung</title>
     <link rel="stylesheet" href="wpr_style.css" />
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
 <div class="overlay"></div>
 <header>
@@ -13,7 +17,7 @@
     <h1>Webentwicklung</h1>
 </header>
 
-<a href="../index.html" class="back-to-home" title="Zurück zur Startseite">
+<a onclick="backPlanet('../index.html')" class="back-to-home" title="Zurück zur Startseite">
     &#8592;
 </a>
 
@@ -39,6 +43,32 @@
     </svg>
 </main>
 <button id="startButton">Level Starten!</button>
+<div class="transition-overlay"></div>
+<div class="clouds-wrapper">
+    <svg class="clouds" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 90.83">
+        <defs>
+            <filter id="goo" color-interpolation-filters="sRGB">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -11" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+            <filter id="blurMe">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.9" />
+            </filter>
+        </defs>
+        <g clip-path="url(#clip-path)" fill="#eef2f3" filter="url(#goo)">
+            <g class="clouds-wrapper" filter="url(#blurMe)">
+                <ellipse class="cloud" cx="40" cy="61.83" rx="7" ry="7" />
+                <ellipse class="cloud" cx="81" cy="68.83" rx="8" ry="8" />
+                <ellipse class="cloud" cx="6" cy="63.83" rx="6" ry="6"/>
+                <ellipse class="cloud" cx="15" cy="70.83" rx="11" ry="11"  />
+                <ellipse class="cloud" cx="65" cy="74.83" rx="11" ry="11"  />
+                <ellipse class="cloud" cx="48" cy="71.83" rx="14" ry="14" />
+                <ellipse class="cloud" cx="34" cy="75.83" rx="16" ry="16" />
+            </g>
+        </g>
+    </svg>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>

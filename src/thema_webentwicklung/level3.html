@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
     <div class="black_transparent">
 
-        <a href="../thema_webentwicklung/wpr.html" class="back-to-home" title="Zurück zur Startseite">
+        <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
             &#8592;
         </a>
 
@@ -40,6 +43,7 @@
         var text3 = "Rufe mit JS die Funktion 'function startRocket(){...}' auf, um die Rakete zu starten";
         var text5 = "Rakete Startet!";
         var text4 = "Rufe hier die Funktion auf:" ;
+        const whiteOverlay = document.querySelector('.white-overlay-start');
     
         gsap.registerPlugin(TextPlugin);
 
@@ -77,6 +81,16 @@
         });
 
         function startLevel() {
+            gsap.to(".white-overlay-start", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+            delay: 0.2,
+            ease: "power1.inOut",
+            onComplete: () => {
+                whiteOverlay.style.display ="none";
+        }
+    });
             gsap.to(".black_transparent", {
             duration: 3, 
             backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz

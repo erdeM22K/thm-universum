@@ -12,8 +12,19 @@ var title_bild3 = "Grafische Datenverarbeitung";
 var title_bild4 = "Mediendesign"
 var title_bild5 = "Game Development"
 
+const whiteOverlay = document.querySelector('.white-overlay-start');
 
 gsap.registerPlugin(TextPlugin);
+
+gsap.to(".white-overlay-start", {
+    y: 0,
+    duration: 1,
+    opacity: 0,
+    ease: "power1.inOut",
+    onComplete: () => {
+        whiteOverlay.style.display ="none";
+}
+});
 
 // Anfangs Text anzeigen
 gsap.to("#text", {
@@ -169,3 +180,94 @@ function startDotsAnimation(lastText) {
 function killDotsAnimation() {
     document.getElementById("dots").style.display = "none";
 }
+
+function backPlanet(relativeUrl) {
+    // Holen der Basis-URL des aktuellen Dokuments
+    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+
+    // Verwandeln des relativen Links in einen absoluten Link
+    var absoluteUrl = baseUrl + '/' + relativeUrl;
+    const whiteOverlay = document.querySelector('.white-overlay');
+    const stars = document.querySelector('.star');
+    whiteOverlay.style.display ="block";
+    stars.style.display ="block";
+    // Animation und Weiterleitung
+    const overlay = document.querySelector('.transition-overlay-back');
+    const clouds = document.querySelector('.clouds');
+    overlay.style.display ="block";
+    clouds.style.display ="block";
+    gsap.to(overlay, {
+        y: -2200,
+        duration: 2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+    gsap.to(".clouds", {
+        y: -2000,
+        duration: 3,
+        opacity: 1,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            clouds.style.display ="none";
+            
+        }
+    });
+    gsap.to(".white-overlay", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+    gsap.to(".star", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+}
+
+const starCount = 200;
+        const stars = [];
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = -10 + 'px';
+            star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
+            document.body.appendChild(star);
+            stars.push(star);
+        }
+
+        function animateStars() {
+            stars.forEach(star => {
+                const top = parseFloat(star.style.top);
+                if (top > window.innerHeight) {
+                    star.style.top = -100 + 'px';
+                    star.style.left = Math.random() * window.innerWidth + 'px';
+                    star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
+                } else {
+                    star.style.top = top + star.speed + 'px';
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        for (let i = 0; i < starCount; i++) {
+            createStar();
+        }
+
+        animateStars();
