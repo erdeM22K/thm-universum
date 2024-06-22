@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const text4 = "Bist du bereit? Setze dich ans Steuer, aktiviere die Antriebe und lass uns gemeinsam die unendlichen Möglichkeiten der Medieninformatik erkunden!";
     const textAnimation = gsap.timeline();
 
-    showCoordinateInput();
     gsap.registerPlugin(TextPlugin);
 
     localStorage.setItem("lastLevel", "0");
