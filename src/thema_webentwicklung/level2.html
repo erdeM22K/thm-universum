@@ -121,16 +121,21 @@
         var text3 = "Änder jetzt mit CSS die Farbe der Rocket auf Gelb";
         var text5 = "Farbe Erfolgeich gaendert";
         var text4 = ".rocket {color:";
+
         const whiteOverlay = document.querySelector('.white-overlay-start');
+
+        const textAnimation = gsap.timeline();
+
     
         gsap.registerPlugin(TextPlugin);
 
         document.addEventListener('DOMContentLoaded', (event) => {
+            localStorage.setItem("lastLevel", "wpr2");
             startLevel();
         });
     
         // Initial Text anzeigen
-        gsap.to("#text", {
+        textAnimation.to("#text", {
             duration: 3,
             text: text1,
             delay: 2,
@@ -144,16 +149,21 @@
         document.querySelectorAll('.textfeld').forEach(function(element) {
             element.addEventListener('click', function() {
                 const textElement = document.getElementById("text");
-                if (textElement.innerText === text1) {
-                    clearText();
-                    showNextText(text2);
-                } else if (textElement.innerText === text2) {
-                    clearText();
-                    showNextText(text3);
-                } else if (textElement.innerText === text3) {
-                    clearText();
-                    showNextText(text4);
-                    showInputField("on");
+                if (textAnimation.isActive() && textAnimation.progress() < 1) {
+                    textAnimation.progress(1);
+                }
+                else {
+                    if (textElement.innerText === text1) {
+                        clearText();
+                        showNextText(text2);
+                    } else if (textElement.innerText === text2) {
+                        clearText();
+                        showNextText(text3);
+                    } else if (textElement.innerText === text3) {
+                        clearText();
+                        showNextText(text4);
+                        showInputField("on");
+                    }
                 }
             });
         });
@@ -203,7 +213,7 @@
     
         // Funktion zum Anzeigen des nächsten Textes
         function showNextText(text) {
-            gsap.to("#text", {
+            textAnimation.to("#text", {
                 duration: 3,
                 delay: 1,
                 text: text,
@@ -215,7 +225,7 @@
         }
         function clearText() {
 
-        gsap.to("#text", {
+        textAnimation.to("#text", {
             duration: 0.5,
             text: "",
             onComplete: function() {

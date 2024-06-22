@@ -14,11 +14,13 @@ var title_bild4 = "Monospace";
 var title_bild5 = "Anwendung in der Praxis";
 var title_bild6 = "Vielen Dank!";
 
+const textAnimation = gsap.timeline();
 
+localStorage.setItem("lastLevel", "md1");
 gsap.registerPlugin(TextPlugin);
 
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -37,33 +39,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3, ".bild1");
-            updateTitleText(title_bild1)
-        } else if (textElement.innerText === text3) {
-            clearText();
-            showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
-            updateTitleText(title_bild2); // Titeltext aktualisieren
-        } else if (textElement.innerText === text4) {
-            clearText();
-            showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild3); // Titeltext aktualisieren
-        } else if (textElement.innerText === text5) {
-            clearText();
-            showNextText(text6, ".bild4"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild4); // Titeltext aktualisieren
-        } else if (textElement.innerText === text6) {
-            clearText();
-            showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild5); // Titeltext aktualisieren
-        } else if (textElement.innerText === text7) {
-            clearText();
-            showNextText(text8, ".bild6"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild6); // Titeltext aktualisieren
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        }
+        else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3, ".bild1");
+                updateTitleText(title_bild1)
+            } else if (textElement.innerText === text3) {
+                clearText();
+                showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
+                updateTitleText(title_bild2); // Titeltext aktualisieren
+            } else if (textElement.innerText === text4) {
+                clearText();
+                showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild3); // Titeltext aktualisieren
+            } else if (textElement.innerText === text5) {
+                clearText();
+                showNextText(text6, ".bild4"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild4); // Titeltext aktualisieren
+            } else if (textElement.innerText === text6) {
+                clearText();
+                showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild5); // Titeltext aktualisieren
+            } else if (textElement.innerText === text7) {
+                localStorage.setItem("md_level1_done", 'true');
+                clearText();
+                showNextText(text8, ".bild6"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild6); // Titeltext aktualisieren
+            }
         }
     });
 });
@@ -130,7 +138,7 @@ function startLevel() {
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text, imageSelector) {
     // Zuerst das Text-Element aktualisieren
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -155,7 +163,7 @@ function showImage(imageSelector) {
 
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {

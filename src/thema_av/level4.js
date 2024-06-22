@@ -1,19 +1,19 @@
 //Grundstruktur Animation + Interaktion
 const whiteOverlay = document.querySelector('.white-overlay-start');
 var text1 = "Du bist nun im letzten Level dieses Moduls angekommen. Dank deiner erfolgreichen Lösung der vorherigen Level weißt du nun, was im Modul Audiovisuelle Medien behandelt wird. Alle vorherigen Aufgaben werden in der Postproduktion (dem Schnitt) zu einem funktionsfähigen Video zusammengeführt. Klicke auf \"Kamera\", um das Endprodukt zu sehen! :) Viel Spaß!";
-var text2 = "Dies ist eine Grundstruktur.";
-var text3 = "Und dies ist ein Beispiel Text.";
-
+const textAnimation = gsap.timeline();
+const bildAnimation = gsap.timeline();
 // Fügen Sie diese Codezeilen in Ihr vorhandenes JavaScript-Skript ein
-
+localStorage.setItem("lastLevel", "av4");
+localStorage.setItem("av_level4_done", 'true');
 // Zuerst verbergen wir das Video:
-gsap.set(".video_container", {
+bildAnimation.set(".video_container", {
     y: "-100%", // Beginnen Sie außerhalb des sichtbaren Bereichs (oben)
     opacity: 0 // Beginnen Sie mit einer Opazität von 0 (versteckt)
 });
 
 // Dann zeigen wir es nach 5 Sekunden an:
-gsap.to(".video_container", {
+bildAnimation.to(".video_container", {
     delay: 5, // Verzögerung von 5 Sekunden
     y: "0%", // Bewegen Sie das Video in den sichtbaren Bereich (oben)
     opacity: 1, // Ändern Sie die Opazität auf 1 (sichtbar)
@@ -25,7 +25,7 @@ gsap.to(".video_container", {
 gsap.registerPlugin(TextPlugin);
 
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -43,13 +43,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
+        if (textAnimation.isActive() && textAnimation.progress() < 1 && bildAnimation.isActive() && bildAnimation.progress() < 1) {
+            textAnimation.progress(1);
+            bildAnimation.progress(1);
+        }
+        /*
         if (textElement.innerText === text1) {
+
             clearText();
             showNextText(text2);
         } else if (textElement.innerText === text2) {
             clearText();
             showNextText(text3);
         }
+
+        */
     });
 });
 
@@ -85,7 +93,7 @@ function startLevel() {
 
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text) {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -97,7 +105,7 @@ function showNextText(text) {
 }
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {

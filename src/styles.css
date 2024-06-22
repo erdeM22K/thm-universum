@@ -5,6 +5,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: "Press Start 2P";
 }
 header {
     display: flex;
@@ -45,6 +46,60 @@ footer div a {
     font-size: 0.7vw;
 }
 
+.menu {
+    position: absolute;
+    top: 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.menu:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.menu:hover {
+    color: #80ba24;
+}
+
+#skillbars, #close {
+    right: 10px;
+}
+
+#skillbars svg {
+    height: 40px;
+}
+
+#close svg {
+    width: 30px;
+}
+
+#skillbars svg path {
+    fill: white;
+}
+
+#close svg path {
+    fill: white;
+}
+
+#skillbars:hover svg path {
+    fill: #80ba24;
+}
+
+#close:hover svg path {
+    fill: #80ba24;
+}
+
+#close {
+    display: none;
+    z-index: 15;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -52,6 +107,7 @@ body {
     width: 100vw;
     overflow: hidden;
     background-size:cover;
+    background-position: top;
     background-repeat: no-repeat;
 }
 #logo {
@@ -126,6 +182,7 @@ text-shadow:
 #planet6 {
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #ffffff;
 }
+
 
 .transition-overlay {
     display: none;
@@ -211,6 +268,197 @@ text-shadow:
   }
 }
 
+
+.textfeld {
+    position: absolute;
+    bottom: 1%;
+    left: 10%;
+    width: 80%;
+    height: 25%;
+    max-height: 25%; /* maximal erlaubte Höhe */
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    border: 2px solid #000; /* Korrektur der Border-Deklaration */
+    border-radius: 1em;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
+    padding: 10px; /* Innenabstand für den Inhalt */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite */
+    display: none;
+}
+
+
+.textfeld::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
+}
+
+
+.copilot {
+    height: 60vh;
+    width: 60vh;
+}
+
+.copilot_container {
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+    z-index: 15;
+    display: none;
+}
+
+#text {
+    font-family: "Press Start 2P";
+    margin: 1em;
+    margin-right: 15em;
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+    line-height: 2em;
+}
+
+#dots {
+    display: none;
+    font-family: "Press Start 2P";
+    color: white;
+    margin: 2em;
+    margin-right: 15em;
+}
+#overlay {
+    display: none; /* Standardmäßig versteckt */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: 5; /* Über allen anderen Inhalten */
+}
+
+div#skillContainer {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 40%;
+    z-index: 10; /* Über allen anderen Inhalten */
+    color: white;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 16% 16% 16% 16% 16% 16%;
+    justify-items: start;
+    align-items: center;
+}
+
+div.skillValue {
+    background-color: white;
+    height: 20px;
+    width: 0;
+}
+
+#skillHeadline {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    color: white;
+}
+
+#coordinateWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    padding: 5em 5em;
+    background-color: #1d1d1b;
+    color: white;
+    z-index: 20;
+    border-radius: 10px;
+}
+
+#coordinateWindow button {
+    font-family: "Press Start 2P";
+    padding: 20px 30px;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#coordinateWindow h1 {
+    margin: 0;
+}
+
+#coordinateContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin: 2em 0;
+}
+
+.coordinateInput {
+    outline: none;
+    width: 1.5em;
+    font-size: 1em;
+    font-family: "Press Start 2P";
+    text-align: center;
+    color: white;
+    border: none;
+    border-bottom:  2px solid white;
+    background-color: transparent; /* Hintergrundfarbe transparent setzen */
+    /* Weitere Stile nach Bedarf anpassen */
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#coordinateClose {
+    right: 10px;
+}
+
+#coordinateClose svg {
+    width: 30px;
+}
+
+#coordinateClose svg path {
+    fill: white;
+}
+
+#coordinateClose:hover svg path {
+    fill: #80ba24;
+}
+
+
+
 @keyframes rotate {
     from {
         background-position: 0 0;
@@ -285,6 +533,63 @@ text-shadow:
     header #logo {
         margin-top: 1em;
 
+    }
+    .copilot {
+        height: 40vh;
+        width: 40vh;
+    }
+    .copilot_container {
+        right: -25%;
+        z-index: 10;
+    }
+    .textfeld {
+        left:0%;
+        width: 100%;
+
+    }
+    #text {
+        margin-right: 0;
+        font-size: 0.7rem;
+    }
+
+    #dots {
+        font-size: 0.7rem;
+    }
+    div#skillContainer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 25%;
+        width: 80%;
+        height: 40%;
+        z-index: 10; /* Über allen anderen Inhalten */
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-size: 0.8rem;
+    }
+
+
+    div.skillValue {
+        background-color: white;
+        height: 10px;
+        width: 0;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    #skillHeadline {
+        position: absolute;
+        top: 10%;
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 15;
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
     }
     body {
         height: 100vh;
@@ -381,6 +686,7 @@ line-height: 8vw;
             box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f0e98b;
         }
 
+
         .transition-overlay {
             display: block;
             background-image: url(./bilder/rocket.svg);
@@ -454,5 +760,29 @@ line-height: 8vw;
             opacity: 1;
           
           }
+
+    #coordinateWindow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+        height: auto;
+        padding: 5em 2em;
+        background-color: #1d1d1b;
+        color: white;
+        z-index: 20;
+        border-radius: 10px;
+    }
+
+    #coordinateHeadline {
+        font-size: 1.7em;
+    }
+
+
     }
 

@@ -1,4 +1,9 @@
+
 const whiteOverlay = document.querySelector('.white-overlay-start');
+
+const textAnimation = gsap.timeline();
+
+
 var text1 = "Willkommen beim ersten Level des Moduls Mobile Apps. Hier kannst du dein Wissen über mobile Softwareplattformen testen!";
 var text2 = "Dieses Level beinhaltet mehrere Fragen zu verschiedenen Softwareplattformen. Jede Frage hat drei Antwortmöglichkeiten, jedoch ist immer nur eine Antwort korrekt.";
 var text3 = "Lass uns mit der ersten Frage beginnen und dein Wissen über Softwareplattformen vertiefen!";
@@ -44,8 +49,9 @@ var retryMode = false; // Variable für den Wiederholungsmodus
 
 gsap.registerPlugin(TextPlugin);
 
+localStorage.setItem("lastLevel", "ma1");
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -63,26 +69,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3);
-        } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
-            clearText();
-            if (retryMode) {
-                retryMode = false;
-                showQuestion();
-            } else {
-                showQuestion();
-                feedbackGiven = false;
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        }
+        else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3);
+            } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
+                clearText();
+                if (retryMode) {
+                    retryMode = false;
+                    showQuestion();
+                } else {
+                    showQuestion();
+                    feedbackGiven = false;
+                }
             }
+            console.log(textAnimation.progress() + "progress");
         }
     });
 });
 
-
+// Funktion, um zu prüfen, ob der Text gerade animiert wird geskippt werden kann + Skippen
 // Funktion zum Starten des Levels
 function startLevel() {
     gsap.to(".white-overlay-start", {
@@ -114,7 +126,7 @@ function startLevel() {
 
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text) {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -127,7 +139,7 @@ function showNextText(text) {
 
 // Funktion zum Leeren des Textfelds
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -205,7 +217,7 @@ function displayFeedback(message, isCorrect) {
         copilotImg.src = "../bilder/copilot_sad.svg";
     }
 
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: message,
@@ -222,15 +234,18 @@ function displayFeedback(message, isCorrect) {
                     showNextText(currentQuestion.explanation + " " + "Klicke unten, um die nächste Frage zu sehen.");
                 } else {
                     currentQuestionIndex = 0;
-                    gsap.to("#text", {
+                    console.log("MA Level 1 fertig");
+                    localStorage.setItem("ma_level1_done", 'true');
+                    textAnimation.to("#text", {
                         duration: 3,
                         delay: 10,
-                        text: "Du hast alle Fragen richtig beantwortet und somit das erste Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
+                        text: "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
                     });
                 }
             }
         }
     });
+
 }
 function backPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
@@ -311,3 +326,6 @@ const starCount = 200;
         }
 
         animateStars();
+
+
+

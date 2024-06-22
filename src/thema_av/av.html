@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Audiovisuelle Medien</title>
-    <link rel="stylesheet" href="av_style.css" />
+    <link rel="stylesheet" href="../levelauswahl.css" />
 </head>
 <div class="transition-overlay-back"></div>
 <div class="white-overlay-start"></div>
@@ -21,7 +21,12 @@
 <a onclick="backPlanet('../index.html')" class="back-to-home" title="Zurück zur Startseite">
     &#8592;
 </a>
-
+<a class="menu" id="skillbars" title="Zu deinen Skills">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 160H320V128H448v32zM48 64C21.5 64 0 85.5 0 112v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM448 352v32H192V352H448zM48 288c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48H48z"/></svg>
+</a>
+<a class="menu" id="close" title="Schliessen">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+</a>
 <main class="main">
     <svg width="150" height="150" viewBox="0 -60 100 250" >
         <image id="planet" href="../bilder/planet_av.svg" width="150" transform="translate(-25, -50)"/>
@@ -31,24 +36,32 @@
         </g>
         <g class="level" id="level1">
             <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Licht">Licht</text>
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Licht">Licht</text>
         </g>
         <g class="level" id="level2">
             <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Kamera">Kamera</text>
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Kamera">Kamera</text>
         </g>
         <g class="level" id="level3">
             <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Audio">Audio</text>
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Audio">Audio</text>
         </g>
         <g class="level" id="level4">
             <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Schnitt">Schnitt</text>
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Schnitt">Schnitt</text>
         </g>
     </svg>
 </main>
 
 <button id="startButton">Level Starten!</button>
+<div id="overlay"></div>
+<div class="copilot_container">
+    <img class="copilot" src="../bilder/copilot_winken.svg" alt="copilot_sad">
+</div>
+<div class="textfeld">
+    <div id="text"></div>
+    <div id="dots"></div>
+</div>
 
 <div class="transition-overlay"></div>
 <div class="clouds-wrapper">

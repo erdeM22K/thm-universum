@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
     const feed = document.getElementById('planeten_container');
+    const textfeld = document.querySelector(".textfeld");
+    const copilotContainer = document.querySelector(".copilot_container");
+    let skillIcon = document.querySelector("#skillbars");
+    let closeSkills = document.querySelector("#close");
+    const text1 = "Willkommen an Bord unseres Raumschiffs, Entdecker des Medieninformatik-Universums! Ich bin dein Copilot und freue mich, dich auf dieser spannenden Reise zu begleiten. Gemeinsam werden wir die vielfältigen Welten der Medieninformatik erkunden.";
+    const text2 = "Jeder Planet in diesem Universum repräsentiert einen einzigartigen Bereich der Medieninformatik, den es zu erkunden gilt. Mehr zu dem jeweiligen Bereich erzähle ich dir, wenn wir zu dem Planeten fliegen.";
+    const text3 = "Oh, ein Fehler im Raumschiff hat die Koordinaten zum Planeten des Gamedevelopments gelöscht... Wir müssen wohl erst die anderen Planeten bereisen, um die benötigten Koordinaten wiederzufinden."
+    const text4 = "Bist du bereit? Setze dich ans Steuer, aktiviere die Antriebe und lass uns gemeinsam die unendlichen Möglichkeiten der Medieninformatik erkunden!";
+    const textAnimation = gsap.timeline();
 
+    gsap.registerPlugin(TextPlugin);
 
+    localStorage.setItem("lastLevel", "0");
     // Funktion, um die Inhalte am Ende zu duplizieren
     function duplicateContent() {
         const containers = feed.querySelectorAll('.planet_container');
@@ -107,6 +118,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    if (!localStorage.getItem('landingpage_visited')) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.5,
+        });
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: text1,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Text 1 ausgeführt");
+            }
+        });
+    }
+
     if (mediaQuery.matches) {
         init();
         startAnimationMobile();
@@ -117,6 +147,69 @@ document.addEventListener('DOMContentLoaded', function () {
         startAnimationDesktop();
     }
     mediaQuery2.addListener(handleMediaQueryChange2);
+
+    skillIcon.addEventListener('click', function () {
+        showSkills(0);
+        skillIcon.style.display = "none";
+        closeSkills.style.display = "block";
+    });
+
+    closeSkills.addEventListener('click', function () {
+        hideSkills();
+        skillIcon.style.display = "block";
+        closeSkills.style.display = "none";
+    });
+
+    document.querySelectorAll('.textfeld').forEach(function(element) {
+        element.addEventListener('click', function() {
+            const textElement = document.getElementById("text");
+            if (textAnimation.isActive() && textAnimation.progress() < 1) {
+                textAnimation.progress(1);
+            }
+            else {
+                if (textElement.innerHTML === text1) {
+                    clearText();
+                    showNextText(text2);
+                }
+                else if (textElement.innerHTML === text2) {
+                    clearText();
+                    showNextText(text3);
+                }
+                else if (textElement.innerHTML === text3) {
+                    clearText();
+                    showNextText(text4);
+                }
+                else if (textElement.innerHTML === text4  || textElement.innerHTML === allPlanetsDoneText) {
+                    gsap.to(".textfeld", {
+                        y: 1500,
+                        duration: 3,
+                        ease: 'power4.out',
+                        opacity: 0,
+                        onComplete: function () {
+                            textfeld.style.display = "none";
+                        }
+                    });
+                    gsap.to(".copilot_container", {
+                        x: 1500,
+                        duration: 3,
+                        ease: 'power4.out',
+                        opacity: 0,
+                        onComplete: function () {
+                            copilotContainer.style.display = "none";
+                        }
+                    });
+                    localStorage.setItem('landingpage_visited', 'true');
+                    gsap.to("#overlay", {
+                        duration: 0.5,
+                        opacity: 0,
+                        onComplete: function () {
+                            document.querySelector("#overlay").style.display = "none";
+                        }
+                    });
+                }
+            }
+        });
+    });
 });
 $(document).ready(function() {
     function loadPlanets() {

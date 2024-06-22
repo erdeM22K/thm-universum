@@ -14,6 +14,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
+            localStorage.setItem("wpr_level2_done", 'true');
         } else if (text === 'blue') {
             changeColor('.cls-7', '#4B69E2')
             changeColor('.cls-9', '#8DABFF')
@@ -21,6 +22,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
+            localStorage.setItem("wpr_level2_done", 'true');
         } else if (text === 'yellow') {
             changeColor('.cls-7', '#EDD529')
             changeColor('.cls-9', '#FFF86C')
@@ -28,6 +30,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
+            localStorage.setItem("wpr_level2_done", 'true');
         } else if (text === 'green') {
             changeColor('.cls-7', '#47D647')
             changeColor('.cls-9', '#95FF83')
@@ -35,6 +38,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
+            localStorage.setItem("wpr_level2_done", 'true');
         } else if (text === 'orange') {
             changeColor('.cls-7', '#F2AE40')
             changeColor('.cls-9', '#FFD85C')
@@ -42,6 +46,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
+            localStorage.setItem("wpr_level2_done", 'true');
         }
     }
 });
