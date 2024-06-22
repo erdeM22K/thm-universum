@@ -10,11 +10,13 @@ var text2 = "Klicke dazu zuerst auf den Lautsprecher und anschließend auf den S
 var textFehler = "Hoppla, da gehört das aber nicht hin. Versuch's nochmal!"
 var textRichtig = "Super, weiter so!";
 
+const textAnimation = gsap.timeline();
 
+localStorage.setItem("lastLevel", "av3");
 gsap.registerPlugin(TextPlugin);
 
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -32,9 +34,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        } else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            }
         }
     });
 });
@@ -142,7 +148,7 @@ function startLevel() {
 
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text) {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -154,7 +160,7 @@ function showNextText(text) {
 }
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -221,6 +227,7 @@ function stopSelectionAnimation(id) {
 
 function testBeideVerbunden() {
     if (speakerConnected[0] && speakerConnected[1]) {
+        localStorage.setItem("av_level3_done", 'true');
         textRichtig = "Herzlichen Glückwunsch, du hast es geschafft!";
     }
 }

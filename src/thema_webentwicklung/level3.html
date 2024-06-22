@@ -10,6 +10,7 @@
 <body>
     <div class="black_transparent">
 
+
         <a href="../thema_webentwicklung/wpr.html" class="back-to-home" title="Zurück zur Startseite">
             &#8592;
         </a>
@@ -40,15 +41,17 @@
         var text3 = "Rufe mit JS die Funktion 'function startRocket(){...}' auf, um die Rakete zu starten";
         var text5 = "Rakete Startet!";
         var text4 = "Rufe hier die Funktion auf:" ;
+        const textAnimation = gsap.timeline();
     
         gsap.registerPlugin(TextPlugin);
 
         document.addEventListener('DOMContentLoaded', (event) => {
+            localStorage.setItem("lastLevel", "wpr3");
             startLevel();
         });
     
         // Initial Text anzeigen
-        gsap.to("#text", {
+        textAnimation.to("#text", {
             duration: 3,
             text: text1,
             delay: 2,
@@ -62,16 +65,21 @@
         document.querySelectorAll('.textfeld').forEach(function(element) {
             element.addEventListener('click', function() {
                 const textElement = document.getElementById("text");
-                if (textElement.innerText === text1) {
-                    clearText();
-                    showNextText(text2, 3);
-                } else if (textElement.innerText === text2) {
-                    clearText();
-                    showNextText(text3, 4);
-                } else if (textElement.innerText === text3) {
-                    clearText();
-                    showNextText(text4, 1);
-                    showInputField("on");
+                if (textAnimation.isActive() && textAnimation.progress() < 1) {
+                    textAnimation.progress(1);
+                }
+                else {
+                    if (textElement.innerText === text1) {
+                        clearText();
+                        showNextText(text2, 3);
+                    } else if (textElement.innerText === text2) {
+                        clearText();
+                        showNextText(text3, 4);
+                    } else if (textElement.innerText === text3) {
+                        clearText();
+                        showNextText(text4, 1);
+                        showInputField("on");
+                    }
                 }
             });
         });
@@ -111,7 +119,7 @@
     
         // Funktion zum Anzeigen des nächsten Textes
         function showNextText(text, zahl) {
-            gsap.to("#text", {
+            textAnimation.to("#text", {
                 duration: zahl,
                 delay: 1,
                 text: text,
@@ -123,7 +131,7 @@
         }
         function clearText() {
 
-        gsap.to("#text", {
+        textAnimation.to("#text", {
             duration: 0.5,
             text: "",
             onComplete: function() {

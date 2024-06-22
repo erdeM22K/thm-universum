@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    localStorage.setItem("lastLevel", "av2");
     startLevel();
     hideImageAndSlider(); // Verstecke das Bild und den Regler zu Beginn
 
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (sliderValue >= -1 && sliderValue <= 1) {
             clearText();
             showNextText("Sehr gut, deine Eingabe war korrekt :)  <br> Über den Pfeil in der oberen linken Ecke gelangst du zurück auf die Startseite!");
+            localStorage.setItem("av_level2_done", 'true');
         } else {
             clearText();
             showNextText("Das sieht noch nicht gut genug aus, du kannst das besser.  <br> Versuch es noch einmal :)!");
@@ -42,10 +44,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 var text1 = "Willkommen im zweiten Level \"Kamera\". In diesem Level besteht deine Aufgabe darin, die Schärfe eines vorgegebenen Bildes mithilfe eines Reglers so anzupassen, dass es wieder erkennbar wird.";
 var text2 = "Wenn du denkst, dass deine Einstellung korrekt ist, dann drück auf den Button \"Abgeben\".";
 
+const textAnimation = gsap.timeline();
+
 gsap.registerPlugin(TextPlugin);
 
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -58,10 +62,15 @@ gsap.to("#text", {
 // Klick-Eventhandler für das Textfeld ('Klick' für nächsten Text)
 document.querySelector('.textfeld').addEventListener('click', function() {
     const textElement = document.getElementById("text");
-    if (textElement.innerText === text1) {
-        clearText();
-        showImageAndSlider(); // Zeige das Bild und den Regler, wenn der Benutzer zum ersten Mal weiterklickt
-        showNextText(text2);
+    if (textAnimation.isActive() && textAnimation.progress() < 1) {
+        textAnimation.progress(1);
+    }
+    else {
+        if (textElement.innerText === text1) {
+            clearText();
+            showImageAndSlider(); // Zeige das Bild und den Regler, wenn der Benutzer zum ersten Mal weiterklickt
+            showNextText(text2);
+        }
     }
 });
 
@@ -95,7 +104,7 @@ function showImageAndSlider() {
 
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text) {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -107,7 +116,7 @@ function showNextText(text) {
 }
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {

@@ -14,7 +14,9 @@ let closeSkills = document.querySelector("#close");
 let startText = "Wir landen auf dem Planeten der Audiovisuellen Medien. Hier kannst du die Stationen \"Licht\", \"Kamera\", \"Audio\" und \"Editing\" besuchen.";
 let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Mobilen Anwendungen abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
 let finishText2 = "Als <i>App-Entwickler</i> kannst du innovative mobile Anwendungen für iOS und Android entwickeln. Als <i>Softwareentwickler</i> stehen dir allgemeinere Softwareprojekte offen, während du als <i>UX/UI Designer</i> an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces arbeitest.";
-let finishText3 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
+let finishText3 = "Bei der Erkundung des Planeten hast du die zweite Koordinate des Gamedevelopment-Planetens gefunden: 3.";
+let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
+let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
 
 for (let i = 0; i < numberOfIcons; i++) {
@@ -40,6 +42,9 @@ function setLastLevelBreakpoint() {
             break;
         case "av3":
             start = breakpointLevel[2];
+            break;
+        case "av4":
+            start = breakpointLevel[3];
             break;
         default:
             return 0;
@@ -196,7 +201,22 @@ function startDotsAnimation(lastText) {
 }
 
 function allLevelsDone() {
-    if (localStorage.getItem('av_level1_done') && localStorage.getItem('av_level2_done') && localStorage.getItem('av_level3_done')) {
+    if (localStorage.getItem('av_level1_done') && localStorage.getItem('av_level2_done') && localStorage.getItem('av_level3_done') && localStorage.getItem('av_level4_done')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function allPlanetsDone() {
+    let anzahlModule = 5;
+    let anzahlModuleDone = 0;
+    for (let i = 0; i < anzahlModule; i++) {
+        if (localStorage.getItem("module" + i + "_done")) {
+            anzahlModuleDone++;
+        }
+    }
+    if (anzahlModule === anzahlModuleDone) {
         return true;
     } else {
         return false;
@@ -206,6 +226,11 @@ function allLevelsDone() {
 function showSkills(delay) {
     let skills = ["Webentwicklung", "Audiovisuelle Medien", "Grafische Datenverarbeitung", "Mobile Apps", "Mediendesign", "Game Development"];
     let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
+    let levelAnzahl = [3, 4, 3, 3, 3, 1];
+    let levelAnzahlGesamt = 0;
+    for (let i = 0; i < levelAnzahl.length; i++) {
+        levelAnzahlGesamt += levelAnzahl[i];
+    }
     let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
 
     const skillHeadline = document.createElement('h1');
@@ -231,11 +256,11 @@ function showSkills(delay) {
 
     }
     for (let modul = 0; modul < skills.length - 1; modul++) {
-        let skillBonusGameDesign = 0.063;
-        for (let level = 1; level <= 3; level++) {
+        let skillBonusGameDesign = 0.95/levelAnzahlGesamt;
+        for (let level = 1; level <= levelAnzahl[modul]; level++) {
             if(localStorage.getItem(skillsShort[modul] + "_level" + level + '_done')) {
                 console.log(skills[modul] + " Level " + level + " fertig.");
-                skillValues[modul] += 0.316;
+                skillValues[modul] += 0.95/levelAnzahl[modul];
                 skillValues[5] += skillBonusGameDesign;
             }
         }
@@ -323,7 +348,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             textAnimation.progress(1);
         }
         else {
-            if (textElement.innerHTML === startText || textElement.innerHTML === finishText3) {
+            if (textElement.innerHTML === startText || textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
                 gsap.to(".textfeld", {
                     y: 1500,
                     duration: 3,
@@ -343,7 +368,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                     }
                 });
                 if (textElement.innerHTML === startText) {
-                    localStorage.setItem('av_visited', 'true');
+                    localStorage.setItem('wpr_visited', 'true');
                     gsap.to("#overlay", {
                         duration: 0.5,
                         opacity: 0,
@@ -352,9 +377,9 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                         }
                     });
                 }
-                if (textElement.innerHTML === finishText3) {
+                if (textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
                     hideSkills();
-                    localStorage.setItem('module1_done', 'true');
+                    localStorage.setItem('module0_done', 'true');
                 }
             } else if (textElement.innerHTML === finishText1) {
                 clearText();
@@ -362,6 +387,13 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             } else if (textElement.innerHTML === finishText2) {
                 clearText();
                 showNextText(finishText3);
+            } else if (textElement.innerHTML === finishText3) {
+                clearText();
+                if (allPlanetsDone()) {
+                    showNextText(allPlanetsDoneText);
+                } else {
+                    showNextText(finishText4);
+                }
             }
         }
     });
@@ -389,6 +421,9 @@ startButton.addEventListener("click", function () {
             break;
         case 2:
             window.location.href = "level3.html";
+            break;
+        case 3:
+            window.location.href = "level4.html";
             break;
     }
 });

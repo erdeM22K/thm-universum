@@ -67,8 +67,6 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
         const textElement = document.getElementById("text");
         if (textAnimation.isActive() && textAnimation.progress() < 1) {
             textAnimation.progress(1);
-            console.log(textAnimation.progress() + "progress");
-            console.log("hit");
         }
         else {
             if (textElement.innerText === text1) {
@@ -226,7 +224,7 @@ function displayFeedback(message, isCorrect) {
                     textAnimation.to("#text", {
                         duration: 3,
                         delay: 10,
-                        text: "Du hast alle Fragen richtig beantwortet und somit das erste Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
+                        text: "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
                     });
                 }
             }
