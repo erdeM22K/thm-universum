@@ -1,4 +1,8 @@
+
+const whiteOverlay = document.querySelector('.white-overlay-start');
+
 const textAnimation = gsap.timeline();
+
 
 var text1 = "Willkommen beim dritten Level des Moduls Mediendesign! In diesem Level wirst du dein Wissen über mobile Formen und die dazugehörigen Marken testen. Es geht darum, wie gut du verschiedene Marken und deren Produkte anhand von Bildern und Logos erkennen kannst.";
 var text2 = "Wir alle erkennen inzwischen viele Produkte und Marken allein anhand ihrer Form oder ihres Logos. Du wirst hier mehrere Produkte und Elemente gezeigt bekommen, die dir bestimmt bekannt vorkommen. Deine Aufgabe ist es, die richtige Marke oder das richtige Unternehmen zu identifizieren.";
@@ -96,6 +100,16 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
 
 // Funktion zum Starten des Levels
 function startLevel() {
+    gsap.to(".white-overlay-start", {
+        y: 0,
+        duration: 1,
+        opacity: 0,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            whiteOverlay.style.display ="none";
+    }
+});
     gsap.to(".black_transparent", {
         duration: 2,
         backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz
@@ -240,3 +254,82 @@ function displayFeedback(message, isCorrect) {
         }
     });
 }
+function backPlanet(relativeUrl) {
+    // Holen der Basis-URL des aktuellen Dokuments
+    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+
+    // Verwandeln des relativen Links in einen absoluten Link
+    var absoluteUrl = baseUrl + '/' + relativeUrl;
+    const whiteOverlay = document.querySelector('.white-overlay');
+    const stars = document.querySelector('.star');
+    whiteOverlay.style.display ="block";
+    stars.style.display ="block";
+    // Animation und Weiterleitung
+    const overlay = document.querySelector('.transition-overlay-back');
+
+    overlay.style.display ="block";
+
+    gsap.to(overlay, {
+        y: -2200,
+        duration: 2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+    gsap.to(".white-overlay", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+    gsap.to(".star", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+}
+
+const starCount = 200;
+        const stars = [];
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = -10 + 'px';
+            star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
+            document.body.appendChild(star);
+            stars.push(star);
+        }
+
+        function animateStars() {
+            stars.forEach(star => {
+                const top = parseFloat(star.style.top);
+                if (top > window.innerHeight) {
+                    star.style.top = -100 + 'px';
+                    star.style.left = Math.random() * window.innerWidth + 'px';
+                    star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
+                } else {
+                    star.style.top = top + star.speed + 'px';
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        for (let i = 0; i < starCount; i++) {
+            createStar();
+        }
+
+        animateStars();

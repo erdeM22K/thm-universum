@@ -109,7 +109,6 @@ body {
     background-size:cover;
     background-position: top;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 #logo {
     margin: 2%;
@@ -183,6 +182,93 @@ text-shadow:
 #planet6 {
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #ffffff;
 }
+
+
+.transition-overlay {
+    display: none;
+    background-image: url(./bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    transform: translate(80vh, 10vh);
+    z-index: 9;
+
+}
+.white-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 0;
+
+}
+
+.white-overlay-start {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 1;
+  
+  }
+
+  .clouds {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 100%;
+    opacity: 0;
+} 
+.cloud {
+    height: 10000px;
+    animation: kaboom 0.4s ease alternate infinite;
+    transform-origin: center center;
+    opacity: 0.9;
+    &:nth-child(odd) {
+        animation: kaboom 0.3s ease alternate infinite;
+    }
+    &:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+    &:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+    &:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+    &:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+    &:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+}
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+@keyframes kaboom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+
 .textfeld {
     position: absolute;
     bottom: 1%;
@@ -372,6 +458,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
+
 @keyframes rotate {
     from {
         background-position: 0 0;
@@ -379,6 +466,15 @@ input[type=number]::-webkit-outer-spin-button {
     to {
         background-position: -200% 0;
     }
+}
+
+.star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
 }
 @media (min-width: 481px) {
     #planeten_container {
@@ -425,6 +521,7 @@ input[type=number]::-webkit-outer-spin-button {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
     }
     header {
         margin:0;
@@ -497,6 +594,7 @@ input[type=number]::-webkit-outer-spin-button {
     body {
         height: 100vh;
         background-repeat: no-repeat;
+        overflow: hidden;
 
         }
         #planeten_container {
@@ -587,6 +685,82 @@ line-height: 8vw;
 
             box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f0e98b;
         }
+
+
+        .transition-overlay {
+            display: block;
+            background-image: url(./bilder/rocket.svg);
+            width: 85vh;
+            height: 85vh;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-26%, 100%);
+        
+        }
+        .white-overlay {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0);
+            position: absolute;
+            z-index: 8;
+            opacity: 0;
+        
+        }
+
+        .clouds {
+            display: none;
+            position: absolute;
+            top: 45%;
+            width: 100vh;
+            transform: translate(-50%, 0%);
+            opacity: 0;
+    
+        }
+        
+        .cloud {
+            display: block;
+            animation: kaboom 0.4s ease alternate infinite;
+            transform-origin: center center;
+            opacity: 0.9;
+            &:nth-child(odd) {
+                animation: kaboom 0.3s ease alternate infinite;
+            }
+            &:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            &:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+            &:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+            &:nth-child(5) {
+                animation-delay: 0.5s;
+            }
+            &:nth-child(6) {
+                animation-delay: 0.6s;
+            }
+            &:nth-child(7) {
+                animation-delay: 0.7s;
+            }
+        }
+        .white-overlay-start {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0);
+            position: absolute;
+            z-index: 8;
+            opacity: 1;
+          
+          }
+
     #coordinateWindow {
         display: flex;
         flex-direction: column;
@@ -608,6 +782,7 @@ line-height: 8vw;
     #coordinateHeadline {
         font-size: 1.7em;
     }
+
 
     }
 

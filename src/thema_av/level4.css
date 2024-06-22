@@ -23,6 +23,7 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
     transition: background 0.3s ease;
+    cursor: pointer;
 }
 
 .back-to-home:visited{
@@ -90,6 +91,53 @@ body {
     margin-right: 15em;
 }
 
+.transition-overlay-back {
+    display: block;
+    background-image: url(../bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    top:50%;
+    left: 0%;
+    transform: translate(-30vh, 180vh);
+    z-index: 9;
+    rotate: 180deg;
+  
+  
+  }
+  
+  .white-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 0;
+  
+  }
+  
+  .white-overlay-start {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 1;
+  
+  }
+  
+  .star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
+  }
+
 @media (max-width: 480px) {
     .copilot {
         height: 40vh;
@@ -109,6 +157,42 @@ body {
     html, body {
         overflow: hidden;
     }
+
+    .transition-overlay-back {
+        display: block;
+        background-image: url(../bilder/rocket.svg);
+        width: 85vh;
+        height: 85vh;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(63vh, 160vh);
+        rotate: 180deg;
+    
+    }
+    
+    .white-overlay {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 0;
+    
+    }
+    
+    .white-overlay-start {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 1;
+      
+      }
 }
 
 .video_container {
@@ -123,21 +207,10 @@ body {
 }
 
 .video_container iframe {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 100vh;
-    height: 100vh;
-    bottom: -10vh;
+    width: 50em;
+    height: 50em;
 }
 
-.copilot_container {
-    position: relative;
-    left: 35%;
-    top: 20%;
-    z-index: 2;
-}
 
 @media (max-width: 480px) {
     .video_container {
@@ -147,6 +220,5 @@ body {
     .video_container iframe {
         width: 25em;
         height: 25em;
-        bottom: 20vh;
     }
 }
