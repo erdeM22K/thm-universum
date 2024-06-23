@@ -93,15 +93,14 @@ body {
 }
 
 .transition-overlay-back {
-    display: block;
+    display: none;
     background-image: url(../bilder/rocket.svg);
     position: absolute;
     width: 100vh;
     height: 100vh;
     background-repeat: no-repeat;
-    top:50%;
-    left: 0%;
-    transform: translate(-30vh, 180vh);
+    top:-120vh;
+    left: 15vw;
     z-index: 9;
     rotate: 180deg;
   
