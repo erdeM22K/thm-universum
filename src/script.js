@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function startAnimationDesktop() {
-
+        if(!localStorage.getItem("landingpage_visited")) {
             gsap.from('#title', {
                 y: -1500,
                 duration: 2,
@@ -72,20 +72,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 2,
                 ease: 'power4.out'
             });
-        
+        }
     }
 
     function startAnimationMobile() {
-
-            gsap.to(".white-overlay-start", {
-                y: 0,
-                duration: 1,
-                opacity: 0,
-                ease: "power1.inOut",
-                onComplete: () => {
-                    whiteOverlay.style.display ="none";
-            }
-        });
+        if(!localStorage.getItem("landingpage_visited")) {
             gsap.from('#title', {
                 y: -2500,
                 duration: 4,
@@ -103,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 3,
                 ease: 'power4.out'
             });
-        
+        }
     }
 
     function startDotsAnimation(lastText) {
@@ -476,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
- 
+    if(!localStorage.getItem("landingpage_visited")) {
         document.querySelector("#overlay").style.display = "block";
         gsap.to("#overlay", {
             duration: 1,
@@ -493,6 +484,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("Text 1 ausgeführt");
             }
         });
+    }
 
     if (mediaQuery.matches) {
         init();
@@ -593,6 +585,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Function to start animation on desktop
         function animatePlanetsDesktop() {
+            if(!localStorage.getItem("landingpage_visited")) {
             gsap.from('.planet', {
                 y: -2500,
                 duration: 2,
@@ -608,9 +601,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 delay: 3
             });
         }
+        }
     
         // Function to start animation on mobile
         function animatePlanetsMobile() {
+            if(!localStorage.getItem("landingpage_visited")) {
             gsap.from('.planet', {
                 x: -2500,
                 duration: 2,
@@ -625,11 +620,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 ease: 'power4.out',
                 delay: 1.5
             });
+        }
         }
     
         // Call the function to load planets and initiate animations
         loadPlanets();
     });
+
+    
 
     skillIcon.addEventListener('click', function () {
         showSkills(0);
@@ -781,3 +779,5 @@ const starCount = 200;
         }
 
         animateStars();
+
+        

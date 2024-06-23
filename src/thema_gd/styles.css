@@ -2,10 +2,11 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow: hidden;
   }
   
   body {
-    background-image: url("../bilder/background_gd.svg");
+    background-image: url("../bilder/background_gd.png");
     background-size: cover;
     background-position: center;
     position: relative;
