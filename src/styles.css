@@ -18,16 +18,40 @@ main {
 }
 
 #qrcode {
-    width:100px;
-    height:100px;
-    margin-top:15px;
-    background-image: url('./bilder/qrcode.png');
-    background-size: cover;
-    position: absolute;
-    top: 80%;
-    left: 48%;
-    box-shadow: inset -0.4vw -0.4vw 0.4vw #000, -0.2vw -0.2vw 1vw #ffffff;
+    display: none;
+    top: 30%;
+    left: 36%;
+    z-index: -1;
+    transition: transform 0.3s ease;
   }
+
+  #qrbutton {
+    font-family: "Press Start 2P";
+    color: white;
+    font-size: large;
+    width: 40px;
+    height: 35px;
+    position: absolute;
+    margin: 15px;
+    top: 0%;
+    left: 2%;
+    z-index: 20 ;
+    background-color: #ffffff00;
+    border-style: none;
+    cursor: pointer;
+  }
+  #qrcode-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund mit Transparenz */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
 
 .menu {
     position: absolute;
@@ -825,13 +849,40 @@ line-height: 8vw;
 
             
         }
-          #qrcode {
-            width:60px;
-            height:60px;
-            top: -1%;
-            left: 5%;
+        #qrcode {
+            display: none;
+            top: 30%;
+            left: 36%;
             z-index: -1;
+            transition: transform 0.3s ease;
           }
+
+          #qrbutton {
+            font-family: "Press Start 2P";
+            color: white;
+            font-size: large;
+            width: 40px;
+            height: 35px;
+            position: absolute;
+            margin: 15px;
+            top: 0%;
+            left: 2%;
+            z-index: 20 ;
+            background-color: #ffffff00;
+            border-style: none;
+          }
+          #qrcode-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund mit Transparenz */
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
 
     }
 

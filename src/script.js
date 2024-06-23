@@ -780,4 +780,39 @@ const starCount = 200;
 
         animateStars();
 
+        function showQr() {
+            var qrcodeContainer = document.getElementById('qrcode-container');
+            var qrcode = document.getElementById('qrcode');
+            qrcode.style.display = "block";
+            
+            // Den QR-Code unsichtbar machen und Container einblenden
+            qrcode.style.transform = 'scale(0)';
+            qrcodeContainer.style.display = 'flex';
+            
+            // Timeout verwenden, um die Skalierung nach der Anzeige zu animieren
+            setTimeout(function() {
+                // Skalierung des QR-Codes auf 1 für die volle Größe
+                qrcode.style.transform = 'scale(2)';
+            }, 50); // Eine kurze Verzögerung für die Animation
+        }
         
+        // Event-Listener hinzufügen, um den QR-Code beim Klick außerhalb des QR-Codes zu schließen
+        document.getElementById('qrcode-container').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideQr();
+            }
+        });
+        
+        // Funktion, um den QR-Code zu verbergen
+        function hideQr() {
+            var qrcodeContainer = document.getElementById('qrcode-container');
+            var qrcode = document.getElementById('qrcode');
+            
+            // Skalierung des QR-Codes auf 0 für das Verstecken
+            qrcode.style.transform = 'scale(0)';
+            
+            // Den Container nach einer kurzen Verzögerung ausblenden, um die Animation abzuschließen
+            setTimeout(function() {
+                qrcodeContainer.style.display = 'none';
+            }, 150); // Zeit entsprechend der CSS-Transition-Dauer anpassen
+        }
