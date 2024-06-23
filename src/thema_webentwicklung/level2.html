@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
     <div class="black_transparent">
 
-        <a href="../thema_webentwicklung/wpr.html" class="back-to-home" title="Zurück zur Startseite">
+        <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
             &#8592;
         </a>
 
@@ -118,17 +121,16 @@
         var text3 = "Änder jetzt mit CSS die Farbe der Rocket auf Gelb";
         var text5 = "Farbe Erfolgeich gaendert";
         var text4 = ".rocket {color:";
-        const textAnimation = gsap.timeline();
+        const whiteOverlay = document.querySelector('.white-overlay-start');
     
         gsap.registerPlugin(TextPlugin);
 
         document.addEventListener('DOMContentLoaded', (event) => {
-            localStorage.setItem("lastLevel", "wpr2");
             startLevel();
         });
     
         // Initial Text anzeigen
-        textAnimation.to("#text", {
+        gsap.to("#text", {
             duration: 3,
             text: text1,
             delay: 2,
@@ -142,26 +144,31 @@
         document.querySelectorAll('.textfeld').forEach(function(element) {
             element.addEventListener('click', function() {
                 const textElement = document.getElementById("text");
-                if (textAnimation.isActive() && textAnimation.progress() < 1) {
-                    textAnimation.progress(1);
-                }
-                else {
-                    if (textElement.innerText === text1) {
-                        clearText();
-                        showNextText(text2);
-                    } else if (textElement.innerText === text2) {
-                        clearText();
-                        showNextText(text3);
-                    } else if (textElement.innerText === text3) {
-                        clearText();
-                        showNextText(text4);
-                        showInputField("on");
-                    }
+                if (textElement.innerText === text1) {
+                    clearText();
+                    showNextText(text2);
+                } else if (textElement.innerText === text2) {
+                    clearText();
+                    showNextText(text3);
+                } else if (textElement.innerText === text3) {
+                    clearText();
+                    showNextText(text4);
+                    showInputField("on");
                 }
             });
         });
 
         function startLevel() {
+            gsap.to(".white-overlay-start", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+            delay: 0.2,
+            ease: "power1.inOut",
+            onComplete: () => {
+                whiteOverlay.style.display ="none";
+        }
+    });
             gsap.to(".black_transparent", {
             duration: 3, 
             backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz
@@ -196,7 +203,7 @@
     
         // Funktion zum Anzeigen des nächsten Textes
         function showNextText(text) {
-            textAnimation.to("#text", {
+            gsap.to("#text", {
                 duration: 3,
                 delay: 1,
                 text: text,
@@ -208,7 +215,7 @@
         }
         function clearText() {
 
-        textAnimation.to("#text", {
+        gsap.to("#text", {
             duration: 0.5,
             text: "",
             onComplete: function() {

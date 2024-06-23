@@ -1,5 +1,5 @@
 //Grundstruktur Animation + Interaktion
-
+const whiteOverlay = document.querySelector('.white-overlay-start');
 var text1 = "Du bist nun im letzten Level dieses Moduls angekommen. Dank deiner erfolgreichen Lösung der vorherigen Level weißt du nun, was im Modul Audiovisuelle Medien behandelt wird. Alle vorherigen Aufgaben werden in der Postproduktion (dem Schnitt) zu einem funktionsfähigen Video zusammengeführt. Klicke auf \"Kamera\", um das Endprodukt zu sehen! :) Viel Spaß!";
 const textAnimation = gsap.timeline();
 const bildAnimation = gsap.timeline();
@@ -64,6 +64,16 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
 //Funktionen ---------------------------------------------------
 
 function startLevel() {
+    gsap.to(".white-overlay-start", {
+        y: 0,
+        duration: 1,
+        opacity: 0,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            whiteOverlay.style.display ="none";
+    }
+});
     gsap.to(".black_transparent", {
         duration: 2,
         backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz
@@ -125,3 +135,82 @@ function startDotsAnimation(lastText) {
 function killDotsAnimation() {
     document.getElementById("dots").style.display = "none";
 }
+function backPlanet(relativeUrl) {
+    // Holen der Basis-URL des aktuellen Dokuments
+    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+
+    // Verwandeln des relativen Links in einen absoluten Link
+    var absoluteUrl = baseUrl + '/' + relativeUrl;
+    const whiteOverlay = document.querySelector('.white-overlay');
+    const stars = document.querySelector('.star');
+    whiteOverlay.style.display ="block";
+    stars.style.display ="block";
+    // Animation und Weiterleitung
+    const overlay = document.querySelector('.transition-overlay-back');
+
+    overlay.style.display ="block";
+
+    gsap.to(overlay, {
+        y: -2200,
+        duration: 2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+    gsap.to(".white-overlay", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+    gsap.to(".star", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+}
+
+const starCount = 200;
+        const stars = [];
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = -10 + 'px';
+            star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
+            document.body.appendChild(star);
+            stars.push(star);
+        }
+
+        function animateStars() {
+            stars.forEach(star => {
+                const top = parseFloat(star.style.top);
+                if (top > window.innerHeight) {
+                    star.style.top = -100 + 'px';
+                    star.style.left = Math.random() * window.innerWidth + 'px';
+                    star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
+                } else {
+                    star.style.top = top + star.speed + 'px';
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        for (let i = 0; i < starCount; i++) {
+            createStar();
+        }
+
+        animateStars();
