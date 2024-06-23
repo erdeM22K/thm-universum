@@ -18,6 +18,7 @@ let finishText3 = "Bei der Erkundung des Planeten hast du die vierte Koordinate 
 let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
 let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
+const whiteOverlay = document.querySelector('.white-overlay-start');
 
 
 
@@ -30,6 +31,16 @@ for (let i = 0; i < numberOfIcons; i++) {
 
 gsap.registerPlugin(MotionPathPlugin);
 gsap.registerPlugin(TextPlugin);
+
+gsap.to(".white-overlay-start", {
+    y: 0,
+    duration: 1,
+    opacity: 0,
+    ease: "power1.inOut",
+    onComplete: () => {
+        whiteOverlay.style.display ="none";
+}
+});
 
 let spaceship = document.querySelector("#spaceship");
 let start = 0;
@@ -414,13 +425,12 @@ levelItem.forEach((item, index) => {
 startButton.addEventListener("click", function () {
     switch (currentLevel) {
         case 0:
-            window.location.href = "level1.html";
+            openPlanet("level1.html");
             break;
         case 1:
-            window.location.href = "level2.html";
-            break;
+            openPlanet("level2.html");
         case 2:
-            window.location.href = "level3.html";
+            openPlanet("level3.html");
             break;
     }
 });
@@ -468,3 +478,149 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function openPlanet(relativeUrl) {
+    // Holen der Basis-URL des aktuellen Dokuments
+    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+
+    // Verwandeln des relativen Links in einen absoluten Link
+    var absoluteUrl = baseUrl + '/' + relativeUrl;
+    const whiteOverlay = document.querySelector('.white-overlay');
+    const stars = document.querySelector('.star');
+    whiteOverlay.style.display ="block";
+    stars.style.display ="block";
+    // Animation und Weiterleitung
+    const overlay = document.querySelector('.transition-overlay');
+    const clouds = document.querySelector('.clouds');
+    overlay.style.display ="block";
+    clouds.style.display ="block";
+    gsap.to(overlay, {
+        y: -2200,
+        duration: 1.5,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+    gsap.to(".clouds", {
+        y: -300,
+        duration: 1.5,
+        opacity: 1,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            clouds.style.display ="none";
+        }
+    });
+    gsap.to(".white-overlay", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+    gsap.to(".star", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+}
+
+function backPlanet(relativeUrl) {
+    // Holen der Basis-URL des aktuellen Dokuments
+    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+
+    // Verwandeln des relativen Links in einen absoluten Link
+    var absoluteUrl = baseUrl + '/' + relativeUrl;
+    const whiteOverlay = document.querySelector('.white-overlay');
+    const stars = document.querySelector('.star');
+    whiteOverlay.style.display ="block";
+    stars.style.display ="block";
+    // Animation und Weiterleitung
+    const overlay = document.querySelector('.transition-overlay-back');
+    const clouds = document.querySelector('.clouds');
+    overlay.style.display ="block";
+    clouds.style.display ="block";
+    gsap.to(overlay, {
+        y: 2200,
+        duration: 2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+    gsap.to(".clouds", {
+        y: 2000,
+        duration: 3,
+        opacity: 1,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            clouds.style.display ="none";
+            
+        }
+    });
+    gsap.to(".white-overlay", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+    gsap.to(".star", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+        }
+    });
+}
+
+const starCount = 200;
+        const stars = [];
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = -10 + 'px';
+            star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
+            document.body.appendChild(star);
+            stars.push(star);
+        }
+
+        function animateStars() {
+            stars.forEach(star => {
+                const top = parseFloat(star.style.top);
+                if (top > window.innerHeight) {
+                    star.style.top = -100 + 'px';
+                    star.style.left = Math.random() * window.innerWidth + 'px';
+                    star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
+                } else {
+                    star.style.top = top + star.speed + 'px';
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        for (let i = 0; i < starCount; i++) {
+            createStar();
+        }
+
+        animateStars();
