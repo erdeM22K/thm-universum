@@ -871,6 +871,9 @@ line-height: 8vw;
             background-color: #ffffff00;
             border-style: none;
           }
+          #qrbutton:hover {
+            color: #80ba24;
+          }
           #qrcode-container {
             display: none;
             position: fixed;
