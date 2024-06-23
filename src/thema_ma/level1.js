@@ -1,13 +1,9 @@
-
-const whiteOverlay = document.querySelector('.white-overlay-start');
-
 const textAnimation = gsap.timeline();
-
 
 var text1 = "Willkommen beim ersten Level des Moduls Mobile Apps. Hier kannst du dein Wissen über mobile Softwareplattformen testen!";
 var text2 = "Dieses Level beinhaltet mehrere Fragen zu verschiedenen Softwareplattformen. Jede Frage hat drei Antwortmöglichkeiten, jedoch ist immer nur eine Antwort korrekt.";
 var text3 = "Lass uns mit der ersten Frage beginnen und dein Wissen über Softwareplattformen vertiefen!";
-
+const whiteOverlay = document.querySelector('.white-overlay-start');
 
 
 var questions = [
@@ -231,7 +227,6 @@ function displayFeedback(message, isCorrect) {
                 currentQuestionIndex++;
                 if (currentQuestionIndex < questions.length) {
                     var currentQuestion = questions[currentQuestionIndex - 1];
-                    showNextText(currentQuestion.explanation + " " + "Klicke unten, um die nächste Frage zu sehen.");
                 } else {
                     currentQuestionIndex = 0;
                     console.log("MA Level 1 fertig");
@@ -245,7 +240,6 @@ function displayFeedback(message, isCorrect) {
             }
         }
     });
-
 }
 function backPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
@@ -326,6 +320,3 @@ const starCount = 200;
         }
 
         animateStars();
-
-
-

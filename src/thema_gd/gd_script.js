@@ -5,14 +5,10 @@ const levelItem = document.querySelectorAll(".level");
 const numberOfIcons = levelItem.length;
 const iconSpacing = pathLength / numberOfIcons;
 const startButton = document.getElementById('startButton');
-
-const whiteOverlay = document.querySelector('.white-overlay-start');
-
 const textfeld = document.querySelector(".textfeld");
 const copilotContainer = document.querySelector(".copilot_container");
 let skillIcon = document.querySelector("#skillbars");
 let closeSkills = document.querySelector("#close");
-
 const levels = ["Modellierung", "Shading", "Animation"];
 let currentLevel = 0;
 let startText = "Wir landen auf dem Planeten der Grafischen Datenverarbeitung. Hier kannst du die Stationen \"Modellierung\", \"Shading\" und \"Animation\" besuchen.";
@@ -22,6 +18,7 @@ let finishText3 = "Bei der Erkundung des Planeten hast du die dritte Koordinate 
 let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
 let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
+const whiteOverlay = document.querySelector('.white-overlay-start');
 
 for (let i = 0; i < numberOfIcons; i++) {
     const distance = pathStart + i * iconSpacing;
@@ -444,6 +441,41 @@ gsap.to("#spaceship", {
     yoyo: true
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    if (allLevelsDone() && !localStorage.getItem('module2_done')) {
+        showSkills(1.3);
+        let copilotImg = document.querySelector(".copilot");
+        copilotImg.src = "../bilder/copilot_sassy.svg";
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: finishText1,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Finish Text wird ausgeführt");
+            }
+        });
+    }
+    else if (!localStorage.getItem('gd_visited')) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.5
+        });
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: startText,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Text 1 ausgeführt");
+            }
+        });
+    }
+});
 
 function openPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
@@ -497,7 +529,6 @@ function openPlanet(relativeUrl) {
         ease: "power1.inOut",
         onComplete: () => {
             console.log('Navigating to: ' + absoluteUrl);
-            window.location.href = absoluteUrl;
         }
     });
 }
@@ -555,7 +586,6 @@ function backPlanet(relativeUrl) {
         ease: "power1.inOut",
         onComplete: () => {
             console.log('Navigating to: ' + absoluteUrl);
-            window.location.href = absoluteUrl;
         }
     });
 }
@@ -592,40 +622,3 @@ const starCount = 200;
         }
 
         animateStars();
-
-document.addEventListener('DOMContentLoaded', function() {
-    if (allLevelsDone() && !localStorage.getItem('module2_done')) {
-        showSkills(1.3);
-        let copilotImg = document.querySelector(".copilot");
-        copilotImg.src = "../bilder/copilot_sassy.svg";
-        startAnimation();
-        textAnimation.to("#text", {
-            duration: 3,
-            delay: 2,
-            text: finishText1,
-            onComplete: function() {
-                startDotsAnimation();
-                console.log("Finish Text wird ausgeführt");
-            }
-        });
-    }
-    else if (!localStorage.getItem('gd_visited')) {
-        document.querySelector("#overlay").style.display = "block";
-        gsap.to("#overlay", {
-            duration: 1,
-            delay: 1,
-            opacity: 0.5
-        });
-        startAnimation();
-        textAnimation.to("#text", {
-            duration: 3,
-            delay: 2,
-            text: startText,
-            onComplete: function() {
-                startDotsAnimation();
-                console.log("Text 1 ausgeführt");
-            }
-        });
-    }
-});
-

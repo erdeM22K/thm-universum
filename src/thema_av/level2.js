@@ -157,7 +157,6 @@ function startDotsAnimation(lastText) {
 function killDotsAnimation() {
     document.getElementById("dots").style.display = "none";
 }
-
 function backPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
     var baseUrl = window.location.href.split('/').slice(0, -1).join('/');

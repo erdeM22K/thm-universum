@@ -41,7 +41,6 @@ var questions = [
     }
 ];
 
-const textAnimation = gsap.timeline();
 
 var currentQuestionIndex = 0;
 var feedbackGiven = false;
@@ -49,9 +48,8 @@ var retryMode = false; // Variable für den Wiederholungsmodus
 
 gsap.registerPlugin(TextPlugin);
 
-localStorage.setItem("lastLevel", "md2");
 // Anfangs Text anzeigen
-textAnimation.to("#text", {
+gsap.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -69,27 +67,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textAnimation.isActive() && textAnimation.progress() < 1) {
-            textAnimation.progress(1);
-        }
-        else {
-            if (textElement.innerText === text1) {
-                clearText();
-                showNextText(text2);
-            } else if (textElement.innerText === text2) {
-                clearText();
-                showNextText(text3);
-            } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
-                clearText();
-                if (retryMode) {
-                    retryMode = false;
-                    showQuestion();
-                } else {
-                    showQuestion();
-                    feedbackGiven = false;
-                }
+        if (textElement.innerText === text1) {
+            clearText();
+            showNextText(text2);
+        } else if (textElement.innerText === text2) {
+            clearText();
+            showNextText(text3);
+        } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
+            clearText();
+            if (retryMode) {
+                retryMode = false;
+                showQuestion();
+            } else {
+                showQuestion();
+                feedbackGiven = false;
             }
-            console.log(textAnimation.progress() + "progress");
         }
     });
 });
@@ -125,7 +117,7 @@ function startLevel() {
 
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text) {
-    textAnimation.to("#text", {
+    gsap.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -138,7 +130,7 @@ function showNextText(text) {
 
 // Funktion zum Leeren des Textfelds
 function clearText() {
-    textAnimation.to("#text", {
+    gsap.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -223,7 +215,7 @@ function displayFeedback(message, isCorrect) {
         copilotImg.src = "../bilder/copilot_sad.svg";
     }
 
-    textAnimation.to("#text", {
+    gsap.to("#text", {
         duration: 3,
         delay: 1,
         text: message,
@@ -238,12 +230,11 @@ function displayFeedback(message, isCorrect) {
                 if (currentQuestionIndex < questions.length) {
                     var currentQuestion = questions[currentQuestionIndex - 1];
                 } else {
-                    localStorage.setItem("md_level2_done", 'true');
                     currentQuestionIndex = 0;
                     gsap.to("#text", {
                         duration: 3,
                         delay: 15,
-                        text: "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
+                        text: "Du hast alle Fragen richtig beantwortet und somit das erste Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
                     });
                 }
             }

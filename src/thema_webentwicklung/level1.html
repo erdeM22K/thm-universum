@@ -13,12 +13,10 @@
 <body>
     <div class="black_transparent">
 
-
         <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
             &#8592;
         </a>
         
-
         <div class="rocket_container">
             <ul id="columns">
                 <li draggable="true" id="rocket_head" data-original-index="0" class="list-element"><span>&lt;div class="rocket_head"&gt;&lt;/div&gt;</span></li>
@@ -49,22 +47,17 @@
         var text1 = "Hallo ich bin Copilot, Willkommen auf dem Level!";
         var text2 = "Dies ist eine Grundstruktur.";
         var text3 = "Und dies ist ein Beispiel Text.";
-
         const whiteOverlay = document.querySelector('.white-overlay-start');
-
-        const textAnimation = gsap.timeline();
-
 
         gsap.registerPlugin(TextPlugin, Draggable, TweenMax);
 
         document.addEventListener('DOMContentLoaded', (event) => {
-            localStorage.setItem("lastLevel", "wpr1");
             startLevel();
             shuffleList();
             enableDragAndDrop();
         });
 
-        textAnimation.to("#text", {
+        gsap.to("#text", {
             duration: 3,
             text: text1,
             delay: 2,
@@ -77,20 +70,15 @@
         document.querySelectorAll('.textfeld').forEach(function(element) {
             element.addEventListener('click', function() {
                 const textElement = document.getElementById("text");
-                if (textAnimation.isActive() && textAnimation.progress() < 1) {
-                    textAnimation.progress(1);
-                }
-                else {
-                    if (textElement.innerText === text1) {
-                        clearText();
-                        showNextText(text2);
-                    } else if (textElement.innerText === text2) {
-                        clearText();
-                        showNextText(text3);
-                        killDotsAnimation();
-                        showButton();
-                        showElements();
-                    }
+                if (textElement.innerText === text1) {
+                    clearText();
+                    showNextText(text2);
+                } else if (textElement.innerText === text2) {
+                    clearText();
+                    showNextText(text3);
+                    killDotsAnimation();
+                    showButton();
+                    showElements();
                 }
             });
         });
@@ -139,7 +127,7 @@
         }
 
         function showNextText(text) {
-            textAnimation.to("#text", {
+            gsap.to("#text", {
                 duration: 3,
                 delay: 1,
                 text: text,
@@ -151,7 +139,7 @@
         }
 
         function clearText() {
-            textAnimation.to("#text", {
+            gsap.to("#text", {
                 duration: 0.5,
                 text: "",
                 onComplete: function() {

@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Webentwicklung</title>
     <link rel="stylesheet" href="../levelauswahl.css" />
@@ -19,8 +17,7 @@
     <h1>Webentwicklung</h1>
 </header>
 
-
-<a onclick="backPlanet('../index.html')" class="back-to-home" title="Zurück zur Startseite">
+<a onclick="backPlanet('../index.html')" class="menu" id="back-to-home" title="Zurück zur Startseite">
     &#8592;
 </a>
 <a class="menu" id="skillbars" title="Zu deinen Skills">
@@ -52,7 +49,6 @@
     </svg>
 </main>
 <button id="startButton">Level Starten!</button>
-
 <div class="transition-overlay"></div>
 <div class="clouds-wrapper">
     <svg class="clouds" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 90.83">
@@ -86,7 +82,6 @@
 <div class="textfeld">
     <div id="text"></div>
     <div id="dots"></div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

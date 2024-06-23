@@ -1,5 +1,5 @@
-const whiteOverlay = document.querySelector('.white-overlay-start');
-var text1 = "Willkommen zu unserem interaktiven Tutorial! Heute werden wir einige grundlegende Funktionen und UI-Elemente durchgehen, die oft in modernen Web- und Mobilanwendungen verwendet werden. Unser Ziel ist es, Ihnen einen klaren Überblick über diese wichtigen Elemente zu geben und deren Einsatzmöglichkeiten zu zeigen.";
+
+var text1 = "Willkommen zu unserem interaktiven Tutorial! Heute werden wir einige grundlegende Funktionen und UI-Elemente durchgehen, die oft in modernen Web- und Mobilanwendungen verwendet werden. Unser Ziel ist es, dir einen klaren Überblick über diese wichtigen Elemente zu geben und deren Einsatzmöglichkeiten zu zeigen.";
 var text2 = "In dieser Sitzung wirst du mehrere wichtige Elemente und Funktionen kennenlernen, die eine zentrale Rolle in modernen Web- und Mobilanwendungen spielen. Durch Klicken auf die Textbox kannst du schrittweise die nächsten Themen anzeigen und dich durch die Inhalte navigieren.";
 var text3 = "Eine Hamburger-Menüleiste ist ein Symbol, das aus drei horizontalen Linien besteht (obere linke Ecke in der Abbildung) und oft in mobilen Anwendungen verwendet wird, um ein verstecktes Menü anzuzeigen. Durch das Antippen des Symbols wird das Menü sichtbar, wodurch Platz gespart und die Benutzeroberfläche übersichtlicher gestaltet wird.";
 var text4 = "Die Listenfunktion ist ein wesentliches UI-Element, das verwendet wird, um eine Reihe von Einträgen in einer strukturierten, leicht lesbaren Weise anzuzeigen. Sie findet Anwendung in verschiedenen Kontexten wie Aufgabenlisten, Menüauswahlen und Datenanzeigen, wodurch Benutzer Informationen effizient durchsuchen und auswählen können.";
@@ -14,6 +14,7 @@ var title_bild4 = "Mobile Rotation"
 var title_bild5 = "Vielen Dank!"
 
 const textAnimation = gsap.timeline();
+const whiteOverlay = document.querySelector('.white-overlay-start');
 
 gsap.registerPlugin(TextPlugin);
 

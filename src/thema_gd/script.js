@@ -105,4 +105,3 @@ const starCount = 200;
         }
 
         animateStars();
-

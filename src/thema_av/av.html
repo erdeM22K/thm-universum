@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Audiovisuelle Medien</title>
     <link rel="stylesheet" href="../levelauswahl.css" />
@@ -18,7 +18,7 @@
 
 </header>
 
-<a onclick="backPlanet('../index.html')" class="back-to-home" title="Zurück zur Startseite">
+<a onclick="backPlanet('../index.html')" class="menu" id="back-to-home" title="Zurück zur Startseite">
     &#8592;
 </a>
 <a class="menu" id="skillbars" title="Zu deinen Skills">
@@ -54,14 +54,6 @@
 </main>
 
 <button id="startButton">Level Starten!</button>
-<div id="overlay"></div>
-<div class="copilot_container">
-    <img class="copilot" src="../bilder/copilot_winken.svg" alt="copilot_sad">
-</div>
-<div class="textfeld">
-    <div id="text"></div>
-    <div id="dots"></div>
-</div>
 
 <div class="transition-overlay"></div>
 <div class="clouds-wrapper">
@@ -88,6 +80,15 @@
             </g>
         </g>
     </svg>
+</div>
+
+<div id="overlay"></div>
+<div class="copilot_container">
+    <img class="copilot" src="../bilder/copilot_winken.svg" alt="copilot_sad">
+</div>
+<div class="textfeld">
+    <div id="text"></div>
+    <div id="dots"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

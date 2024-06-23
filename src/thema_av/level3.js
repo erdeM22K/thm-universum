@@ -241,7 +241,6 @@ function testBeideVerbunden() {
         textRichtig = "Herzlichen Glückwunsch, du hast es geschafft!";
     }
 }
-
 function backPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
     var baseUrl = window.location.href.split('/').slice(0, -1).join('/');

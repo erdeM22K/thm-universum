@@ -183,7 +183,6 @@ text-shadow:
     box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #ffffff;
 }
 
-
 .transition-overlay {
     display: none;
     background-image: url(./bilder/rocket.svg);
@@ -268,6 +267,14 @@ text-shadow:
   }
 }
 
+.star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
+}
 
 .textfeld {
     position: absolute;
@@ -458,7 +465,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-
 @keyframes rotate {
     from {
         background-position: 0 0;
@@ -466,15 +472,6 @@ input[type=number]::-webkit-outer-spin-button {
     to {
         background-position: -200% 0;
     }
-}
-
-.star {
-    display: none;
-    position: absolute;
-    width: 10px;
-    height: 200px;
-    background: rgb(255, 255, 255);
-    opacity: 1;
 }
 @media (min-width: 481px) {
     #planeten_container {
@@ -521,7 +518,6 @@ input[type=number]::-webkit-outer-spin-button {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
     }
     header {
         margin:0;
@@ -592,6 +588,7 @@ input[type=number]::-webkit-outer-spin-button {
         font-size: 1.5rem;
     }
     body {
+        position: fixed;
         height: 100vh;
         background-repeat: no-repeat;
         overflow: hidden;
@@ -685,9 +682,28 @@ line-height: 8vw;
 
             box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f0e98b;
         }
+    #coordinateWindow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+        height: auto;
+        padding: 5em 2em;
+        background-color: #1d1d1b;
+        color: white;
+        z-index: 20;
+        border-radius: 10px;
+    }
 
-
-        .transition-overlay {
+    #coordinateHeadline {
+        font-size: 1.7em;
+    }
+    .transition-overlay {
             display: block;
             background-image: url(./bilder/rocket.svg);
             width: 85vh;
@@ -760,29 +776,6 @@ line-height: 8vw;
             opacity: 1;
           
           }
-
-    #coordinateWindow {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: auto;
-        height: auto;
-        padding: 5em 2em;
-        background-color: #1d1d1b;
-        color: white;
-        z-index: 20;
-        border-radius: 10px;
-    }
-
-    #coordinateHeadline {
-        font-size: 1.7em;
-    }
-
 
     }
 

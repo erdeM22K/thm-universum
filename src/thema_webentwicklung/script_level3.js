@@ -17,7 +17,6 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
-            localStorage.setItem("wpr_level3_done", 'true');
         } else {
             image.src = './bilder/rocket.svg';
         }

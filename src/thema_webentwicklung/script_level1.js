@@ -146,7 +146,6 @@ function checkOrder() {
     
     if (isEqual) {
         applyCorrectStyle();
-        localStorage.setItem("wpr_level1_done", 'true');
       console.log('Die Reihenfolge stimmt mit der erwarteten Reihenfolge überein.');
     } else {
         applyInCorrectStyle();
