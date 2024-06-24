@@ -146,9 +146,13 @@ function checkOrder() {
     
     if (isEqual) {
         applyCorrectStyle();
+        clearText();
+        showNextText(text5);
       console.log('Die Reihenfolge stimmt mit der erwarteten Reihenfolge überein.');
     } else {
         applyInCorrectStyle();
+        clearText();
+        showNextText(text6);
       console.log('Die Reihenfolge stimmt NICHT mit der erwarteten Reihenfolge überein.');
     }
   }
@@ -165,14 +169,30 @@ function checkOrder() {
     const lis = document.querySelectorAll('#columns li');
     lis.forEach(li => {
         li.style.border = '0.5vh solid #32CD32';
+        li.classList.add('shakeRight');
     });
+    setTimeout(() => {
+        lis.forEach(li => {
+            li.classList.remove('shakeRight'); // Wackeln entfernen
+        });
+    }, 500); // Zeit in Millisekunden, wie lange der falsche Stil angezeigt werden soll
 }
+
 
 function applyInCorrectStyle() {
     const lis = document.querySelectorAll('#columns li');
     lis.forEach(li => {
         li.style.border = '0.5vh solid #FF0000';
+        li.classList.add('shakeWrong'); // Wackeln hinzufügen
     });
+
+    // Setze den Stil und die Animation nach 500ms zurück
+    setTimeout(() => {
+        lis.forEach(li => {
+            li.style.border = ''; // Stil zurücksetzen
+            li.classList.remove('shakeWrong'); // Wackeln entfernen
+        });
+    }, 500); // Zeit in Millisekunden, wie lange der falsche Stil angezeigt werden soll
 }
 
 function showButton() {
