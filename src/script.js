@@ -843,16 +843,20 @@ const starCount = 200;
         function showQr() {
             var qrcodeContainer = document.getElementById('qrcode-container');
             var qrcode = document.getElementById('qrcode');
+            var qrTitle = document.getElementById('qrtitle');
             qrcode.style.display = "block";
+            qrTitle.style.display = "block";
             
             // Den QR-Code unsichtbar machen und Container einblenden
             qrcode.style.transform = 'scale(0)';
+            qrTitle.style.transform = 'scale(0)';
             qrcodeContainer.style.display = 'flex';
             
             // Timeout verwenden, um die Skalierung nach der Anzeige zu animieren
             setTimeout(function() {
                 // Skalierung des QR-Codes auf 1 für die volle Größe
                 qrcode.style.transform = 'scale(2)';
+                qrTitle.style.transform = 'scale(1)';
             }, 50); // Eine kurze Verzögerung für die Animation
         }
         
@@ -862,17 +866,31 @@ const starCount = 200;
                 hideQr();
             }
         });
+
+        
+
         
         // Funktion, um den QR-Code zu verbergen
         function hideQr() {
             var qrcodeContainer = document.getElementById('qrcode-container');
             var qrcode = document.getElementById('qrcode');
+            var qrTitle = document.getElementById('qrtitle');
             
             // Skalierung des QR-Codes auf 0 für das Verstecken
             qrcode.style.transform = 'scale(0)';
+            qrTitle.style.transform = 'scale(0)';
             
             // Den Container nach einer kurzen Verzögerung ausblenden, um die Animation abzuschließen
             setTimeout(function() {
                 qrcodeContainer.style.display = 'none';
             }, 150); // Zeit entsprechend der CSS-Transition-Dauer anpassen
         }
+        
+        document.getElementById('qrbutton').addEventListener('mouseenter', function() {
+            showQr();
+            
+        });
+        
+        document.getElementById('qrbutton').addEventListener('mouseleave', function() {
+            hideQr();
+        });

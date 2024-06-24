@@ -28,17 +28,20 @@ main {
   #qrbutton {
     font-family: "Press Start 2P";
     color: white;
-    font-size: large;
+    font-size: 36px;
     width: 40px;
     height: 35px;
     position: absolute;
     margin: 15px;
     top: 0%;
     left: 2%;
-    z-index: 20 ;
+    z-index: 5 ;
     background-color: #ffffff00;
     border-style: none;
     cursor: pointer;
+  }
+  #qrbutton:hover {
+    color: #80ba24;
   }
   #qrcode-container {
     display: none;
@@ -48,9 +51,17 @@ main {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund mit Transparenz */
-    z-index: 9999;
+    z-index: 4;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+#qrtitle {
+    display: none;
+    color: white;
+    position: absolute;
+    top: 25%;
+    transition: transform 0.3s ease;
 }
 
 .menu {
@@ -873,17 +884,25 @@ line-height: 8vw;
             transition: transform 0.3s ease;
           }
 
+          #qrcode {
+            display: none;
+            top: 30%;
+            left: 36%;
+            z-index: -1;
+            transition: transform 0.3s ease;
+          }
+
           #qrbutton {
             font-family: "Press Start 2P";
             color: white;
-            font-size: large;
+            font-size: 36px;
             width: 40px;
             height: 35px;
             position: absolute;
             margin: 15px;
             top: 0%;
             left: 2%;
-            z-index: 20 ;
+            z-index: 5 ;
             background-color: #ffffff00;
             border-style: none;
           }
@@ -898,7 +917,7 @@ line-height: 8vw;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund mit Transparenz */
-            z-index: 9999;
+            z-index: 4;
             justify-content: center;
             align-items: center;
         }
