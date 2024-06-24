@@ -106,6 +106,22 @@ svg {
     opacity: 0;
 }
 
+#resetButton {
+    font-family: "Press Start 2P";
+    position: absolute; /* Ändere die Position auf fixiert */
+    bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+    left: 50%; /* Zentriere den Button horizontal */
+    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    padding: 20px 30px;
+    font-size: 1rem;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 15;
+}
+
 .level {
     cursor: pointer;
 }

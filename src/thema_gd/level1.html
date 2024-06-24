@@ -26,21 +26,21 @@
             </div>
         </div>
         <div class="modes_container">
+            <div class="image_container">
+                <h2 class="mode_title">Smooth Mesh</h2>
+                <img class="modes highlight" id="mode1" src="..\bilder\gd_smooth.png" alt="mode1" loading="lazy">
+            </div>
             <div class="image_container swipe-container">
-                <h2 class="mode_title">Standard-Mode</h2>
-                <img class="modes highlight" id="mode1" src="..\bilder\mode1.png" alt="mode1" loading="lazy">
+                <h2 class="mode_title">Original Mesh</h2>
+                <img class="modes highlight" id="mode2" src="..\bilder\gd_original_mesh.png" alt="mode2" loading="lazy">
             </div>
             <div class="image_container">
-                <h2 class="mode_title">Wireframe-Mode</h2>
-                <img class="modes highlight" id="mode2" src="..\bilder\mode2.png" alt="mode2" loading="lazy">
-            </div>
-            <div class="image_container">
-                <h2 class="mode_title">Smooth-Mode</h2>
-                <img class="modes highlight" id="mode3" src="..\bilder\mode3.png" alt="mode3" loading="lazy">
+                <h2 class="mode_title">Cage + Smooth Mesh</h2>
+                <img class="modes highlight" id="mode3" src="..\bilder\gd_cage+smooth.png" alt="mode3" loading="lazy">
             </div>
         </div>
         <div class="copilot_container">
-            <img class="copilot" src="..\bilder\copilot_sad.svg" alt="copilot_sad">
+            <img class="copilot" src="..\bilder\copilot_lachen.svg" alt="copilot_sad">
         </div>
         <div class="textfeld">
             <div id="text"></div>
@@ -55,16 +55,17 @@
     <script>
     //Grundstruktur Animation + Interaktion
 
-        var text1 = "Hallo ich bin dein Copilot, Willkommen auf dem Level!";
-        var text2 = "Dies ist eine Grundstruktur.";
-        var text3 = "Und dies ist ein Beispiel Text.";
+        var text1 = "Willkommen im Bereich Modellierung in der Grafischen Datenverarbeitung. Während des Studiums lernst du, wie du digitale Modelle von Objekten erstellst, die in Computerspielen, Animationen und anderen visuellen Medien zum Einsatz kommen.";
+        var text2 = "Die Modelle sind die Grundlage für alles Visuelle, vom Design von Charakteren bis hin zu detaillierten Umgebungen von Städten oder fantastischen Welten.";
+        var text3 = "Schauen wir uns nun die drei grundlegenden Ansichten an, die in der Modellierung verwendet werden, um die Entwicklung und Bearbeitung von Modellen zu unterstützen. Mit den Pfeilen kannst du zwischen den unterschiedlichen Ansichten wechseln.";
+
         const whiteOverlay = document.querySelector('.white-overlay-start');
 
 
         gsap.registerPlugin(TextPlugin);
     
         // Anfangs Text anzeigen
-        gsap.to("#text", {
+        textAnimation.to("#text", {
             duration: 3,
             delay: 2,
             text: text1,
@@ -75,8 +76,8 @@
         });
 
         document.addEventListener('DOMContentLoaded', (event) => {
+            localStorage.setItem("lastLevel", "gd1");
             startLevel();
-            initializeModeSwitching();
             mobileSwipe();
     });
     
@@ -84,12 +85,20 @@
         document.querySelectorAll('.textfeld').forEach(function(element) {
             element.addEventListener('click', function() {
                 const textElement = document.getElementById("text");
-                if (textElement.innerText === text1) {
-                    clearText();
-                    showNextText(text2);
-                } else if (textElement.innerText === text2) {
-                    clearText();
-                    showNextText(text3);
+                if (textAnimation.isActive() && textAnimation.progress() < 1) {
+                    textAnimation.progress(1);
+                } else {
+                    if (textElement.innerText === text1) {
+                        clearText();
+                        showNextText(text2);
+                    } else if (textElement.innerText === text2) {
+                        clearText();
+                        showNextText(text3);
+                    }
+                    else if (textElement.innerText === text3) {
+                        localStorage.setItem("gd_level1_done", "true");
+                        initializeModeSwitching();
+                    }
                 }
             });
         });
@@ -138,19 +147,19 @@
 
         // Funktion zum Anzeigen des nächsten Textes
         function showNextText(text) {
-            gsap.to("#text", {
+            textAnimation.to("#text", {
                 duration: 3,
                 delay: 1,
                 text: text,
                 onComplete: function() {
-                    startDotsAnimation(text3);
+                    startDotsAnimation();
                     console.log("Text wird ausgeführt");
                 }
             });
         }
 
         function clearText() {
-            gsap.to("#text", {
+            textAnimation.to("#text", {
                 duration: 0.5,
                 text: "",
                 onComplete: function() {
@@ -160,23 +169,24 @@
             document.getElementById("dots").style.display = "none";
         }
 
-        function startDotsAnimation(lastText) {
-            if (document.getElementById("text").innerText === lastText) {
-                document.getElementById("dots").style.display = "none";
-            } else {
+    function startDotsAnimation() {
+        if (document.getElementById("text").innerText === textMode) {
+            document.getElementById("dots").style.display = "none";
+        } else {
             document.getElementById("dots").style.display = "block";
-            gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+            document.getElementById("dots").innerText = "...>"
             gsap.to("#dots", {
-                        duration: 2,
-                        repeat: -1,
-                        text: "...",
-                        onComplete: function() {
-                            
-                            console.log("Textfeld geleert");
-                        }
-                    });
+                duration: 1,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut",
+                x: "+=10",
+                onComplete: function() {
+                    console.log("Textfeld geleert");
                 }
+            });
         }
+    }
         function killDotsAnimation() {
             document.getElementById("dots").style.display = "none";
         }

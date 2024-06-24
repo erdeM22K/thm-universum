@@ -332,16 +332,58 @@ function hideSkills() {
     });
 }
 
-setLastLevelBreakpoint()
+function addResetButton() {
+    let resetButton = document.createElement('button');
+    resetButton.id = "resetButton";
+    resetButton.innerText = "Zurücksetzen";
+    document.querySelector("body").appendChild(resetButton);
+
+    gsap.from('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    setButtonAnimation("#resetButton", resetButton);
+
+    resetButton.addEventListener('click', function() {
+        const confirmation = confirm("Bist du sicher, dass du deinen Fortschritt zurücksetzen willst?");
+        if (confirmation) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    });
+}
+
+function removeResetButton() {
+    document.querySelector('#resetButton').remove();
+    gsap.to('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: function () {
+            document.querySelector('#resetButton').remove();
+        }
+    });
+}
+
 
 skillIcon.addEventListener('click', function () {
     showSkills(0);
+
+    addResetButton();
+
     skillIcon.style.display = "none";
     closeSkills.style.display = "block";
 });
 
 closeSkills.addEventListener('click', function () {
     hideSkills();
+
+    removeResetButton();
+
     skillIcon.style.display = "block";
     closeSkills.style.display = "none";
 });
@@ -404,6 +446,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
     });
 });
 
+setLastLevelBreakpoint();
 placeSpaceshipOnPath();
 setButtonAnimation("#startButton", startButton);
 

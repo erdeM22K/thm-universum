@@ -6,7 +6,7 @@ var text4 = "Face ID ist eine biometrische Authentifizierungsmethode, die Gesich
 var text5 = "Der Fingerabdrucksensor ist eine weitere biometrische Authentifizierungsmethode, die den einzigartigen Abdruck eines Fingers verwendet, um das Gerät zu entsperren oder Zahlungen zu bestätigen. Der Sensor scannt und speichert die Fingerabdruckdaten des Benutzers und vergleicht diese bei jeder Nutzung. Diese Methode ist schnell, bequem und bietet eine hohe Sicherheit.";
 var text6 = "Ein Pulsmesser im Handy verwendet optische Sensoren oder Infrarotsensoren, um den Herzschlag des Benutzers zu messen. Diese Funktion findet sich häufig in Fitness- und Gesundheits-Apps und ermöglicht die Überwachung der Herzfrequenz in Echtzeit. Sie hilft Benutzern, ihre Fitnessaktivitäten zu verfolgen, ihre Gesundheit zu überwachen und ihre Trainingsintensität zu optimieren."
 
-var textende = "Du bist am Ende des Levels angekommen. Über den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite"
+var textende = "Du bist am Ende des Levels angekommen. Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du wieder zur Levelauswahl.";
 
 //-----------------------------------------------------------------
 
@@ -68,10 +68,12 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 updateTitleText(title_bild4); // Titeltext aktualisieren
             } else if (textElement.innerText === text6) {
                 clearText();
-                showNextText(textende, ".bild5"); // Hier Bild 2 einblenden
+                showNextText(textende); // Hier Bild 2 einblenden
                 updateTitleText(title_bildende); // Titeltext aktualisieren
                 console.log("MA Level 3 fertig");
                 localStorage.setItem("ma_level3_done", 'true');
+            } else if (textElement.innerText === textende) {
+                backPlanet("ma.html");
             }
         }
     });
@@ -144,7 +146,7 @@ function showNextText(text, imageSelector) {
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3); // Hier entsprechenden letzten Text übergeben
+            startDotsAnimation(); // Hier entsprechenden letzten Text übergeben
             console.log("Text wird ausgeführt");
         }
     });
@@ -179,13 +181,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });

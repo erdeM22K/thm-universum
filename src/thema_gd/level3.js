@@ -5,7 +5,7 @@ var text3 = "Straight Ahead & Pose-to-Pose sind zwei Ansätze zur Animationserst
 var text4 = "Staging bezieht sich auf die Art und Weise, wie ein Szenario oder eine Szene präsentiert wird, um die Aufmerksamkeit des Betrachters zu lenken und die Erzählung effektiver zu gestalten. Es geht darum, visuelle Hierarchien zu schaffen und wichtige Elemente hervorzuheben.";
 var text5 = "Solid Drawing ist die Fähigkeit, Objekte in drei Dimensionen zu zeichnen und ihnen Volumen und Tiefe zu verleihen, unabhängig von ihrer Perspektive. Diese Technik ist essenziell für Animatoren, um Charaktere und Objekte lebendig und greifbar wirken zu lassen, egal aus welchem Blickwinkel sie betrachtet werden.";
 var text6 = "Squash & Stretch ist eine Animationstechnik, bei der Objekte in Bewegung verändert und gestreckt werden, um den Eindruck von Elastizität und Gewicht zu vermitteln. Diese Technik wird häufig verwendet, um die Dynamik und Realitätstreue von Bewegungen zu verstärken.";
-var text7 = "Herzlichen Glückwunsch! Du hast das Ende des Levels erreicht. Kehre über den Pfeil in der oberen linken Ecke zur Startseite zurück.";
+var text7 = "Herzlichen Glückwunsch! Du hast das Ende des Levels erreicht. Kehre über einen Klick oder den Pfeil in der oberen linken Ecke zur Startseite zurück.";
 
 var title_bild1 = "Straight Ahead & Pose-to-Pose";
 var title_bild2 = "Staging";
@@ -13,11 +13,15 @@ var title_bild3 = "Solid Drawing";
 var title_bild4 = "Squash & Stretch";
 var title_bild5 = "Vielen Dank!";
 
+const textAnimation = gsap.timeline();
+
 
 gsap.registerPlugin(TextPlugin);
 
+localStorage.setItem("lastLevel", "gd3");
+
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -36,29 +40,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3, ".bild1");
-            updateTitleText(title_bild1)
-        } else if (textElement.innerText === text3) {
-            clearText();
-            showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
-            updateTitleText(title_bild2); // Titeltext aktualisieren
-        } else if (textElement.innerText === text4) {
-            clearText();
-            showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild3); // Titeltext aktualisieren
-        } else if (textElement.innerText === text5) {
-            clearText();
-            showNextText(text6, ".bild4"); // Hier Bild 3 einblenden
-            updateTitleText(title_bild4); // Titeltext aktualisieren
-        } else if (textElement.innerText === text6) {
-            clearText();
-            showNextText(text7, ".bild5"); // Hier Bild 4 einblenden
-            updateTitleText(title_bild5); // Titeltext aktualisieren
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        } else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3, ".bild1");
+                updateTitleText(title_bild1)
+            } else if (textElement.innerText === text3) {
+                clearText();
+                showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
+                updateTitleText(title_bild2); // Titeltext aktualisieren
+            } else if (textElement.innerText === text4) {
+                clearText();
+                showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild3); // Titeltext aktualisieren
+            } else if (textElement.innerText === text5) {
+                clearText();
+                showNextText(text6, ".bild4"); // Hier Bild 3 einblenden
+                updateTitleText(title_bild4); // Titeltext aktualisieren
+            } else if (textElement.innerText === text6) {
+                clearText();
+                showNextText(text7); // Hier Bild 4 einblenden
+                updateTitleText(title_bild5); // Titeltext aktualisieren
+                localStorage.setItem("gd_level3_done", "true");
+            } else if (textElement.innerText === text7) {
+                backPlanet("gd.html")
+            }
         }
     });
 });
@@ -125,12 +136,12 @@ function startLevel() {
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text, imageSelector) {
     // Zuerst das Text-Element aktualisieren
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3); // Hier entsprechenden letzten Text übergeben
+            startDotsAnimation(); // Hier entsprechenden letzten Text übergeben
             console.log("Text wird ausgeführt");
         }
     });
@@ -165,13 +176,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });
