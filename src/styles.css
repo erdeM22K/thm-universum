@@ -54,6 +54,14 @@ main {
     z-index: 4;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+#qrtitle {
+    display: none;
+    color: white;
+    position: absolute;
+    top: 25%;
+    transition: transform 0.3s ease;
 }
 
 .menu {
