@@ -28,7 +28,7 @@ main {
   #qrbutton {
     font-family: "Press Start 2P";
     color: white;
-    font-size: large;
+    font-size: 36px;
     width: 40px;
     height: 35px;
     position: absolute;
@@ -879,7 +879,7 @@ line-height: 8vw;
           #qrbutton {
             font-family: "Press Start 2P";
             color: white;
-            font-size: large;
+            font-size: 36px;
             width: 40px;
             height: 35px;
             position: absolute;
