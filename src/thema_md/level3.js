@@ -3,6 +3,7 @@ var text1 = "Willkommen beim dritten Level des Moduls Mediendesign! In diesem Le
 var text2 = "Wir alle erkennen inzwischen viele Produkte und Marken allein anhand ihrer Form oder ihres Logos. Du wirst hier mehrere Produkte und Elemente gezeigt bekommen, die dir bestimmt bekannt vorkommen. Deine Aufgabe ist es, die richtige Marke oder das richtige Unternehmen zu identifizieren.";
 var text3 = "Dieses Level soll dir zeigen, wie sehr wir Menschen uns Logos und Marken einprägen und wie wir oft nur durch die Form eines Produktes den Namen oder den Hersteller erkennen können. Tauche ein in die Welt der visuellen Identität und vertiefe dein Verständnis für Marken und ihre Erkennungsmerkmale im Modul Mediendesign!";
 
+const textAnimation = gsap.timeline();
 
 var questions = [
     {
@@ -49,8 +50,10 @@ var retryMode = false; // Variable für den Wiederholungsmodus
 
 gsap.registerPlugin(TextPlugin);
 
+localStorage.setItem("lastLevel", "md3");
+
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -68,20 +71,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3);
-        } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
-            clearText();
-            if (retryMode) {
-                retryMode = false;
-                showQuestion();
-            } else {
-                showQuestion();
-                feedbackGiven = false;
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        } else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3);
+            } else if (textElement.innerText === "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kannst mit einem Klick oder Über den Pfeil in der oberen linken Ecke auf die Startseite zurück") {
+                backPlanet("md.html");
+            } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
+                clearText();
+                if (retryMode) {
+                    retryMode = false;
+                    showQuestion();
+                } else {
+                    showQuestion();
+                    feedbackGiven = false;
+                }
             }
         }
     });
@@ -118,7 +127,7 @@ function startLevel() {
 
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text) {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
@@ -131,7 +140,7 @@ function showNextText(text) {
 
 // Funktion zum Leeren des Textfelds
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -147,11 +156,13 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
                 console.log("Textfeld geleert");
             }
@@ -216,7 +227,7 @@ function displayFeedback(message, isCorrect) {
         copilotImg.src = "../bilder/copilot_sad.svg";
     }
 
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: message,
@@ -232,10 +243,11 @@ function displayFeedback(message, isCorrect) {
                     var currentQuestion = questions[currentQuestionIndex - 1];
                 } else {
                     currentQuestionIndex = 0;
-                    gsap.to("#text", {
+                    localStorage.setItem("md_level3_done", 'true');
+                    textAnimation.to("#text", {
                         duration: 3,
                         delay: 15,
-                        text: "Du hast alle Fragen richtig beantwortet und somit das erste Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
+                        text: "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kannst mit einem Klick oder Über den Pfeil in der oberen linken Ecke auf die Startseite zurück"
                     });
                 }
             }

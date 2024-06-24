@@ -13,8 +13,8 @@ const levels = ["Modellierung", "Shading", "Animation"];
 let currentLevel = 0;
 let startText = "Wir landen auf dem Planeten der Grafischen Datenverarbeitung. Hier kannst du die Stationen \"Modellierung\", \"Shading\" und \"Animation\" besuchen.";
 let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Mobilen Anwendungen abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
-let finishText2 = "Als <i>App-Entwickler</i> kannst du innovative mobile Anwendungen für iOS und Android entwickeln. Als <i>Softwareentwickler</i> stehen dir allgemeinere Softwareprojekte offen, während du als <i>UX/UI Designer</i> an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces arbeitest.";
-let finishText3 = "Bei der Erkundung des Planeten hast du die dritte Koordinate des Gamedevelopment-Planetens gefunden: 9.";
+let finishText2 = "Als <i>3D-Modellierer</i> kannst du detailreiche und realistische 3D-Modelle für verschiedene Anwendungen wie Animationen, Spiele oder Visualisierungen erstellen, als <i>Rendering-Spezialist</i> bist du in der Lage, beeindruckende visuelle Effekte und realistische Beleuchtung für 3D-Szenen zu erzeugen und als <i>3D-Animator</i> kannst du dynamische und ansprechende Animationen entwickeln";
+let finishText3 = "Bei der Erkundung des Planeten hast du die dritte Koordinate des Gamedevelopment-Planetens gefunden: 1.";
 let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
 let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
@@ -195,13 +195,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });

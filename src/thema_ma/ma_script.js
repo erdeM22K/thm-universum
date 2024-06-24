@@ -14,7 +14,7 @@ let currentLevel = 0;
 let startText = "Wir landen auf dem Planeten der Mobilen Anwendungen. Hier kannst du die Stationen \"Softwareplattformen\", \"Appdesign\" und \"Sensoren\" besuchen.";
 let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Mobilen Anwendungen abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
 let finishText2 = "Als <i>App-Entwickler</i> kannst du innovative mobile Anwendungen für iOS und Android entwickeln. Als <i>Softwareentwickler</i> stehen dir allgemeinere Softwareprojekte offen, während du als <i>UX/UI Designer</i> an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces arbeitest.";
-let finishText3 = "Bei der Erkundung des Planeten hast du die vierte Koordinate des Gamedevelopment-Planetens gefunden: 4.";
+let finishText3 = "Bei der Erkundung des Planeten hast du die vierte Koordinate des Gamedevelopment-Planetens gefunden: 6.";
 let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
 let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
@@ -198,13 +198,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });
@@ -423,7 +424,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                     }
                 });
                 if (textElement.innerHTML === startText) {
-                    localStorage.setItem('wpr_visited', 'true');
+                    localStorage.setItem('ma_visited', 'true');
                     gsap.to("#overlay", {
                         duration: 0.5,
                         opacity: 0,
@@ -434,7 +435,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 }
                 if (textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
                     hideSkills();
-                    localStorage.setItem('module0_done', 'true');
+                    localStorage.setItem('module3_done', 'true');
                 }
             } else if (textElement.innerHTML === finishText1) {
                 clearText();
@@ -473,6 +474,7 @@ startButton.addEventListener("click", function () {
             break;
         case 1:
             openPlanet("level2.html");
+            break;
         case 2:
             openPlanet("level3.html");
             break;

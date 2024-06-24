@@ -63,6 +63,8 @@ document.querySelector('.textfeld').addEventListener('click', function() {
             clearText();
             showImageAndSlider(); // Zeige das Bild und den Regler, wenn der Benutzer zum ersten Mal weiterklickt
             showNextText(text2);
+        } else if (textElement.innerHTML === "Sehr gut, deine Eingabe war korrekt :) <br> Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du zurück zur Levelauswahl.") {
+            backPlanet("av.html");
         }
     }
 });
@@ -134,11 +136,13 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
                 console.log("Textfeld geleert");
             }

@@ -7,9 +7,19 @@ const iconSpacing = pathLength / numberOfIcons;
 const startButton = document.getElementById('startButton');
 const whiteOverlay = document.querySelector('.white-overlay-start');
 const levels = ["Typografie", "Farben", "Formen"];
-let currentLevel = 0;
+const textfeld = document.querySelector(".textfeld");
+const copilotContainer = document.querySelector(".copilot_container");
 let skillIcon = document.querySelector("#skillbars");
 let closeSkills = document.querySelector("#close");
+let currentLevel = 0;
+let startText = "Wir landen auf dem Planeten des Mediendesigns. Hier kannst du die Stationen \"Typografie\", \"Farben\" und \"Formen\" besuchen.";
+let finishText1 = "Herzlichen Glückwunsch, du hast alle Level des Mediendesigns abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
+let finishText2 = "Als <i>Grafikdesigner</i> kannst du ansprechende visuelle Konzepte für Print- und digitale Medien entwickeln. Als <i>Motion Designer</i> bist du in der Lage, beeindruckende Animationen und visuelle Effekte für Videos und interaktive Medien zu erstellen. Als <i>UX/UI Designer</i> arbeitest du an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces, um eine optimale Nutzererfahrung zu gewährleisten.";
+let finishText3 = "Bei der Erkundung des Planeten hast du die vierte Koordinate des Gamedevelopment-Planetens gefunden: 9.";
+let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
+let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
+
+const textAnimation = gsap.timeline();
 
 for (let i = 0; i < numberOfIcons; i++) {
     const distance = pathStart + i * iconSpacing;
@@ -43,8 +53,8 @@ function placeSpaceshipOnPath() {
             align: "#path",
             autoRotate: true,
             alignOrigin: [0.5, 0.5],
-            start: 0,
-            end: 0,
+            start: start,
+            end: start,
         }
     });
 }
@@ -107,6 +117,22 @@ function animateToLevel(level) {
     showButton(0.8);
 }
 
+function setLastLevelBreakpoint() {
+    switch (localStorage.getItem("lastLevel")) {
+        case "md1":
+            start = breakpointLevel[0];
+            break;
+        case "md2":
+            start = breakpointLevel[1];
+            break;
+        case "md3":
+            start = breakpointLevel[2];
+            break;
+        default:
+            return 0;
+    }
+}
+
 function setButtonAnimation(id, button) {
     button.addEventListener("mouseenter", function () {
         gsap.to(id, {
@@ -132,6 +158,84 @@ function setButtonAnimation(id, button) {
             duration: 0.2,
         });
     });
+}
+
+function startAnimation() {
+    textfeld.style.display = "block";
+    copilotContainer.style.display = "block";
+    gsap.from(".textfeld", {
+        y: 1500,
+        duration: 3,
+        ease: 'power4.out',
+    });
+    gsap.from(".copilot_container", {
+        x: 1500,
+        duration: 3,
+        ease: 'power4.out',
+    });
+}
+
+function clearText() {
+    textAnimation.to("#text", {
+        duration: 0.5,
+        text: "",
+        onComplete: function() {
+            console.log("Textfeld geleert");
+        }
+    });
+    document.getElementById("dots").style.display = "none";
+}
+function showNextText(text) {
+    textAnimation.to("#text", {
+        duration: 3,
+        delay: 1,
+        text: text,
+        onComplete: function() {
+            startDotsAnimation();
+            console.log("Text wird ausgeführt");
+        }
+    });
+}
+function startDotsAnimation(lastText) {
+    if (document.getElementById("text").innerText === lastText) {
+        document.getElementById("dots").style.display = "none";
+    } else {
+        document.getElementById("dots").style.display = "block";
+        document.getElementById("dots").innerText = "...>"
+        gsap.to("#dots", {
+            duration: 1,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
+            onComplete: function() {
+                console.log("Textfeld geleert");
+            }
+        });
+    }
+}
+
+function allLevelsDone() {
+    if (localStorage.getItem('md_level1_done') && localStorage.getItem('md_level2_done') && localStorage.getItem('md_level3_done')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function allPlanetsDone() {
+    let anzahlModule = 5;
+    let anzahlModuleDone = 0;
+    for (let i = 0; i < anzahlModule; i++) {
+        if (localStorage.getItem("module" + i + "_done")) {
+            anzahlModuleDone++;
+        }
+    }
+    if (anzahlModule === anzahlModuleDone) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function showSkills(delay) {
@@ -295,6 +399,64 @@ closeSkills.addEventListener('click', function () {
     closeSkills.style.display = "none";
 });
 
+document.querySelectorAll('.textfeld').forEach(function(element) {
+    element.addEventListener('click', function() {
+        const textElement = document.getElementById("text");
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        }
+        else {
+            if (textElement.innerHTML === startText || textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
+                gsap.to(".textfeld", {
+                    y: 1500,
+                    duration: 3,
+                    ease: 'power4.out',
+                    opacity: 0,
+                    onComplete: function () {
+                        textfeld.style.display = "none";
+                    }
+                });
+                gsap.to(".copilot_container", {
+                    x: 1500,
+                    duration: 3,
+                    ease: 'power4.out',
+                    opacity: 0,
+                    onComplete: function () {
+                        copilotContainer.style.display = "none";
+                    }
+                });
+                if (textElement.innerHTML === startText) {
+                    localStorage.setItem('md_visited', 'true');
+                    gsap.to("#overlay", {
+                        duration: 0.5,
+                        opacity: 0,
+                        onComplete: function () {
+                            document.querySelector("#overlay").style.display = "none";
+                        }
+                    });
+                }
+                if (textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
+                    hideSkills();
+                    localStorage.setItem('module4_done', 'true');
+                }
+            } else if (textElement.innerHTML === finishText1) {
+                clearText();
+                showNextText(finishText2);
+            } else if (textElement.innerHTML === finishText2) {
+                clearText();
+                showNextText(finishText3);
+            } else if (textElement.innerHTML === finishText3) {
+                clearText();
+                if (allPlanetsDone()) {
+                    showNextText(allPlanetsDoneText);
+                } else {
+                    showNextText(finishText4);
+                }
+            }
+        }
+    });
+});
+setLastLevelBreakpoint();
 placeSpaceshipOnPath();
 setButtonAnimation("#startButton", startButton);
 
@@ -324,6 +486,42 @@ gsap.to("#spaceship", {
     ease: "power1.inOut",
     repeat: -1,
     yoyo: true
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (allLevelsDone() && !localStorage.getItem('module4_done')) {
+        showSkills(1.3);
+        let copilotImg = document.querySelector(".copilot");
+        copilotImg.src = "../bilder/copilot_sassy.svg";
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: finishText1,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Finish Text wird ausgeführt");
+            }
+        });
+    }
+    else if (!localStorage.getItem('md_visited')) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.5
+        });
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: startText,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Text 1 ausgeführt");
+            }
+        });
+    }
 });
 
 function openPlanet(relativeUrl) {

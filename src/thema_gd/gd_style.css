@@ -131,12 +131,30 @@ svg {
     bottom: 1%;
     width: 80%;
     height: 25%;
-    left: 10%;
     background-color: rgba(255, 255, 255, 0.5); /* Schwarz mit 50% Transparenz */
-    z-index: 10;
+    z-index: 1;
     border: #000 solid;
     border-radius: 1em;
-    display: none;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
+}
+
+.textfeld::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
 }
 
 .copilot {

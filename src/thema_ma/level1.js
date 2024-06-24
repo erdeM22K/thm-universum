@@ -75,6 +75,8 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             } else if (textElement.innerText === text2) {
                 clearText();
                 showNextText(text3);
+            } else if (textElement.innerText === "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kommst entweder mit einem Klick oder Über den Pfeil in der oberen linken Ecke zur Levelauswahl zurück.") {
+                backPlanet("ma.html");
             } else if (textElement.innerText === text3 || feedbackGiven || retryMode) {
                 clearText();
                 if (retryMode) {
@@ -151,11 +153,13 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
                 console.log("Textfeld geleert");
             }
@@ -234,7 +238,7 @@ function displayFeedback(message, isCorrect) {
                     textAnimation.to("#text", {
                         duration: 3,
                         delay: 10,
-                        text: "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kannst entweder mit einem Klick hier die Fragen wieder von vorne beginnen oder Über den Pfeil in der oberen linken Ecke kommst du auf die Startseite zurück"
+                        text: "Du hast alle Fragen richtig beantwortet und somit das Level erfolgreich beendet! Du kommst entweder mit einem Klick oder Über den Pfeil in der oberen linken Ecke zur Levelauswahl zurück."
                     });
                 }
             }

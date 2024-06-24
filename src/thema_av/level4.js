@@ -31,6 +31,7 @@ textAnimation.to("#text", {
     text: text1,
     onComplete: function() {
         startDotsAnimation();
+        killDotsAnimation()
         console.log("Text 1 ausgeführt");
     }
 });
@@ -98,7 +99,7 @@ function showNextText(text) {
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3);
+            startDotsAnimation(text1);
             console.log("Text wird ausgeführt");
         }
     });
@@ -120,13 +121,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });
