@@ -8,39 +8,44 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
         var color = document.getElementsByClassName('cls-11')[0];
 
         if (text === 'red' || text === 'rot') {
-            changeColor('.cls-7', '#AA1A1A')
-            changeColor('.cls-9', '#E22424')
-            changeColor('.cls-11', '#C40808') 
+            changeColor('.cls-7', '#AA1A1A');
+            changeColor('.cls-9', '#E22424');
+            changeColor('.cls-11', '#C40808');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
         } else if (text === 'blue' || text === 'blau') {
-            changeColor('.cls-7', '#4B69E2')
-            changeColor('.cls-9', '#8DABFF')
-            changeColor('.cls-11', '#5A89FF') 
+            changeColor('.cls-7', '#4B69E2');
+            changeColor('.cls-9', '#8DABFF');
+            changeColor('.cls-11', '#5A89FF');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
         } else if (text === 'yellow' || text === 'gelb') {
-            changeColor('.cls-7', '#EDD529')
-            changeColor('.cls-9', '#FFF86C')
-            changeColor('.cls-11', '#FCEB1D') 
+            changeColor('.cls-7', '#EDD529');
+            changeColor('.cls-9', '#FFF86C');
+            changeColor('.cls-11', '#FCEB1D');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
         } else if (text === 'green' || text === 'gruen' || text === 'grün') {
-            changeColor('.cls-7', '#47D647')
-            changeColor('.cls-9', '#95FF83')
-            changeColor('.cls-11', '#4BF752') 
+            changeColor('.cls-7', '#47D647');
+            changeColor('.cls-9', '#95FF83');
+            changeColor('.cls-11', '#4BF752');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
         } else if (text === 'orange') {
-            changeColor('.cls-7', '#F2AE40')
-            changeColor('.cls-9', '#FFD85C')
-            changeColor('.cls-11', '#FFC840') 
+            changeColor('.cls-7', '#F2AE40');
+            changeColor('.cls-9', '#FFD85C');
+            changeColor('.cls-11', '#FFC840');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
         }
     }
