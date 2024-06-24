@@ -145,6 +145,7 @@ function checkOrder() {
     var isEqual = arraysEqual(currentOrder, expectedOrder);
     
     if (isEqual) {
+        localStorage.setItem("wpr_level1_done", "true");
         applyCorrectStyle();
         clearText();
         showNextText(text5);

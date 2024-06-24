@@ -14,6 +14,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
                 rotation: 40, // degrees
                 ease: "power1.inOut" 
             });
+            localStorage.setItem("wpr_level3_done", "true");
             clearText();
             showNextText(text5);
             showInputField("off");

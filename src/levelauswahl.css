@@ -261,7 +261,7 @@ div#skillContainer {
     left: 25%;
     width: 50%;
     height: 40%;
-    z-index: 10; /* Über allen anderen Inhalten */
+    z-index: 8; /* Über allen anderen Inhalten */
     color: white;
     display: grid;
     grid-template-columns: 60% 40%;
@@ -470,7 +470,7 @@ div.skillValue {
         top: 25%;
         width: 80%;
         height: 40%;
-        z-index: 10; /* Über allen anderen Inhalten */
+        z-index: 5; /* Über allen anderen Inhalten */
         color: white;
         display: flex;
         flex-direction: column;

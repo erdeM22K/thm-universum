@@ -235,9 +235,9 @@ function allPlanetsDone() {
 function showSkills(delay) {
     let skills = ["Webentwicklung", "Audiovisuelle Medien", "Grafische Datenverarbeitung", "Mobile Apps", "Mediendesign", "Game Development"];
     let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
-    let levelAnzahl = [3, 4, 3, 3, 3];
+    let levelAnzahl = [3, 4, 3, 3, 3, 1];
     let levelAnzahlGesamt = 0;
-    for (let i = 0; i < levelAnzahl.length; i++) {
+    for (let i = 0; i < levelAnzahl.length - 1; i++) {
         levelAnzahlGesamt += levelAnzahl[i];
     }
     let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
@@ -432,7 +432,6 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 }
                 if (textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
                     hideSkills();
-                    localStorage.setItem('module2_done', 'true');
                 }
             } else if (textElement.innerHTML === finishText1) {
                 clearText();
@@ -442,6 +441,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 showNextText(finishText3);
             } else if (textElement.innerHTML === finishText3) {
                 clearText();
+                localStorage.setItem('module2_done', 'true');
                 if (allPlanetsDone()) {
                     showNextText(allPlanetsDoneText);
                 } else {

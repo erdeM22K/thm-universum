@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let skillIcon = document.querySelector("#skillbars");
     let closeSkills = document.querySelector("#close");
     const text1 = "Willkommen an Bord unseres Raumschiffs, Entdecker des Medieninformatik-Universums! Ich bin dein Copilot und freue mich, dich auf dieser spannenden Reise zu begleiten. Gemeinsam werden wir die vielfältigen Welten der Medieninformatik erkunden.";
-    const text2 = "Jeder Planet in diesem Universum repräsentiert einen einzigartigen Bereich der Medieninformatik, den es zu erkunden gilt. Mehr zu dem jeweiligen Bereich erzähle ich dir, wenn wir zu dem Planeten fliegen.";
+    const text2 = "Jeder Planet in diesem Universum repräsentiert einen einzigartigen Bereich der Medieninformatik, den es zu erkunden gilt. Mehr zu dem jeweiligen Bereich erzähle ich dir auf den Planeten.";
     const text3 = "Oh, ein Fehler im Raumschiff hat die Koordinaten zum Planeten des Gamedevelopments gelöscht... Wir müssen wohl erst die anderen Planeten bereisen, um die benötigten Koordinaten wiederzufinden."
     const text4 = "Bist du bereit? Setze dich ans Steuer, aktiviere die Antriebe und lass uns gemeinsam die unendlichen Möglichkeiten der Medieninformatik erkunden!";
+    const text5 = "Herzlichen Glückwunsch, du hast das gesamte Medieninformatik-Universum erkundet! :) Ich muss leider schon dem nächsten Entdecker helfen, aber schau dich gern noch etwas um und bis bald!"
     const textAnimation = gsap.timeline();
     const whiteOverlayStart = document.querySelector('.white-overlay-start');
 
@@ -102,13 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("dots").style.display = "none";
         } else {
             document.getElementById("dots").style.display = "block";
-            gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+            document.getElementById("dots").innerText = "...>"
             gsap.to("#dots", {
-                duration: 2,
+                duration: 1,
                 repeat: -1,
-                text: "...",
+                yoyo: true,
+                ease: "power1.inOut",
+                x: "+=10",
                 onComplete: function() {
-
                     console.log("Textfeld geleert");
                 }
             });
@@ -155,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
         let levelAnzahl = [3, 4, 3, 3, 3, 1];
         let levelAnzahlGesamt = 0;
-        for (let i = 0; i < levelAnzahl.length; i++) {
+        for (let i = 0; i < levelAnzahl.length - 1; i++) {
             levelAnzahlGesamt += levelAnzahl[i];
         }
         let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
@@ -289,6 +291,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("Text 1 ausgeführt");
             }
         });
+    } else if (localStorage.getItem("gamedev_done") && !localStorage.getItem("finaltext_read")) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.5,
+        });
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: text5,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Text 1 ausgeführt");
+            }
+        });
     }
 
     if (mediaQuery.matches) {
@@ -330,7 +349,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         var onClickFunction;
                         if (id == 6) {
-                            console.log("Planet ID 6");
                             onClickFunction = "showCoordinateInput()";
                         } else {
                             onClickFunction = "openPlanet('" + link + "')";
@@ -515,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     clearText();
                     showNextText(text4);
                 }
-                else if (textElement.innerHTML === text4  || textElement.innerHTML === allPlanetsDoneText) {
+                else if (textElement.innerHTML === text4 || textElement.innerHTML === text5) {
                     gsap.to(".textfeld", {
                         y: 1500,
                         duration: 3,
@@ -542,6 +560,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.querySelector("#overlay").style.display = "none";
                         }
                     });
+                    if (textElement.innerHTML === text5) {
+                        localStorage.setItem("finaltext_read", "true");
+                    }
                 }
             }
         });
