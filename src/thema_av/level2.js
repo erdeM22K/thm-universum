@@ -49,6 +49,11 @@ const textAnimation = gsap.timeline();
 
 gsap.registerPlugin(TextPlugin);
 
+//blockiert das selectstart-Ereignis
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
 // Anfangs Text anzeigen
 textAnimation.to("#text", {
     duration: 3,

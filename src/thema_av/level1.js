@@ -52,6 +52,11 @@ textAnimation.to("#text", {
     }
 });
 
+//blockiert das selectstart-Ereignis
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
 // Klick-Eventhandler für das Textfeld ('Klick' für nächsten Text)
 document.querySelector('.textfeld').addEventListener('click', function() {
     const textElement = document.getElementById("text");
