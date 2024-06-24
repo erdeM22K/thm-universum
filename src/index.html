@@ -4,47 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>THM-UNIVERSUM</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
 </head>
-
-<body>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
+<body id="body">
     <header>
-        <img id="logo" src="./bilder/landingpage/THM_Logo_4c.png" alt="Logo"/>
-        <h1 id="title">UNIVERSUM</h1>
+        <button id="qrbutton" onclick="showQr()"><i class="fa fa-qrcode"></i></button>
+        <div id="qrcode-container">
+            <h1  id="qrtitle">SCAN ME:</h1>
+            <div id="qrcode"></div>
+        </div>
+        <img id="logo" src="" alt="Logo"/>
+        <h2 id="title2"></h2>
+        <h1 id="title"></h1>
     </header>
-<div id="planeten_container">
-    <div class="planet_container" onclick="openPlanet('1.png')">
-        <h1 class="planet_title">WEBENTWICKLUNG</h1>
-        <div class="planet" id="planet1"></div>
+    <a class="menu" id="skillbars" title="Zu deinen Skills">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 160H320V128H448v32zM48 64C21.5 64 0 85.5 0 112v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM448 352v32H192V352H448zM48 288c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48H48z"/></svg>
+    </a>
+    <a class="menu" id="close" title="Schliessen">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+    </a>
+    <main id="planeten_container">
+        
+    </main>
+    <footer>
+        <div>
+            <p class="footetext" id="copyright"></p>
+            <a class="footetext" id="impressum" href="/"></a>
+        </div>
+    </footer>
+
+    <div class="transition-overlay"></div>
+    <div class="clouds-wrapper"></div>
+
+    <div id="overlay"></div>
+    <div class="copilot_container">
+        <img class="copilot" src="bilder/copilot_winken.svg" alt="copilot_sad">
     </div>
-    <div class="planet_container" onclick="openPlanet('2.png')">
-        <h1 class="planet_title">AUDIOVISUELLE MEDIEN</h1>
-        <div class="planet" id="planet2"></div>
-    </div>    <div class="planet_container" onclick="openPlanet('3.png')">
-        <h1 class="planet_title">3D: GRAFISCHE DATEN- VERARBEITUNG</h1>
-        <div class="planet" id="planet3"></div>
-    </div>    <div class="planet_container" onclick="openPlanet('4.png')">
-        <h1 class="planet_title">MOBILE APPS</h1>
-        <div class="planet" id="planet4"></div>
-    </div>    <div class="planet_container" onclick="openPlanet('5.png')">
-        <h1 class="planet_title">ZUSATZ</h1>
-        <div class="planet" id="planet5"></div>
+    <div class="textfeld">
+        <div id="text"></div>
+        <div id="dots"></div>
     </div>
-</div>
-<footer>
- <div>
-    <p class="footetext">&copy;THM</p>
-    <a class="footetext" href="/">Impressum</a>
-</div>
-</footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-<script src="script.js"></script>
-<script>
-function openPlanet(url) {
-        console.log('Navigating to: ' + url);
-        window.location.href = url;
-      }
-</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 100,
+            height : 100
+        });
+        
+        qrcode.makeCode(window.location.href)
+        
+        
+        </script>
+    
 </body>
 </html>

@@ -1,0 +1,282 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-image: url("../bilder/background_av.svg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Stil für den Pfeil-Button */
+.back-to-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    z-index: 8;
+}
+
+.back-to-home:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.back-to-home:hover {
+    color: #80ba24;
+}
+
+.black_transparent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Schwarz mit 50% Transparenz */
+    z-index: 1;
+}
+
+.textfeld {
+    position: absolute;
+    bottom: 1%;
+    width: 80%;
+    height: 25%;
+    background-color: rgba(255, 255, 255, 0.5); /* Schwarz mit 50% Transparenz */
+    z-index: 1;
+    border: #000 solid;
+    border-radius: 1em;
+    overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+    padding: 1em; /* Fügt Innenabstand hinzu, um den Text vom Rand zu entfernen */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite und -höhe */
+}
+
+.copilot {
+    height: 60vh;
+    width: 60vh;
+}
+
+.copilot_container {
+    position: relative;
+    left: 35%;
+    top: 20%;
+    z-index: 2;
+}
+
+.centered_image_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 50%);
+    z-index: 2;
+}
+
+.image_wrapper {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+}
+
+.centered_image {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.overlay_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Verhindert, dass das Overlay-Bild anklickbar ist */
+}
+
+#blur_slider {
+    margin-top: 20px;
+    width: 80%;
+}
+
+#text {
+    font-family: "Press Start 2P";
+    margin: 2em;
+    margin-right: 15em;
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+    line-height: 2em;
+}
+
+#dots {
+    display: none;
+    font-family: "Press Start 2P";
+    color: white;
+    margin: 2em;
+    margin-right: 15em;
+}
+
+#submit_button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #80BA24;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#submit_button:hover {
+    background-color: #80BA24;
+}
+
+#submit_button:hover {
+    scale: 1.05;
+}
+
+.transition-overlay-back {
+    display: none;
+    background-image: url(../bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    top:-120vh;
+    left: 15vw;
+    z-index: 9;
+    rotate: 180deg;
+  
+  
+  }
+  
+  .white-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 0;
+  
+  }
+  
+  .white-overlay-start {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 1;
+  
+  }
+  
+  .star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
+  }
+
+@media (max-width: 480px) {
+    .copilot {
+        height: 40vh;
+        width: 40vh;
+    }
+    .copilot_container {
+        top: 30%;
+        z-index: 1;
+    }
+    .textfeld {
+        width: 100%;
+    }
+    #text {
+        margin-right: 2em;
+        font-size: small;
+    }
+    html, body {
+        overflow: hidden;
+    }
+    .centered_image_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image_wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #submit_button{
+        font-size: 12px;
+    }
+    .centered_image{
+        width: 100%;
+        height: 8em;
+    }
+    .overlay_image{
+        width: 100%;
+        height: 8em;
+    }
+    .transition-overlay-back {
+        display: block;
+        background-image: url(../bilder/rocket.svg);
+        width: 85vh;
+        height: 85vh;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(63vh, 160vh);
+        rotate: 180deg;
+    
+    }
+    
+    .white-overlay {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 0;
+    
+    }
+    
+    .white-overlay-start {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 1;
+      
+      }
+}

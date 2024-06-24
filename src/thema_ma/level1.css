@@ -1,0 +1,250 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-image: url("../bilder/background_ma.svg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.black_transparent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Schwarz mit 50% Transparenz */
+    z-index: 1;
+}
+
+/* Stil für den Pfeil-Button */
+.back-to-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    z-index: 8;
+}
+
+.back-to-home:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.back-to-home:hover {
+    color: #80ba24;
+}
+
+.textfeld {
+    position: absolute;
+    bottom: 1%;
+    width: 80%;
+    height: 25%;
+    max-height: 25%; /* maximal erlaubte Höhe */
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+    border: 2px solid #000; /* Korrektur der Border-Deklaration */
+    border-radius: 1em;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
+    padding: 10px; /* Innenabstand für den Inhalt */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite */
+}
+
+
+.textfeld::-webkit-scrollbar {
+    display: none; /* Für Webkit-basierte Browser (Chrome, Safari) */
+}
+
+.copilot {
+    height: 60vh;
+    width: 60vh;
+}
+
+.copilot_container {
+    position: relative;
+    left: 35%;
+    top: 20%;
+    z-index: 2;
+}
+
+#text {
+    font-family: "Press Start 2P";
+    margin: 1em;
+    margin-right: 15em;
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+    line-height: 2em;
+}
+
+#dots {
+    display: none;
+    font-family: "Press Start 2P";
+    color: white;
+    margin: 2em;
+    margin-right: 15em;
+}
+
+#dots:hover{
+    cursor: pointer;
+}
+
+.question_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: #000 solid;
+    border-radius: 1em;
+    padding: 2em;
+    text-align: center;
+}
+
+#question {
+    font-family: "Press Start 2P";
+    color: black;
+    margin-bottom: 1em;
+}
+
+.answer {
+    font-family: "Press Start 2P";
+    display: block;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #000;
+    border-radius: 0.5em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.answer:hover{
+    scale: 1.05;
+}
+.transition-overlay-back {
+    display: none;
+    background-image: url(../bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    top:-120vh;
+    left: 15vw;
+    z-index: 9;
+    rotate: 180deg;
+  
+  
+  }
+  
+  .white-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 0;
+  
+  }
+  
+  .white-overlay-start {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 1;
+  
+  }
+  
+  .star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
+  }
+
+@media (max-width: 480px) {
+    .copilot {
+        height: 40vh;
+        width: 40vh;
+    }
+    .copilot_container {
+        top: 30%;
+        z-index: 1;
+    }
+    .textfeld {
+        width: 100%;
+    }
+    #text {
+        margin-right: 2em;
+        font-size: small;
+    }
+    html, body {
+        overflow: hidden;
+    }
+    .question_container {
+        width: 90%;
+    }
+    .transition-overlay-back {
+        display: block;
+        background-image: url(../bilder/rocket.svg);
+        width: 85vh;
+        height: 85vh;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(63vh, 160vh);
+        rotate: 180deg;
+    
+    }
+    
+    .white-overlay {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 0;
+    
+    }
+    
+    .white-overlay-start {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 1;
+      
+      }
+}

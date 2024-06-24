@@ -2,44 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Audiovisuelle Medien</title>
-    <link rel="stylesheet" href="av_style.css" />
+    <link rel="stylesheet" href="../levelauswahl.css" />
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
 <div class="overlay"></div>
 <header>
-    <img src="../assets/Bilder/THM_Logo_4c.png" />
+    <img src="../bilder/THM_Logo_4c.png" />
     <h1>Audiovisuelle Medien</h1>
+
 </header>
 
+<a onclick="backPlanet('../index.html')" class="menu" id="back-to-home" title="Zurück zur Startseite">
+    &#8592;
+</a>
+<a class="menu" id="skillbars" title="Zu deinen Skills">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 160H320V128H448v32zM48 64C21.5 64 0 85.5 0 112v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM448 352v32H192V352H448zM48 288c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48H48z"/></svg>
+</a>
+<a class="menu" id="close" title="Schliessen">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+</a>
 <main class="main">
     <svg width="150" height="150" viewBox="0 -60 100 250" >
-        <image id="planet" href="../assets/Bilder/planet_av.svg" width="150" transform="translate(-25, -50)"/>
+        <image id="planet" href="../bilder/planet_av.svg" width="150" transform="translate(-25, -50)"/>
         <path id="path" stroke-dasharray="5,5" fill="none" d="M10,-37 C 150,10 -50,40 90,87"/>
         <g id="spaceship">
-            <image href="../assets/Bilder/spaceship.svg" width="30" transform="rotate(90)"/>
+            <image href="../bilder/spaceship.svg" width="30" transform="rotate(90)"/>
         </g>
         <g class="level" id="level1">
-            <image class="icon" href="../assets/Bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Licht">Licht</text>
+            <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Licht">Licht</text>
         </g>
         <g class="level" id="level2">
-            <image class="icon" href="../assets/Bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Kamera">Kamera</text>
+            <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Kamera">Kamera</text>
         </g>
         <g class="level" id="level3">
-            <image class="icon" href="../assets/Bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Audio">Audio</text>
+            <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Audio">Audio</text>
         </g>
         <g class="level" id="level4">
-            <image class="icon" href="../assets/Bilder/LevelIcon.svg" width="16" />
-            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" font-family="Arial" font-size="8" fill="white" data-name="Schnitt">Schnitt</text>
+            <image class="icon" href="../bilder/LevelIcon.svg" width="16" />
+            <text class="labelLevel" x="8" y="-5" text-anchor="middle" alignment-baseline="middle" fill="white" data-name="Schnitt">Schnitt</text>
         </g>
     </svg>
 </main>
 
 <button id="startButton">Level Starten!</button>
+
+<div class="transition-overlay"></div>
+<div class="clouds-wrapper">
+    <svg class="clouds" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 90.83">
+        <defs>
+            <filter id="goo" color-interpolation-filters="sRGB">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -11" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+            <filter id="blurMe">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.9" />
+            </filter>
+        </defs>
+        <g clip-path="url(#clip-path)" fill="#eef2f3" filter="url(#goo)">
+            <g class="clouds-wrapper" filter="url(#blurMe)">
+                <ellipse class="cloud" cx="40" cy="61.83" rx="7" ry="7" />
+                <ellipse class="cloud" cx="81" cy="68.83" rx="8" ry="8" />
+                <ellipse class="cloud" cx="6" cy="63.83" rx="6" ry="6"/>
+                <ellipse class="cloud" cx="15" cy="70.83" rx="11" ry="11"  />
+                <ellipse class="cloud" cx="65" cy="74.83" rx="11" ry="11"  />
+                <ellipse class="cloud" cx="48" cy="71.83" rx="14" ry="14" />
+                <ellipse class="cloud" cx="34" cy="75.83" rx="16" ry="16" />
+            </g>
+        </g>
+    </svg>
+</div>
+
+<div id="overlay"></div>
+<div class="copilot_container">
+    <img class="copilot" src="../bilder/copilot_winken.svg" alt="copilot_sad">
+</div>
+<div class="textfeld">
+    <div id="text"></div>
+    <div id="dots"></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>

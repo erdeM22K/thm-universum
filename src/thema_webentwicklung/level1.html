@@ -7,51 +7,56 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
     <div class="black_transparent">
+
+        <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
+            &#8592;
+        </a>
+        
         <div class="rocket_container">
-            <div class="content_container">
-                <div id="content1" class="content">
-                    <p class="content_text">&lt;div class="rocket_nase&gt;&lt;/div&gt;</p>
-                </div>
-                <div id="content2" class="content" draggable="true">
-                    <p class="content_text">&lt;div class="rocket_fenster&gt;&lt;/div&gt;</p>
-                </div>
-                <div id="content3" class="content" draggable="true">
-                    <p class="content_text">&lt;div class="rocket_flügel&gt;&lt;/div&gt;</p>
-                </div>
-                <div id="content" class="content" draggable="true">
-                    <p class="content_text">&lt;div class="rocket_auspuff&gt;&lt;/div&gt;</p>
-                </div>
-            </div>
-            <img id="rocket" src="..\bilder\webentwicklung\rocket.svg" alt="rocket">
+            <ul id="columns">
+                <li draggable="true" id="rocket_head" data-original-index="0" class="list-element"><span>&lt;div class="rocket_head"&gt;&lt;/div&gt;</span></li>
+                <li draggable="true" id="rocket_body" data-original-index="1" class="list-element"><span>&lt;div class="rocket_body"&gt;&lt;/div&gt;</span></li>
+                <li draggable="true" id="rocket_wings" data-original-index="2" class="list-element"><span>&lt;div class="rocket_wings"&gt;&lt;/div&gt;</span></li>
+                <li draggable="true" id="rocket_engine" data-original-index="3" class="list-element"><span>&lt;div class="rocket_engine"&gt;&lt;/div&gt;</span></li>
+              </ul>
+            <img id="rocket" src="../bilder/webentwicklung/rocket.svg" alt="rocket">
         </div>
+        <button class="button" onclick="checkOrder()">Check Order</button>
         <div class="copilot_container">
-            <img class="copilot" src="..\bilder\webentwicklung\copilot_sad.svg" alt="copilot_sad">
+            <img class="copilot" src="../bilder/webentwicklung/copilot_sad.svg" alt="copilot_sad">
         </div>
         <div class="textfeld">
-            <div id="text">
-            </div>
+            <div id="text"></div>
             <div id="dots"></div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Draggable.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/TextPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/TweenMax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script> 
     <script src="script_level1.js"></script>
 
     <script>
         var text1 = "Hallo ich bin Copilot, Willkommen auf dem Level!";
         var text2 = "Dies ist eine Grundstruktur.";
         var text3 = "Und dies ist ein Beispiel Text.";
-    
-        gsap.registerPlugin(TextPlugin);
+        const whiteOverlay = document.querySelector('.white-overlay-start');
+
+        gsap.registerPlugin(TextPlugin, Draggable, TweenMax);
 
         document.addEventListener('DOMContentLoaded', (event) => {
             startLevel();
+            shuffleList();
+            enableDragAndDrop();
         });
-    
-        // Initial Text anzeigen
+
         gsap.to("#text", {
             duration: 3,
             text: text1,
@@ -61,8 +66,7 @@
                 console.log("Text 1 ausgeführt");
             }
         });
-    
-        // Klick-Eventhandler für das Dokument
+
         document.querySelectorAll('.textfeld').forEach(function(element) {
             element.addEventListener('click', function() {
                 const textElement = document.getElementById("text");
@@ -73,44 +77,55 @@
                     clearText();
                     showNextText(text3);
                     killDotsAnimation();
+                    showButton();
+                    showElements();
                 }
             });
         });
 
         function startLevel() {
-            gsap.to(".black_transparent", {
-            duration: 3, 
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz
-            ease: "power1.inOut" 
-        });
-        gsap.from(".content", {
-            x: 1500,
-            duration: 3,
-            stagger: 1,
-            delay:4,
-            ease: 'power4.out',
-        });
-        gsap.from(".textfeld", {
-            y: 1500,
-            duration: 3,
-            stagger: 1,
-            ease: 'power4.out',
-        });
-        gsap.from(".rocket_container", {
-            y: -1500,
-            duration: 10,
-            stagger: 3,
-            ease: 'power4.out',
-        });
-        gsap.from(".copilot_container", {
-            x: 1500,
-            duration: 3,
-            stagger: 2,
-            ease: 'power4.out',
-        });
+            gsap.to(".white-overlay-start", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+            delay: 0.2,
+            ease: "power1.inOut",
+            onComplete: () => {
+                whiteOverlay.style.display ="none";
         }
-    
-        // Funktion zum Anzeigen des nächsten Textes
+    });
+            gsap.to(".black_transparent", {
+                duration: 3, 
+                backgroundColor: "rgba(0, 0, 0, 0.5)", 
+                ease: "power1.inOut"
+            });
+            gsap.from(".content", {
+                x: 1500,
+                duration: 3,
+                stagger: 1,
+                delay: 4,
+                ease: 'power4.out',
+            });
+            gsap.from(".textfeld", {
+                y: 1500,
+                duration: 3,
+                stagger: 1,
+                ease: 'power4.out',
+            });
+            gsap.from(".rocket_container", {
+                y: -1500,
+                duration: 10,
+                stagger: 3,
+                ease: 'power4.out',
+            });
+            gsap.from(".copilot_container", {
+                x: 1500,
+                duration: 3,
+                stagger: 2,
+                ease: 'power4.out',
+            });
+        }
+
         function showNextText(text) {
             gsap.to("#text", {
                 duration: 3,
@@ -122,38 +137,38 @@
                 }
             });
         }
+
         function clearText() {
-
-        gsap.to("#text", {
-            duration: 0.5,
-            text: "",
-            onComplete: function() {
-                console.log("Textfeld geleert");
-            }
-        });
-        document.getElementById("dots").style.display = "none";
-    }
-
-    function startDotsAnimation() {
-        if (document.getElementById("text").innerText === text3) {
+            gsap.to("#text", {
+                duration: 0.5,
+                text: "",
+                onComplete: function() {
+                    console.log("Textfeld geleert");
+                }
+            });
             document.getElementById("dots").style.display = "none";
-        } else {
-        document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
-        gsap.to("#dots", {
+        }
+
+        function startDotsAnimation() {
+            if (document.getElementById("text").innerText === text3) {
+                document.getElementById("dots").style.display = "none";
+            } else {
+                document.getElementById("dots").style.display = "block";
+                gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+                gsap.to("#dots", {
                     duration: 2,
                     repeat: -1,
-                    text: "...",
+                    text: "...>",
                     onComplete: function() {
-                        
                         console.log("Textfeld geleert");
-                     }
+                    }
                 });
             }
-    }
-    function killDotsAnimation() {
-        document.getElementById("dots").style.display = "none";
-    }
+        }
+
+        function killDotsAnimation() {
+            document.getElementById("dots").style.display = "none";
+        }
     </script>
 </body>
 </html>

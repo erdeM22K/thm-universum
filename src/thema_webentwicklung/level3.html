@@ -7,15 +7,23 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
     <div class="black_transparent">
+
+        <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
+            &#8592;
+        </a>
+
         <div class="rocket_container">
             <div class="content_container">
             </div>
-            <img id="rocket" src="..\bilder\webentwicklung\rocket_yellow.svg" alt="rocket">
+            <img id="rocket" src="..\bilder\rocket.svg" alt="rocket">
         </div>
         <div class="copilot_container">
-            <img class="copilot" src="..\bilder\webentwicklung\copilot_lachen.svg" alt="copilot_sad">
+            <img class="copilot" src="..\bilder\copilot_lachen.svg" alt="copilot_sad">
         </div>
         <div class="textfeld">
             <div id="text">
@@ -32,9 +40,10 @@
     <script>
         var text1 = "Hallo ich bin Copilot, Willkommen auf dem Level!";
         var text2 = "Dies ist eine Grundstruktur.";
-        var text3 = "Schreibe mit JS den Funktionsnamen 'startRocket(){}' um die Rakete zu starten";
+        var text3 = "Rufe mit JS die Funktion 'function startRocket(){...}' auf, um die Rakete zu starten";
         var text5 = "Rakete Startet!";
-        var text4 = "function" ;
+        var text4 = "Rufe hier die Funktion auf:" ;
+        const whiteOverlay = document.querySelector('.white-overlay-start');
     
         gsap.registerPlugin(TextPlugin);
 
@@ -72,6 +81,16 @@
         });
 
         function startLevel() {
+            gsap.to(".white-overlay-start", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+            delay: 0.2,
+            ease: "power1.inOut",
+            onComplete: () => {
+                whiteOverlay.style.display ="none";
+        }
+    });
             gsap.to(".black_transparent", {
             duration: 3, 
             backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz

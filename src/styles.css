@@ -1,8 +1,11 @@
 
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    font-family: "Press Start 2P";
 }
 header {
     display: flex;
@@ -10,70 +13,163 @@ header {
     justify-content: center;
     align-items: center;
 }
-footer {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+main {
+    flex-grow: 1;
 }
-footer div {
-    display: flex;
-    flex-direction: row; 
-}
-footer div p {
-    margin-left: 2em;
-    margin-top: 9em;
+
+#qrcode {
+    display: none;
+    top: 30%;
+    left: 36%;
+    z-index: -1;
+    transition: transform 0.3s ease;
+  }
+
+  #qrbutton {
     font-family: "Press Start 2P";
     color: white;
+    font-size: 36px;
+    width: 40px;
+    height: 35px;
+    position: absolute;
+    margin: 15px;
+    top: 0%;
+    left: 2%;
+    z-index: 5 ;
+    background-color: #ffffff00;
+    border-style: none;
+    cursor: pointer;
+  }
+  #qrbutton:hover {
+    color: #80ba24;
+  }
+  #qrcode-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund mit Transparenz */
+    z-index: 4;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-footer div a {
-    margin-left: 2em;
-    margin-top: 9em;
-    font-family: "Press Start 2P";
+#qrtitle {
+    display: none;
+    color: white;
+    position: absolute;
+    top: 25%;
+    transition: transform 0.3s ease;
+}
+
+.menu {
+    position: absolute;
+    top: 10px;
+    font-size: 2rem;
     color: white;
     text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.menu:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.menu:hover {
+    color: #80ba24;
+}
+
+#skillbars, #close {
+    right: 10px;
+}
+
+#skillbars svg {
+    height: 40px;
+}
+
+#close svg {
+    width: 30px;
+}
+
+#skillbars svg path {
+    fill: white;
+}
+
+#close svg path {
+    fill: white;
+}
+
+#skillbars:hover svg path {
+    fill: #80ba24;
+}
+
+#close:hover svg path {
+    fill: #80ba24;
+}
+
+#close {
+    display: none;
+    z-index: 15;
 }
 
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100vw;
+    width: 100vw;
     overflow: hidden;
-    background-image: url('./bilder/landingpage/landingpage_background.svg');
     background-size:cover;
-    background-repeat: repeat;
     background-position: top;
+    background-repeat: no-repeat;
 }
 #logo {
     margin: 2%;
-    width: 20vw; /* Responsive width */
+    margin-bottom: 1vw;
+    width: 10vw; /* Responsive width */
     height: auto; /* Höhe automatisch einstellen, damit das Bild proportional bleibt */
 }
 #title {
     margin: 0;
-    margin-bottom: 1em;
+    margin-bottom: 2.5vw;
     color: white;
-    font-size: 3.5em;
+    font-size: 2.5vw;
     font-family: 'Press Start 2P';
     text-align: center;
     text-shadow: 
-        -3px -3px 0 #000,  
-         3px -3px 0 #000,
-        -3px  3px 0 #000,
-         3px  3px 0 #000;
+        -0.1vw -0.1vw 0vw #000,  
+         0.1vw -0.1vw 0vw #000,
+        -0.1vw  0.1vw 0vw #000,
+         0.1vw  0.1vw 0vw #000;
+}
+#title2 {
+    margin: 0;
+    margin-bottom: 1vw;
+    color: white;
+    font-size: 1vw;
+    font-family: 'Press Start 2P';
+    text-align: center;
+    text-shadow: 
+    -0.1vw -0.1vw 0vw #000,  
+    0.1vw -0.1vw 0vw #000,
+   -0.1vw  0.1vw 0vw #000,
+    0.1vw  0.1vw 0vw #000;
 }
 .planet_title {
 margin: 0;
 color: white;
-font-size: 1.0em;
 font-family: 'Press Start 2P';
 text-align: center;
 text-shadow: 
-    -2px -2px 0 #000,  
-    2px -2px 0 #000,
-    -2px  2px 0 #000,
-    2px  2px 0 #000;
+-0.1vw -0.1vw 0vw #000,  
+0.1vw -0.1vw 0vw #000,
+-0.1vw  0.1vw 0vw #000,
+0.1vw  0.1vw 0vw #000;
     cursor: pointer;
 
 }
@@ -81,33 +177,313 @@ text-shadow:
     border-radius: 50%;
     background-repeat: repeat;
     background-size: 200% 100%;
-    width: 18em;
-    height: 18em;
     position: relative;
     animation: rotate 30s linear infinite;
     cursor: pointer;
 }
 
 #planet1 {
-    background-image: url('./bilder/landingpage/1.png');
-    box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #f0d08b;
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f0d08b;
 }
 #planet2 {
-    background-image: url('./bilder/landingpage/2.png');
-    box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #8be1f0;
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #8be1f0;
 }
 #planet3 {
-    background-image: url('./bilder/landingpage/3.png');
-    box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #f08bd7;
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f08bd7;
 }
 #planet4 {
-    background-image: url('./bilder/landingpage/4.png');
-    box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #a8f08b;
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #a8f08b;
 }
 #planet5 {
-    background-image: url('./bilder/landingpage/5.png');
-    box-shadow: inset -2em -2em 2em #000, -0.5em -0.5em 1em #f0e98b;
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #f0e98b;
 }
+#planet6 {
+    box-shadow: inset -2vw -2vw 2vw #000, -0.4vw -0.4vw 1vw #ffffff;
+}
+
+.transition-overlay {
+    display: none;
+    background-image: url(./bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    top: 120%;
+    left: 37%;
+    z-index: 9;
+
+}
+.white-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 0;
+
+}
+
+.white-overlay-start {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 1;
+  
+  }
+
+  .clouds {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 100%;
+    opacity: 0;
+} 
+.cloud {
+    height: 10000px;
+    animation: kaboom 0.4s ease alternate infinite;
+    transform-origin: center center;
+    opacity: 0.9;
+    &:nth-child(odd) {
+        animation: kaboom 0.3s ease alternate infinite;
+    }
+    &:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+    &:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+    &:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+    &:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+    &:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+}
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+@keyframes kaboom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+.star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
+}
+
+.textfeld {
+    position: absolute;
+    bottom: 1%;
+    left: 10%;
+    width: 80%;
+    height: 25%;
+    max-height: 25%; /* maximal erlaubte Höhe */
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    border: 2px solid #000; /* Korrektur der Border-Deklaration */
+    border-radius: 1em;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
+    padding: 10px; /* Innenabstand für den Inhalt */
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Gesamtbreite */
+    display: none;
+}
+
+
+.textfeld::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
+}
+
+
+.copilot {
+    height: 60vh;
+    width: 60vh;
+}
+
+.copilot_container {
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+    z-index: 15;
+    display: none;
+}
+
+#text {
+    font-family: "Press Start 2P";
+    margin: 1em;
+    margin-right: 15em;
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+    line-height: 2em;
+}
+
+#dots {
+    display: none;
+    font-family: "Press Start 2P";
+    color: white;
+    margin: 2em;
+    margin-right: 15em;
+}
+#overlay {
+    display: none; /* Standardmäßig versteckt */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: 5; /* Über allen anderen Inhalten */
+}
+
+div#skillContainer {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 40%;
+    z-index: 10; /* Über allen anderen Inhalten */
+    color: white;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 16% 16% 16% 16% 16% 16%;
+    justify-items: start;
+    align-items: center;
+}
+
+div.skillValue {
+    background-color: white;
+    height: 20px;
+    width: 0;
+}
+
+#skillHeadline {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    color: white;
+}
+
+#coordinateWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    padding: 5em 5em;
+    background-color: #1d1d1b;
+    color: white;
+    z-index: 20;
+    border-radius: 10px;
+}
+
+#coordinateWindow button {
+    font-family: "Press Start 2P";
+    padding: 20px 30px;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#coordinateWindow h1 {
+    margin: 0;
+}
+
+#coordinateContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin: 2em 0;
+}
+
+.coordinateInput {
+    outline: none;
+    width: 1.5em;
+    font-size: 1em;
+    font-family: "Press Start 2P";
+    text-align: center;
+    color: white;
+    border: none;
+    border-bottom:  2px solid white;
+    background-color: transparent; /* Hintergrundfarbe transparent setzen */
+    /* Weitere Stile nach Bedarf anpassen */
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#coordinateClose {
+    right: 10px;
+}
+
+#coordinateClose svg {
+    width: 30px;
+}
+
+#coordinateClose svg path {
+    fill: white;
+}
+
+#coordinateClose:hover svg path {
+    fill: #80ba24;
+}
+
+
 @keyframes rotate {
     from {
         background-position: 0 0;
@@ -120,28 +496,68 @@ text-shadow:
     #planeten_container {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content:space-between;
+        flex-wrap:nowrap;
+        margin-left: 3vw;
+        margin-right: 3vw;
     }
     .planet_container {
         display: flex;
         flex-direction: column;
+        justify-content:center;
         align-items: center;
-        margin: 2em;
+        width: 100vw;
         transition: transform 0.5s ease-in-out;
+        z-index: 3;
     }
     .planet {
-        margin-top: 2em;
+        margin-top: 2vw;
+        width: 14vw;
+        height: 14vw;
     }
     .planet_container:hover {
         transform: scale(1.25);
     }
     .planet_container:hover .planet_title {
         text-shadow: 
-        -2px -2px 0 #80ba24,  
-        2px -2px 0 #80ba24,
-        -2px  2px 0 #80ba24,
-        2px  2px 0 #80ba24;
+        -0.1vw -0.1vw 0vw #80ba24,  
+        0.1vw -0.1vw 0vw #80ba24,
+        -0.1vw  0.1vw 0vw #80ba24,
+        0.1vw  0.1vw 0vw #80ba24;
     }
+    .planet_title {
+        font-size: 0.9vw;
+        line-height: 1.5vw;
+        }
+        footer {
+            width: 100%;
+            height: 20vw; /* Adjust height as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Optional: text color */
+        }
+        footer div {
+            display: flex;
+            flex-direction: row; 
+        }
+        footer div p {
+            margin-left: 2vw;
+            margin-top: 10vw;
+            margin-bottom: 3vw;
+            font-family: "Press Start 2P";
+            color: white;
+            font-size: 0.7vw;
+        }
+        footer div a {
+            margin-left: 2vw;
+            margin-top: 10vw;
+            margin-bottom: 3vw;
+            font-family: "Press Start 2P";
+            color: white;
+            text-decoration: none;
+            font-size: 0.7vw;
+        }
 }
 
 @media (max-width: 480px) {
@@ -162,9 +578,68 @@ text-shadow:
         margin-top: 1em;
 
     }
+    .copilot {
+        height: 40vh;
+        width: 40vh;
+    }
+    .copilot_container {
+        right: -25%;
+        z-index: 10;
+    }
+    .textfeld {
+        left:0%;
+        width: 100%;
+
+    }
+    #text {
+        margin-right: 0;
+        font-size: 0.7rem;
+    }
+
+    #dots {
+        font-size: 0.7rem;
+    }
+    div#skillContainer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 25%;
+        width: 80%;
+        height: 40%;
+        z-index: 10; /* Über allen anderen Inhalten */
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-size: 0.8rem;
+    }
+
+
+    div.skillValue {
+        background-color: white;
+        height: 10px;
+        width: 0;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    #skillHeadline {
+        position: absolute;
+        top: 10%;
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 15;
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
+    }
     body {
+        position: fixed;
         height: 100vh;
         background-repeat: no-repeat;
+        overflow: hidden;
 
         }
         #planeten_container {
@@ -207,11 +682,229 @@ text-shadow:
         }
         #title {
             font-size: 2em;
+            margin: 0;
+            text-shadow: 
+            -0.5vw -0.5vw 0vw #000,  
+            0.5vw -0.5vw 0vw #000,
+            -0.5vw  0.5vw 0vw #000,
+            0.5vw  0.5vw 0vw #000;
+        }
+        #title2 {
+            font-size: 1em;
+            margin: 0;
+            margin-top: 0.5em;
+            text-shadow: 
+            -0.5vw -0.5vw 0vw #000,  
+            0.5vw -0.5vw 0vw #000,
+            -0.5vw  0.5vw 0vw #000,
+            0.5vw  0.5vw 0vw #000;
+            
         }
         .planet_title {
             margin: 15%;
             top: 15%;
-            font-size: 1.5em;
+            font-size: 1.2em;
+            text-shadow: 
+-0.5vw -0.5vw 0vw #000,  
+0.5vw -0.5vw 0vw #000,
+-0.5vw  0.5vw 0vw #000,
+0.5vw  0.5vw 0vw #000;
+line-height: 8vw;
         }
+        #planet1 {
+            box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f0d08b;
+        }
+        #planet2 {
+            box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #8be1f0;
+        }
+        #planet3 {
+            box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f08bd7;
+        }
+        #planet4 {
+            box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #a8f08b;
+        }
+        #planet5 {
+            box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f0e98b;
+        }
+        #planet6 {
+
+            box-shadow: inset -8vw -8vw 8vw #000, -1.5vw -1.5vw 5vw #f0e98b;
+        }
+    #coordinateWindow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+        height: auto;
+        padding: 5em 2em;
+        background-color: #1d1d1b;
+        color: white;
+        z-index: 20;
+        border-radius: 10px;
+    }
+
+    #coordinateHeadline {
+        font-size: 1.7em;
+    }
+    .transition-overlay {
+            display: block;
+            background-image: url(./bilder/rocket.svg);
+            width: 85vh;
+            height: 85vh;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-26%, 100%);
+        
+        }
+        .white-overlay {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0);
+            position: absolute;
+            z-index: 8;
+            opacity: 0;
+        
+        }
+
+        .clouds {
+            display: none;
+            position: absolute;
+            top: 45%;
+            width: 100vh;
+            transform: translate(-50%, 0%);
+            opacity: 0;
+    
+        }
+        
+        .cloud {
+            display: block;
+            animation: kaboom 0.4s ease alternate infinite;
+            transform-origin: center center;
+            opacity: 0.9;
+            &:nth-child(odd) {
+                animation: kaboom 0.3s ease alternate infinite;
+            }
+            &:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            &:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+            &:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+            &:nth-child(5) {
+                animation-delay: 0.5s;
+            }
+            &:nth-child(6) {
+                animation-delay: 0.6s;
+            }
+            &:nth-child(7) {
+                animation-delay: 0.7s;
+            }
+        }
+        .white-overlay-start {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0);
+            position: absolute;
+            z-index: 8;
+            opacity: 1;
+          
+          }
+          footer {
+            width: 100%;
+            height: 3%; /* Adjust height as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(255, 255, 255); /* Optional: text color */
+            position: absolute;
+            top: 97.5%;
+            left: 0%;
+            background-color: rgba(255, 255, 255, 0.507);
+        }
+        footer div {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: row; 
+            align-items: center;
+            justify-content: center;
+        }
+        footer div p {
+            margin-left: 2vw;
+            font-family: "Press Start 2P";
+            color: rgb(0, 0, 0);
+            font-size: 3vw;
+
+        }
+        footer div a {
+            margin-left: 10vw;
+            font-family: "Press Start 2P";
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            font-size: 3vw;
+
+            
+        }
+        #qrcode {
+            display: none;
+            top: 30%;
+            left: 36%;
+            z-index: -1;
+            transition: transform 0.3s ease;
+          }
+
+          #qrcode {
+            display: none;
+            top: 30%;
+            left: 36%;
+            z-index: -1;
+            transition: transform 0.3s ease;
+          }
+
+          #qrbutton {
+            font-family: "Press Start 2P";
+            color: white;
+            font-size: 36px;
+            width: 40px;
+            height: 35px;
+            position: absolute;
+            margin: 15px;
+            top: 0%;
+            left: 2%;
+            z-index: 5 ;
+            background-color: #ffffff00;
+            border-style: none;
+          }
+          #qrbutton:hover {
+            color: #80ba24;
+          }
+          #qrcode-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund mit Transparenz */
+            z-index: 4;
+            justify-content: center;
+            align-items: center;
+        }
+
     }
 

@@ -5,34 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>GD Level 1</title>
+    <title>Level 1 - Modellierung</title>
 </head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body>
     <div class="black_transparent">
+
+        <a onclick="backPlanet('../thema_gd/gd.html')" class="back-to-home" title="Zurück zur Startseite">
+            &#8592;
+        </a>
+
         <div class="arrows_container">
             <div class="arrow_image_container" id="arrowLeft">
-                <img class="arrow" src="..\bilder\gd\arrow.svg" alt="arrow">
+                <img class="arrow" src="..\bilder\arrow.svg" alt="arrow">
             </div>
             <div class="arrow_image_container" id="arrowRight">
-                <img class="arrow" src="..\bilder\gd\arrow.svg" alt="arrow">
+                <img class="arrow" src="..\bilder\arrow.svg" alt="arrow">
             </div>
         </div>
         <div class="modes_container">
             <div class="image_container swipe-container">
                 <h2 class="mode_title">Standard-Mode</h2>
-                <img class="modes highlight" id="mode1" src="..\bilder\gd\mode1.png" alt="mode1">
+                <img class="modes highlight" id="mode1" src="..\bilder\mode1.png" alt="mode1" loading="lazy">
             </div>
             <div class="image_container">
                 <h2 class="mode_title">Wireframe-Mode</h2>
-                <img class="modes highlight" id="mode2" src="..\bilder\gd\mode2.png" alt="mode2">
+                <img class="modes highlight" id="mode2" src="..\bilder\mode2.png" alt="mode2" loading="lazy">
             </div>
             <div class="image_container">
                 <h2 class="mode_title">Smooth-Mode</h2>
-                <img class="modes highlight" id="mode3" src="..\bilder\gd\mode3.png" alt="mode3">
+                <img class="modes highlight" id="mode3" src="..\bilder\mode3.png" alt="mode3" loading="lazy">
             </div>
         </div>
         <div class="copilot_container">
-            <img class="copilot" src="..\bilder\gd\copilot_sad.svg" alt="copilot_sad">
+            <img class="copilot" src="..\bilder\copilot_sad.svg" alt="copilot_sad">
         </div>
         <div class="textfeld">
             <div id="text"></div>
@@ -50,6 +58,7 @@
         var text1 = "Hallo ich bin dein Copilot, Willkommen auf dem Level!";
         var text2 = "Dies ist eine Grundstruktur.";
         var text3 = "Und dies ist ein Beispiel Text.";
+        const whiteOverlay = document.querySelector('.white-overlay-start');
 
 
         gsap.registerPlugin(TextPlugin);
@@ -88,6 +97,16 @@
         //Funktionen ---------------------------------------------------
 
         function startLevel() {
+            gsap.to(".white-overlay-start", {
+        y: 0,
+        duration: 1,
+        opacity: 0,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            whiteOverlay.style.display ="none";
+    }
+});
             gsap.to(".black_transparent", {
                 duration: 2, 
                 backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz

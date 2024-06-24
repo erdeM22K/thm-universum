@@ -1,0 +1,346 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    font-family: "Press Start 2P";
+    position: relative; /* Ändere die Position auf relativ */
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background-image: url("../bilder/background.jpg");
+    background-size: cover;
+}
+
+.overlay {
+    z-index: -100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Halbtransparentes Schwarz */
+}
+
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0 0 ;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: #f1f1f1;
+    text-shadow:
+            -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px  2px 0 #000,
+            2px  2px 0 #000;
+}
+
+header img {
+    width: 200px;
+}
+
+/* Stil für den Pfeil-Button */
+.back-to-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.back-to-home:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.back-to-home:hover {
+    color: #80ba24;
+}
+
+#path {
+    stroke-width: 2;
+    stroke: #f1f1f1;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+#spaceship {
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.main {
+    height: 100vh; /* Setze die Höhe auf 100vh */
+    overflow: hidden; /* Verwende auto overflow, um bei Bedarf einen Scrollbalken anzuzeigen */
+    display: flex; /* Verwende Flexbox für die Ausrichtung des Inhalts */
+    justify-content: center; /* Zentriere den Inhalt horizontal */
+    align-items: center; /* Zentriere den Inhalt vertikal */
+}
+
+#startButton {
+    position: fixed; /* Ändere die Position auf fixiert */
+    bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+    left: 50%; /* Zentriere den Button horizontal */
+    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    padding: 20px 30px;
+    font-size: 1.5rem;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.level {
+    cursor: pointer;
+}
+
+.transition-overlay {
+    display: none;
+    background-image: url(../bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    transform: translate(80vh, 10vh);
+    z-index: 9;
+
+
+}
+
+.transition-overlay-back {
+    display: none;
+    background-image: url(../bilder/rocket.svg);
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    top:50%;
+    left: 0%;
+    transform: translate(-30vh, 180vh);
+    z-index: 9;
+    rotate: 180deg;
+
+
+}
+
+.white-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 0;
+
+}
+
+.white-overlay-start {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 8;
+    opacity: 1;
+  
+  }
+
+.clouds {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    opacity: 0;
+} 
+
+.cloud {
+    height: 10000px;
+    animation: kaboom 0.4s ease alternate infinite;
+    transform-origin: center center;
+    opacity: 0.9;
+    &:nth-child(odd) {
+        animation: kaboom 0.3s ease alternate infinite;
+    }
+    &:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+    &:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+    &:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+    &:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+    &:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+}
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+@keyframes kaboom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+.star {
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    opacity: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+    header h1 {
+        font-size: 3rem;
+        color: #f1f1f1;
+    }
+    header img {
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
+    #startButton {
+        position: absolute; /* Ändere die Position auf absolut */
+        bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+        left: 50%; /* Zentriere den Button horizontal */
+        transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+        margin-top: 20px; /* Füge einen oberen Abstand hinzu, um den Button unter der SVG zu platzieren */
+        width: auto; /* Setze die Breite auf automatisch */
+        height: auto;
+        font-size: 2rem;
+    }
+    header {
+        padding: 20px 0;
+    }
+    header h1{
+        font-size: 2rem;
+    }
+    header img{
+        width:200px;
+    }
+    .back-to-home {
+        font-size: 3rem; /* Größerer Schriftgrad für mobile Ansicht */
+    }
+
+    .transition-overlay {
+        display: none;
+        background-image: url(../bilder/rocket.svg);
+        width: 85vh;
+        height: 85vh;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-26%, 100%);
+    
+    }
+
+    .transition-overlay-back {
+        display: block;
+        background-image: url(../bilder/rocket.svg);
+        width: 85vh;
+        height: 85vh;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(63vh, 160vh);
+        rotate: 180deg;
+    
+    }
+
+    .white-overlay {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 0;
+    
+    }
+
+    .clouds {
+        display: none;
+        position: absolute;
+        top: 45%;
+        width: 100vh;
+        opacity: 0;
+
+    } 
+    
+    .cloud {
+        display: block;
+        animation: kaboom 0.4s ease alternate infinite;
+        transform-origin: center center;
+        opacity: 0.9;
+        &:nth-child(odd) {
+            animation: kaboom 0.3s ease alternate infinite;
+        }
+        &:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        &:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        &:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        &:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        &:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+        &:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+        &:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+    }
+    .white-overlay-start {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 8;
+        opacity: 1;
+      
+      }
+}

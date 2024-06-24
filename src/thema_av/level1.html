@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="level1.css">
+    <title>Level 1 - Licht</title>
+</head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
+<body>
+<div class="black_transparent">
+
+    <a onclick="backPlanet('../thema_av/av.html')" class="back-to-home" title="Zurück zur Startseite">
+        &#8592;
+    </a>
+
+    <div class="copilot_container">
+        <img class="copilot" src="../bilder/copilot_winken.svg" alt="copilot_sad">
+    </div>
+    <div class="textfeld">
+        <div id="text"></div>
+        <div id="dots-container">
+            <div id="dots"></div>
+        </div>
+    </div>
+    <div class="centered_image_container" id="imageAndSliderContainer">
+        <div class="image_wrapper">
+            <img class="centered_image" id="gamma_picture" src="../bilder/av_level1_bild.png" alt="gamma_picture">
+            <img class="overlay_image" src="../bilder/kamera_overlay.png" alt="kamera_overlay">
+        </div>
+        <input type="range" id="brightness_slider" min="0" max="500" value="">
+        <button id="submit_button">Abgeben</button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Draggable.min.js"></script>
+<script src="level1.js"></script>
+</body>
+</html>

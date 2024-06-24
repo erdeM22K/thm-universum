@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="level2.css">
+    <title>Level 2 - Farben</title>
+</head>
+<div class="transition-overlay-back"></div>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
+<body>
+<div class="black_transparent">
+
+    <a onclick="backPlanet('../thema_md/md.html')" class="back-to-home" title="Zurück zur Startseite">
+        &#8592;
+    </a>
+
+    <div class="copilot_container">
+        <img class="copilot" id="copilot" src="../bilder/copilot_winken.svg" alt="copilot_winken">
+    </div>
+    <div class="textfeld">
+        <div id="text"></div>
+        <div id="dots"></div>
+    </div>
+    <div id="questionContainer" class="question_container" style="display: none;">
+        <div id="question"></div>
+        <div class="logo-answers-container">
+            <div id="logo"></div>
+            <div id="answers"></div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Draggable.min.js"></script>
+<script src="level2.js"></script>
