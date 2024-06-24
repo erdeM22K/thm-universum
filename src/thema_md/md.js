@@ -8,6 +8,8 @@ const startButton = document.getElementById('startButton');
 const whiteOverlay = document.querySelector('.white-overlay-start');
 const levels = ["Typografie", "Farben", "Formen"];
 let currentLevel = 0;
+let skillIcon = document.querySelector("#skillbars");
+let closeSkills = document.querySelector("#close");
 
 for (let i = 0; i < numberOfIcons; i++) {
     const distance = pathStart + i * iconSpacing;
@@ -81,6 +83,7 @@ function showButton(delay) {
         duration: 0.5,
         ease: "elastic.out(1,0.5)",
     });
+    startButton.style.display = "block";
 }
 function animateToLevel(level) {
     hideButton();
@@ -130,6 +133,167 @@ function setButtonAnimation(id, button) {
         });
     });
 }
+
+function showSkills(delay) {
+    let skills = ["Webentwicklung", "Audiovisuelle Medien", "Grafische Datenverarbeitung", "Mobile Apps", "Mediendesign", "Game Development"];
+    let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
+    let levelAnzahl = [3, 4, 3, 3, 3, 1];
+    let levelAnzahlGesamt = 0;
+    for (let i = 0; i < levelAnzahl.length; i++) {
+        levelAnzahlGesamt += levelAnzahl[i];
+    }
+    let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+
+    const skillHeadline = document.createElement('h1');
+    skillHeadline.id = "skillHeadline";
+    skillHeadline.innerHTML = "Deine Skills";
+    document.querySelector("body").appendChild(skillHeadline);
+    const skillContainer = document.createElement('div');
+    skillContainer.id = "skillContainer";
+    document.querySelector("body").appendChild(skillContainer);
+
+    for (let i = 0; i < skills.length; i++) {
+        let skillName = document.createElement('div');
+        skillName.className = "skillName";
+        skillName.className = "skillName";
+        skillName.innerHTML = skills[i];
+        skillContainer.appendChild(skillName);
+        let skillValue = document.createElement('div');
+        skillValue.className = "skillValue";
+        skillContainer.appendChild(skillValue);
+
+        //Prüfen, ob ein Modul fertig ist und Eintragen des skillValues
+
+
+    }
+    for (let modul = 0; modul < skills.length - 1; modul++) {
+        let skillBonusGameDesign = 0.95/levelAnzahlGesamt;
+        for (let level = 1; level <= levelAnzahl[modul]; level++) {
+            if(localStorage.getItem(skillsShort[modul] + "_level" + level + '_done')) {
+                console.log(skills[modul] + " Level " + level + " fertig.");
+                skillValues[modul] += 0.95/levelAnzahl[modul];
+                skillValues[5] += skillBonusGameDesign;
+            }
+        }
+    }
+
+    document.querySelector("#overlay").style.display = "block";
+    gsap.to("#overlay", {
+        duration: 0.5,
+        delay: delay,
+        opacity: 0.9,
+
+    });
+
+    gsap.from('#skillHeadline', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        delay: delay,
+    });
+
+    gsap.from('#skillContainer div:nth-child(odd)', {
+        x: -100,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        delay: delay,
+    });
+
+    for (let i = 0; i < skillValues.length; i++) {
+        let staggerFactor = 0.1;
+        gsap.to(".skillValue:nth-child(" + (i * 2 + 2) + ")", {
+            delay: delay + 0.3 + i * staggerFactor,
+            width: skillValues[i] * 100 + "%",
+            duration: 0.5,
+            ease: "power2.out"
+        });
+    }
+}
+
+function hideSkills() {
+    gsap.to("#overlay", {
+        duration: 0.5,
+        opacity: 0,
+        onComplete: function () {
+            document.querySelector("#overlay").style.display = "none";
+        }
+    });
+    gsap.to('#skillContainer div', {
+        x: -100,
+        opacity: 0,
+        stagger: 0.015,
+        duration: 0.5,
+        onComplete: function () {
+            document.querySelector("#skillContainer").remove();
+        }
+    });
+    gsap.to('#skillHeadline', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        onComplete: function () {
+            document.querySelector("#skillHeadline").remove();
+        }
+    });
+}
+
+function addResetButton() {
+    let resetButton = document.createElement('button');
+    resetButton.id = "resetButton";
+    resetButton.innerText = "Zurücksetzen";
+    document.querySelector("body").appendChild(resetButton);
+
+    gsap.from('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    setButtonAnimation("#resetButton", resetButton);
+
+    resetButton.addEventListener('click', function() {
+        const confirmation = confirm("Bist du sicher, dass du deinen Fortschritt zurücksetzen willst?");
+        if (confirmation) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    });
+}
+
+function removeResetButton() {
+    document.querySelector('#resetButton').remove();
+    gsap.to('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: function () {
+            document.querySelector('#resetButton').remove();
+        }
+    });
+}
+
+
+skillIcon.addEventListener('click', function () {
+    showSkills(0);
+
+    addResetButton();
+
+    skillIcon.style.display = "none";
+    closeSkills.style.display = "block";
+});
+
+
+closeSkills.addEventListener('click', function () {
+    hideSkills();
+
+    removeResetButton();
+
+    skillIcon.style.display = "block";
+    closeSkills.style.display = "none";
+});
 
 placeSpaceshipOnPath();
 setButtonAnimation("#startButton", startButton);

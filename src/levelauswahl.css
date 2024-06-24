@@ -151,6 +151,21 @@ svg {
     text-align: center;
 }
 
+#resetButton {
+    font-family: "Press Start 2P";
+    position: absolute; /* Ändere die Position auf fixiert */
+    bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+    left: 50%; /* Zentriere den Button horizontal */
+    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    padding: 20px 30px;
+    font-size: 1rem;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 15;
+}
 
 
 .level {
@@ -413,7 +428,7 @@ div.skillValue {
     header img {
         width: 150px;
     }
-    #startButton {
+    #startButton, #resetButton {
         font-size: 1rem;
         position: absolute; /* Ändere die Position auf absolut */
         bottom: 2.5%; /* Platziere den Button 25px über dem unteren Rand */
