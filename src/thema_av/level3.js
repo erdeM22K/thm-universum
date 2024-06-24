@@ -4,6 +4,7 @@ let currentSpeaker = 0;
 let speakerConnected = [false, false];
 const speaker = document.querySelectorAll(".speaker");
 const steckplatz = document.querySelectorAll(".hitbox");
+const copilotImage = document.querySelector('.copilot');
 
 var text1 = "Willkommen im zweiten Level \"Audio\". In diesem Level besteht deine Aufgabe darin, die beiden Lautsprecher an den richtigen Steckplätzen am Mischpult anzuschließen.";
 var text2 = "Klicke dazu zuerst auf den Lautsprecher und anschließend auf den Steckplatz.";
@@ -73,11 +74,13 @@ steckplatz.forEach(function (element) {
                 if (steckplatz[0] === element) {
                     clearText();
                     showNextText(textFehler);
+                    copilotImage.src = '../bilder/copilot_sad.svg';
                 } else if (steckplatz[1] === element) {
                     speakerConnected[0] = true;
                     clearText();
                     testBeideVerbunden();
                     showNextText(textRichtig);
+                    copilotImage.src = '../bilder/copilot_lachen.svg';
                     gsap.to("#SteckerR", {
                         opacity: 1,
                         duration: 0.5,
@@ -93,6 +96,7 @@ steckplatz.forEach(function (element) {
                 } else if (steckplatz[2] === element) {
                     clearText();
                     showNextText(textFehler);
+                    copilotImage.src = '../bilder/copilot_sad.svg';
                 }
                 break;
             case 2:
@@ -100,14 +104,17 @@ steckplatz.forEach(function (element) {
                 if (steckplatz[0] === element) {
                     clearText();
                     showNextText(textFehler);
+                    copilotImage.src = '../bilder/copilot_sad.svg';
                 } else if (steckplatz[1] === element) {
                     clearText();
                     showNextText(textFehler);
+                    copilotImage.src = '../bilder/copilot_sad.svg';
                 } else if (steckplatz[2] === element) {
                     speakerConnected[1] = true;
                     clearText();
                     testBeideVerbunden();
                     showNextText(textRichtig);
+                    copilotImage.src = '../bilder/copilot_lachen.svg';
                     gsap.to("#SteckerL", {
                         opacity: 1,
                         duration: 0.5,
@@ -239,6 +246,7 @@ function testBeideVerbunden() {
     if (speakerConnected[0] && speakerConnected[1]) {
         localStorage.setItem("av_level3_done", 'true');
         textRichtig = "Herzlichen Glückwunsch, du hast es geschafft!";
+        copilotImage.src = '../bilder/copilot_lachen.svg';
     }
 }
 function backPlanet(relativeUrl) {

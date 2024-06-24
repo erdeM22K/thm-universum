@@ -13,6 +13,7 @@ var title_bild4 = "Mediendesign"
 var title_bild5 = "Game Development"
 
 const whiteOverlay = document.querySelector('.white-overlay-start');
+const copilotImage = document.querySelector('.copilot');
 
 gsap.registerPlugin(TextPlugin);
 
@@ -69,6 +70,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             clearText();
             showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
             updateTitleText(title_bild5); // Titeltext aktualisieren
+            copilotImage.src = '../bilder/copilot_lachen.svg';
         }
     });
 });

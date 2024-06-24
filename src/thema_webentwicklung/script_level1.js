@@ -134,6 +134,7 @@ function enableDragAndDrop() {
 
 function checkOrder() {
     const col = document.querySelectorAll('#columns .list-element');
+    const copilotImage = document.querySelector('.copilot');
     // Vordefinierte Reihenfolge
     var expectedOrder = ['<div class="rocket_head"></div>', '<div class="rocket_body"></div>', '<div class="rocket_wings"></div>', '<div class="rocket_engine"></div>'];
 
@@ -147,9 +148,11 @@ function checkOrder() {
     if (isEqual) {
         applyCorrectStyle();
       console.log('Die Reihenfolge stimmt mit der erwarteten Reihenfolge überein.');
+        copilotImage.src = '../bilder/copilot_lachen.svg';
     } else {
         applyInCorrectStyle();
       console.log('Die Reihenfolge stimmt NICHT mit der erwarteten Reihenfolge überein.');
+        copilotImage.src = '../bilder/copilot_sad.svg';
     }
   }
 

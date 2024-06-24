@@ -206,11 +206,11 @@ function checkAnswer(selectedIndex) {
 
 // Funktion zum Anzeigen des Feedbacks
 function displayFeedback(message, isCorrect) {
-    var copilotImg = document.getElementById("copilot");
+    var copilotImage = document.getElementById("copilot");
     if (isCorrect) {
-        copilotImg.src = "../bilder/copilot_sassy.svg";
+        copilotImage.src = "../bilder/copilot_sassy.svg";
     } else {
-        copilotImg.src = "../bilder/copilot_sad.svg";
+        copilotImage.src = "../bilder/copilot_sad.svg";
     }
 
     textAnimation.to("#text", {

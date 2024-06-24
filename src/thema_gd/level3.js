@@ -1,4 +1,5 @@
 const whiteOverlay = document.querySelector('.white-overlay-start');
+const copilotImage = document.querySelector('.copilot');
 var text1 = "Willkommen zum dritten und letzten Level vom Planeten 3D-Grafische Datenverarbeitung. Das Thema dieses Levels sind Animationen. Viel Spaß! :)";
 var text2 = "In diesem Level lernst du die Grundlagen der Animation kennen und erfährst, wie sie in der 3D-Grafik-Datenverarbeitung angewendet werden. Wir werden uns die Techniken Squash & Stretch, Staging, Straight Ahead & Pose-to-Pose und Solid Drawing genauer anschauen. Diese Techniken sind entscheidend, um Bewegungen in animierten Szenen lebendig und überzeugend wirken zu lassen.";
 var text3 = "Straight Ahead & Pose-to-Pose sind zwei Ansätze zur Animationserstellung. Straight Ahead bedeutet, dass eine Szene frame-by-frame von Anfang bis Ende gezeichnet wird, während Pose-to-Pose bedeutet, dass Schlüsselbilder zuerst festgelegt und dann die Zwischenbilder erstellt werden. Jeder Ansatz hat seine Vor- und Nachteile je nach den Anforderungen der Szene und der gewünschten Art der Animation.";
@@ -59,6 +60,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             clearText();
             showNextText(text7, ".bild5"); // Hier Bild 4 einblenden
             updateTitleText(title_bild5); // Titeltext aktualisieren
+            copilotImage.src = '../bilder/copilot_lachen.svg';
         }
     });
 });

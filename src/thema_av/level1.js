@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const slider = document.getElementById('brightness_slider');
     const image = document.getElementById('gamma_picture');
+    const copilotImage = document.querySelector('.copilot');
     const max_slider = slider.max;
 
     // Set slider to a random value between 0 and 200
@@ -24,10 +25,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (sliderValue >= 75 && sliderValue <= 125) {
             clearText();
             showNextText("Sehr gut, deine Eingabe war korrekt :) <br> Über den Pfeil in der oberen linken Ecke gelangst du zurück auf die Startseite!");
+            copilotImage.src = '../bilder/copilot_lachen.svg';
             localStorage.setItem("av_level1_done", 'true');
         } else {
             clearText();
             showNextText("Das sieht noch nicht gut genug aus, du kannst das besser.  <br> Versuch es noch einaml :)!");
+            copilotImage.src = '../bilder/copilot_sad.svg';
         }
     });
 });

@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
+        const copilotImage = document.querySelector('.copilot');
         if (textAnimation.isActive() && textAnimation.progress() < 1) {
             textAnimation.progress(1);
         }
@@ -72,6 +73,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 updateTitleText(title_bildende); // Titeltext aktualisieren
                 console.log("MA Level 3 fertig");
                 localStorage.setItem("ma_level3_done", 'true');
+                copilotImage.src = '../bilder/copilot_lachen.svg';
             }
         }
     });

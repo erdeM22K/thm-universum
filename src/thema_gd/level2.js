@@ -1,4 +1,5 @@
 const whiteOverlay = document.querySelector('.white-overlay-start');
+const copilotImage = document.querySelector('.copilot');
 var text1 = "Einleitung 1";
 var text2 = "Einleitung 2";
 var text3 = "Erklärung zu Shading 1";
@@ -59,6 +60,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             clearText();
             showNextText(text7, ".bild5"); // Hier Bild 4 einblenden
             updateTitleText(title_bild5); // Titeltext aktualisieren
+            copilotImage.src = '../bilder/copilot_lachen.svg';
         }
     });
 });
