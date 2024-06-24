@@ -7,9 +7,16 @@
     <link rel="stylesheet" href="styles.css">
     <title>THM-UNIVERSUM</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
 </head>
+<div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <body id="body">
     <header>
+        <button id="qrbutton" onclick="showQr()">QR</button>
+        <div id="qrcode-container">
+            <div id="qrcode"></div>
+        </div>
         <img id="logo" src="" alt="Logo"/>
         <h2 id="title2"></h2>
         <h1 id="title"></h1>
@@ -21,30 +28,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
     </a>
     <main id="planeten_container">
-        <div class="planet_container" onclick="openPlanet('')">
-            <h1 class="planet_title"></h1>
-            <div class="planet" id="planet1"></div>
-        </div>
-        <div class="planet_container" onclick="openPlanet('')">
-            <h1 class="planet_title"></h1>
-            <div class="planet" id="planet2"></div>
-        </div>   
-        <div class="planet_container" onclick="openPlanet('')">
-            <h1 class="planet_title"></h1>
-            <div class="planet" id="planet3"></div>
-        </div>    
-        <div class="planet_container" onclick="openPlanet('')">
-            <h1 class="planet_title"></h1>
-            <div class="planet" id="planet4"></div>
-        </div>    
-        <div class="planet_container" onclick="openPlanet('')">
-            <h1 class="planet_title"></h1>
-            <div class="planet" id="planet5"></div>
-        </div>    
-        <div class="planet_container" onclick="openPlanet('')">
-            <h1 class="planet_title"></h1>
-            <div class="planet" id="planet6"></div>
-        </div>
+        
     </main>
     <footer>
         <div>
@@ -52,6 +36,9 @@
             <a class="footetext" id="impressum" href="/"></a>
         </div>
     </footer>
+
+    <div class="transition-overlay"></div>
+    <div class="clouds-wrapper"></div>
 
     <div id="overlay"></div>
     <div class="copilot_container">
@@ -62,64 +49,19 @@
         <div id="dots"></div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
     <script src="script.js"></script>
-    <script>
-
-        $(document).ready(function() {
-            $.ajax({
-                type: "GET",
-                url: "data.xml",
-                dataType: "xml",
-                success: function(xml) {
-                    // Body
-                    $('#body').css('background-image', 'url(' + $(xml).find('background').text() + ')');
-
-                    // Header
-                    $('#logo').attr('src', $(xml).find('logo').text());
-                    $('#title2').text($(xml).find('title1').text());
-                    $('#title').text($(xml).find('title2').text());
-
-                    // Planets
-                    $(xml).find('planet').each(function(index) {
-                var id = $(this).attr('id');
-                var title = $(this).find('title').text();
-                var image = $(this).find('image').text();
-                var link = $(this).find('link').text(); // Link aus XML holen
-
-                // Set planet background image
-                $('#planet' + id).css('background-image', 'url(' + image + ')');
-                
-                // Set planet title
-                $('.planet_container:nth-child(' + (index + 1) + ') .planet_title').text(title);
-
-                // Set planet link
-                $('.planet_container:nth-child(' + (index + 1) + ')').click(function() {
-                    openPlanet(link);
-                });
-            });
-
-                    // Footer
-                    $('#copyright').text($(xml).find('links > copyright').text());
-                    $('#impressum').text($(xml).find('links > impressum').text());
-                },
-                error: function() {
-                    console.log("Failed to load XML file.");
-                }
-            });
+    <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 100,
+            height : 100
         });
-
-        function openPlanet(relativeUrl) {
-    // Holen der Basis-URL des aktuellen Dokuments
-    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
-
-    // Verwandeln des relativen Links in einen absoluten Link
-    var absoluteUrl = baseUrl + '/' + relativeUrl;
-
-    console.log('Navigating to: ' + absoluteUrl);
-    window.location.href = absoluteUrl;
-}
-    </script>
+        
+        qrcode.makeCode('www.amazon.de')
+        
+        
+        </script>
+    
 </body>
 </html>
