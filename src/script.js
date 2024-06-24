@@ -802,6 +802,9 @@ const starCount = 200;
                 hideQr();
             }
         });
+
+        
+
         
         // Funktion, um den QR-Code zu verbergen
         function hideQr() {
@@ -816,3 +819,12 @@ const starCount = 200;
                 qrcodeContainer.style.display = 'none';
             }, 150); // Zeit entsprechend der CSS-Transition-Dauer anpassen
         }
+        
+        document.getElementById('qrbutton').addEventListener('mouseenter', function() {
+            showQr();
+            
+        });
+        
+        document.getElementById('qrbutton').addEventListener('mouseleave', function() {
+            hideQr();
+        });
