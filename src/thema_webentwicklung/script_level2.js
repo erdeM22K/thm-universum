@@ -7,28 +7,28 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
         var reflection = document.getElementsByClassName('cls-9')[0];
         var color = document.getElementsByClassName('cls-11')[0];
 
-        if (text === 'red') {
+        if (text === 'red' || text === 'rot') {
             changeColor('.cls-7', '#AA1A1A')
             changeColor('.cls-9', '#E22424')
             changeColor('.cls-11', '#C40808') 
             clearText();
             showNextText(text5);
             showInputField("off");
-        } else if (text === 'blue') {
+        } else if (text === 'blue' || text === 'blau') {
             changeColor('.cls-7', '#4B69E2')
             changeColor('.cls-9', '#8DABFF')
             changeColor('.cls-11', '#5A89FF') 
             clearText();
             showNextText(text5);
             showInputField("off");
-        } else if (text === 'yellow') {
+        } else if (text === 'yellow' || text === 'gelb') {
             changeColor('.cls-7', '#EDD529')
             changeColor('.cls-9', '#FFF86C')
             changeColor('.cls-11', '#FCEB1D') 
             clearText();
             showNextText(text5);
             showInputField("off");
-        } else if (text === 'green') {
+        } else if (text === 'green' || text === 'gruen' || text === 'grün') {
             changeColor('.cls-7', '#47D647')
             changeColor('.cls-9', '#95FF83')
             changeColor('.cls-11', '#4BF752') 

@@ -2,7 +2,7 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
     if (event.key === 'Enter') {  // Überprüfen, ob die Enter-Taste gedrückt wurde
         var text = event.target.value;
 
-        if (text === "startRocket();") {
+        if (text === "startRocket") {
             gsap.to(".rocket_container", {
                 x: 1500,
                 y: -1500,
@@ -17,11 +17,21 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
             clearText();
             showNextText(text5);
             showInputField("off");
+            document.getElementById("semicolon").style.display='none'
+            setTimeout(function() {
+                backPlanet('wpr.html');
+            }, 4000);
         } else {
-            image.src = './bilder/rocket.svg';
+            showInputField("off");
+            document.getElementById("semicolon").style.display='none'
+            clearText();
+            showNextText(text6);
+            clearText();
+            showNextText(text4, "on", "block");
         }
     }
 });
+
 
 function backPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
