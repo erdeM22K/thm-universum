@@ -750,7 +750,8 @@ input[type=number]::-webkit-outer-spin-button {
             
         }
         .planet_title {
-            margin: 15%;
+            margin-top: 8%;
+            margin-bottom: 8%;
             top: 15%;
             font-size: 1.2em;
             text-shadow: 
