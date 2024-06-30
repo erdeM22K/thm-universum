@@ -11,6 +11,8 @@
     <script type="text/javascript" src="./davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
 </head>
 <body id="body">
+    <div class="white-overlay-start"></div>
+<div class="white-overlay"></div>
 <header>
     <a onclick="backPlanet('index.html')" class="back-to-home" title="Zurück zur Startseite" href="../index.html">
         &#8592;
@@ -48,6 +50,17 @@
     /*function openFreepik (){
         window.location.href = "https://de.freepik.com/"
     }*/
+    const whiteOverlayStart = document.querySelector('.white-overlay-start');
+
+    gsap.to(".white-overlay-start", {
+        y: 0,
+        duration: 1,
+        opacity: 0,
+        ease: "power1.inOut",
+        onComplete: () => {
+            whiteOverlayStart.style.display ="none";
+    }
+});
     // GSAP Animationen
     gsap.from('header', { duration: 1, y: '-100vw', ease: 'power2.out' });
 
@@ -55,6 +68,30 @@
     gsap.from('#id1', { duration: 1, opacity: 0, y: '+100px', ease: 'power2.out', delay: 1 });
     gsap.from('#id2', { duration: 1, opacity: 0, y: '+100px', ease: 'power2.out', delay: 1.5 });
     gsap.from('#id3', { duration: 1, opacity: 0, y: '+100px', ease: 'power2.out', delay: 2 });
+
+    function backPlanet(relativeUrl) {
+    // Holen der Basis-URL des aktuellen Dokuments
+    var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+
+    // Verwandeln des relativen Links in einen absoluten Link
+    var absoluteUrl = baseUrl + '/' + relativeUrl;
+    const whiteOverlay = document.querySelector('.white-overlay');
+    
+    whiteOverlay.style.display ="block";
+    
+    // Animation und Weiterleitung
+    gsap.to(".white-overlay", {
+        y: 0,
+        duration: 1.5,
+        opacity: 1,
+        delay: 0.2,
+        ease: "power1.inOut",
+        onComplete: () => {
+            console.log('Navigating to: ' + absoluteUrl);
+            window.location.href = absoluteUrl;
+        }
+    });
+}
 </script>
 
 </body>

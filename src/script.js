@@ -805,7 +805,7 @@ function openPlanet(relativeUrl) {
             console.log('Navigating to: ' + absoluteUrl);
             clouds.style.display ="none";
         }
-    });
+    })
     gsap.to(".white-overlay", {
         y: 0,
         duration: 1.5,
@@ -827,7 +827,7 @@ function openPlanet(relativeUrl) {
             console.log('Navigating to: ' + absoluteUrl);
             window.location.href = absoluteUrl;
         }
-    });
+    }); 
 }
 const starCount = 200;
         const stars = [];
@@ -859,7 +859,7 @@ const starCount = 200;
             createStar();
         }
 
-        animateStars();
+       animateStars(); 
 
         function showQr() {
             var qrcodeContainer = document.getElementById('qrcode-container');
@@ -915,3 +915,11 @@ const starCount = 200;
         document.getElementById('qrbutton').addEventListener('mouseleave', function() {
             hideQr();
         });
+
+        function adjustLayout() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        window.addEventListener('resize', adjustLayout);
+        window.addEventListener('load', adjustLayout);

@@ -1,9 +1,11 @@
-/* Ändert die Farbe der Textauswahl */
-::selection {
-    background: none;
-    color: inherit;
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Nicht präfixierte Versionen */
 }
-
 html, body {
     margin: 0;
     padding: 0;
@@ -214,6 +216,12 @@ body {
 }
 
 @media (max-width: 480px) {
+    .copilot_container {
+        position: relative;
+        left: 35%;
+        top: 25%;
+        z-index: -1;
+    }
     .video_container {
         height: 100%;
         width: 100%;
@@ -221,7 +229,7 @@ body {
     .video_container iframe {
         width: 25em;
         height: 25em;
-        bottom: 20vh;
+        bottom: 10vh;
     }
     .transition-overlay-back {
         display: block;

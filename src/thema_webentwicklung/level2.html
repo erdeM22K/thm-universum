@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
-<div class="transition-overlay-back"></div>
+<body>
+    <div class="transition-overlay-back"></div>
 <div class="white-overlay-start"></div>
 <div class="white-overlay"></div>
-<body>
     <div class="black_transparent">
 
         <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
@@ -240,7 +240,7 @@
         }
         function clearText() {
 
-        gsap.to("#text", {
+            textAnimation.to("#text", {
             duration: 0.5,
             text: "",
             onComplete: function() {

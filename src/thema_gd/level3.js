@@ -166,7 +166,7 @@ function showImage(imageSelector) {
 
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
