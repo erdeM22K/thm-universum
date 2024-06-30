@@ -43,6 +43,11 @@ let spaceship = document.querySelector("#spaceship");
 let start = 0;
 let breakpointLevel = [0.14, 0.36, 0.57, 0.78];
 
+//blockiert das selectstart-Ereignis
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
 function setLastLevelBreakpoint() {
     switch (localStorage.getItem("lastLevel")) {
         case "av1":

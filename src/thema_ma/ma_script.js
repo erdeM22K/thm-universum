@@ -21,7 +21,10 @@ const textAnimation = gsap.timeline();
 const whiteOverlay = document.querySelector('.white-overlay-start');
 
 
-
+//blockiert das selectstart-Ereignis
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
 
 for (let i = 0; i < numberOfIcons; i++) {
     const distance = pathStart + i * iconSpacing;
