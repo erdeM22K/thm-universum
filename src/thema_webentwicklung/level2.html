@@ -125,6 +125,7 @@
         var text3 = "CSS ist wichtig, weil es das Design von der Struktur trennt, die Wartung erleichtert und ansprechende, einheitliche Designs ermöglicht, die sich an verschiedene Geräte anpassen.";
         var text5 = "Farbe Erfolgeich gaendert! Du kannst jetzt zur nächsten Station, Adios.";
         var text4 = "Ändere jetzt die Farbe der Rakete indem du eine Farbe in den CSS Code schreibst.<br> .rocket {color:";
+        var text6 = "Diese Farbe ist zurzeit ausverkauft!";
         const whiteOverlay = document.querySelector('.white-overlay-start');
         const textAnimation = gsap.timeline();
     
@@ -232,6 +233,7 @@
                 text: text,
                 onComplete: function() {
                     showInputField(onComplete);
+                    document.getElementById("semicolon").style.visibility= "visible";
                     document.getElementById("semicolon").style.display=visibility;
                     startDotsAnimation();
                     console.log("Text wird ausgeführt");

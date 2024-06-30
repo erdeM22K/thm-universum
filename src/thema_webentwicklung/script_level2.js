@@ -48,6 +48,15 @@ document.getElementById('textInput').addEventListener('keypress', function(event
             showNextText(text5, "off", "none");
             showInputField("off");
         }
+        else {
+            clearText();
+            document.getElementById("semicolon").style.visibility= "hidden";
+            showNextText(text6, "off", "none");
+            showInputField("off");
+            clearText();
+            showNextText(text4, "on", "block");
+            
+        }
     }
 });
 

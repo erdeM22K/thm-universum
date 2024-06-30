@@ -269,6 +269,7 @@ transition: transform 0.1s ease-in-out;
 #semicolon {
   display: none;
   line-height: 8%;
+  visibility: visible;
 }
 
 .transition-overlay-back {
