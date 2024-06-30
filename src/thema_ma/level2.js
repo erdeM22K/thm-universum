@@ -30,6 +30,11 @@ textAnimation.to("#text", {
     }
 });
 
+//blockiert das selectstart-Ereignis
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
 document.addEventListener('DOMContentLoaded', (event) => {
     startLevel();
     initializeModeSwitching();

@@ -1,3 +1,8 @@
+/* Ändert die Farbe der Textauswahl */
+::selection {
+    background: none;
+    color: inherit;
+}
 
 html, body {
     height: 100%;

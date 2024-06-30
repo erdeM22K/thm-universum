@@ -1,3 +1,9 @@
+/* Ändert die Farbe der Textauswahl */
+::selection {
+    background: none;
+    color: inherit;
+}
+
 html, body {
     margin: 0;
     padding: 0;

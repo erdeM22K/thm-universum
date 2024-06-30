@@ -57,6 +57,11 @@ textAnimation.to("#text", {
     }
 });
 
+//blockiert das selectstart-Ereignis
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
 document.addEventListener('DOMContentLoaded', (event) => {
     startLevel();
 });
@@ -103,8 +108,8 @@ function startLevel() {
         ease: "power1.inOut",
         onComplete: () => {
             whiteOverlay.style.display ="none";
-    }
-});
+        }
+    });
     gsap.to(".black_transparent", {
         duration: 2,
         backgroundColor: "rgba(0, 0, 0, 0.5)", // Endfarbe mit Transparenz
@@ -293,34 +298,34 @@ function backPlanet(relativeUrl) {
 }
 
 const starCount = 200;
-        const stars = [];
+const stars = [];
 
-        function createStar() {
-            const star = document.createElement('div');
-            star.classList.add('star');
+function createStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.top = -10 + 'px';
+    star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
+    document.body.appendChild(star);
+    stars.push(star);
+}
+
+function animateStars() {
+    stars.forEach(star => {
+        const top = parseFloat(star.style.top);
+        if (top > window.innerHeight) {
+            star.style.top = -100 + 'px';
             star.style.left = Math.random() * window.innerWidth + 'px';
-            star.style.top = -10 + 'px';
-            star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
-            document.body.appendChild(star);
-            stars.push(star);
+            star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
+        } else {
+            star.style.top = top + star.speed + 'px';
         }
+    });
+    requestAnimationFrame(animateStars);
+}
 
-        function animateStars() {
-            stars.forEach(star => {
-                const top = parseFloat(star.style.top);
-                if (top > window.innerHeight) {
-                    star.style.top = -100 + 'px';
-                    star.style.left = Math.random() * window.innerWidth + 'px';
-                    star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
-                } else {
-                    star.style.top = top + star.speed + 'px';
-                }
-            });
-            requestAnimationFrame(animateStars);
-        }
+for (let i = 0; i < starCount; i++) {
+    createStar();
+}
 
-        for (let i = 0; i < starCount; i++) {
-            createStar();
-        }
-
-        animateStars();
+animateStars();
