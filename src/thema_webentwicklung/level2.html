@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
-<div class="transition-overlay-back"></div>
+<body>
+    <div class="transition-overlay-back"></div>
 <div class="white-overlay-start"></div>
 <div class="white-overlay"></div>
-<body>
     <div class="black_transparent">
 
         <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
@@ -120,7 +120,7 @@
     <script src="script_level2.js"></script>
 
     <script>
-        var text1 = "Willkommen im auf der CSS Station! Hier kannst du deine Rakete richtig aufmotzen.";
+        var text1 = "Willkommen auf der CSS Station! Hier kannst du deine Rakete richtig aufmotzen.";
         var text2 = "CSS (Cascading Style Sheets) ist eine Sprache zur Gestaltung von Webseiten. Es bestimmt Farben, Schriftarten, Abstände und Layouts, während HTML den Inhalt definiert.";
         var text3 = "CSS ist wichtig, weil es das Design von der Struktur trennt, die Wartung erleichtert und ansprechende, einheitliche Designs ermöglicht, die sich an verschiedene Geräte anpassen.";
         var text5 = "Farbe Erfolgeich gaendert! Du kannst jetzt zur nächsten Station, Adios.";
@@ -131,6 +131,7 @@
         gsap.registerPlugin(TextPlugin);
 
         document.addEventListener('DOMContentLoaded', (event) => {
+            localStorage.setItem("lastLevel", "wpr2");
             startLevel();
         });
     
@@ -169,6 +170,8 @@
                 clearText();
                 showNextText(text5, "off", "none");
                 killDotsAnimation();
+            } else if (textElement.innerText === text5) {
+                backPlanet("wpr.html");
             }
             console.log(textAnimation.progress() + "progress");
         }
@@ -220,13 +223,16 @@
     
         // Funktion zum Anzeigen des nächsten Textes
         function showNextText(text, onComplete, visibility) {
+            if (text === text5) {
+                document.getElementById("semicolon").style.display=visibility;
+            }
             textAnimation.to("#text", {
                 duration: 3,
                 delay: 1,
                 text: text,
                 onComplete: function() {
                     showInputField(onComplete);
-                    document.getElementById("semicolon").style.display=visibility
+                    document.getElementById("semicolon").style.display=visibility;
                     startDotsAnimation();
                     console.log("Text wird ausgeführt");
                 }
@@ -234,7 +240,7 @@
         }
         function clearText() {
 
-        gsap.to("#text", {
+            textAnimation.to("#text", {
             duration: 0.5,
             text: "",
             onComplete: function() {
@@ -245,18 +251,24 @@
         document.getElementById("dots").style.display = "none";
     }
 
-    function startDotsAnimation(string) {
-
-document.getElementById("dots").style.display = "block";
-gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
-gsap.to("#dots", {
-    duration: 2,
-    text: "...>",
-    onComplete: function() {
-        console.log("Textfeld geleert");
+    function startDotsAnimation(lastText) {
+        if (document.getElementById("text").innerText === lastText) {
+            document.getElementById("dots").style.display = "none";
+        } else {
+            document.getElementById("dots").style.display = "block";
+            document.getElementById("dots").innerText = "...>"
+            gsap.to("#dots", {
+                duration: 1,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut",
+                x: "+=10",
+                onComplete: function() {
+                    console.log("Textfeld geleert");
+                }
+            });
+        }
     }
-});
-}
     function killDotsAnimation() {
         document.getElementById("dots").style.visibility = "hidden";
     }

@@ -12,9 +12,9 @@ let closeSkills = document.querySelector("#close");
 let currentLevel = 0;
 const levels = ["HTML", "CSS", "JavaScript"];
 let startText = "Wir landen auf dem Planeten der Webprogrammierung. Hier kannst du die Stationen \"HTML\", \"CSS\" und \"Javascript\" besuchen.";
-let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Mobilen Anwendungen abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
-let finishText2 = "Als <i>App-Entwickler</i> kannst du innovative mobile Anwendungen für iOS und Android entwickeln. Als <i>Softwareentwickler</i> stehen dir allgemeinere Softwareprojekte offen, während du als <i>UX/UI Designer</i> an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces arbeitest.";
-let finishText3 = "Bei der Erkundung des Planeten hast du die erste Koordinate des Gamedevelopment-Planetens gefunden: 7.";
+let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Webentwicklung abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
+let finishText2 = "Als <i>Webentwickler</i> kannst du innovative Websites und Webanwendungen erstellen, die sowohl funktional als auch ansprechend sind. Als <i>Frontend-Entwickler</i> fokussierst du dich auf die Gestaltung und Umsetzung der Benutzeroberfläche, während du als <i>Backend-Entwickler</i> die serverseitige Logik und Datenbankanbindungen verwaltest.";
+let finishText3 = "Bei der Erkundung des Planeten hast du die erste Koordinate des Gamedevelopment-Planetens gefunden: 6.";
 let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
 let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
@@ -192,13 +192,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
-            onComplete: function() {
-
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
+            onComplete: function () {
                 console.log("Textfeld geleert");
             }
         });
@@ -218,6 +219,7 @@ function allPlanetsDone() {
     let anzahlModuleDone = 0;
     for (let i = 0; i < anzahlModule; i++) {
         if (localStorage.getItem("module" + i + "_done")) {
+            console.log("module" + i + "_done");
             anzahlModuleDone++;
         }
     }
@@ -233,7 +235,7 @@ function showSkills(delay) {
     let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
     let levelAnzahl = [3, 4, 3, 3, 3, 1];
     let levelAnzahlGesamt = 0;
-    for (let i = 0; i < levelAnzahl.length; i++) {
+    for (let i = 0; i < levelAnzahl.length - 1; i++) {
         levelAnzahlGesamt += levelAnzahl[i];
     }
     let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
@@ -332,16 +334,58 @@ function hideSkills() {
     });
 }
 
-setLastLevelBreakpoint()
+function addResetButton() {
+    let resetButton = document.createElement('button');
+    resetButton.id = "resetButton";
+    resetButton.innerText = "Zurücksetzen";
+    document.querySelector("body").appendChild(resetButton);
+
+    gsap.from('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    setButtonAnimation("#resetButton", resetButton);
+
+    resetButton.addEventListener('click', function() {
+        const confirmation = confirm("Bist du sicher, dass du deinen Fortschritt zurücksetzen willst?");
+        if (confirmation) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    });
+}
+
+function removeResetButton() {
+    document.querySelector('#resetButton').remove();
+    gsap.to('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: function () {
+            document.querySelector('#resetButton').remove();
+        }
+    });
+}
+
 
 skillIcon.addEventListener('click', function () {
     showSkills(0);
+
+    addResetButton();
+
     skillIcon.style.display = "none";
     closeSkills.style.display = "block";
 });
 
 closeSkills.addEventListener('click', function () {
     hideSkills();
+
+    removeResetButton();
+
     skillIcon.style.display = "block";
     closeSkills.style.display = "none";
 });
@@ -384,7 +428,6 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 }
                 if (textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
                     hideSkills();
-                    localStorage.setItem('module0_done', 'true');
                 }
             } else if (textElement.innerHTML === finishText1) {
                 clearText();
@@ -394,6 +437,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 showNextText(finishText3);
             } else if (textElement.innerHTML === finishText3) {
                 clearText();
+                localStorage.setItem('module0_done', 'true');
                 if (allPlanetsDone()) {
                     showNextText(allPlanetsDoneText);
                 } else {
@@ -404,6 +448,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
     });
 });
 
+setLastLevelBreakpoint();
 placeSpaceshipOnPath();
 setButtonAnimation("#startButton", startButton);
 

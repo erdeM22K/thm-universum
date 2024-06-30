@@ -1,12 +1,22 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Nicht präfixierte Versionen */
+}
 body, html {
-    padding: 0;
+    height: 100%;
+    width: 100%;
     margin: 0;
+    padding: 0;
+    overflow: hidden;
     font-family: "Press Start 2P";
-    position: relative; /* Ändere die Position auf relativ */
 }
 
 body {
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     background-image: url("bilder/background.jpg");
     background-size: cover;
@@ -151,6 +161,21 @@ svg {
     text-align: center;
 }
 
+#resetButton {
+    font-family: "Press Start 2P";
+    position: absolute; /* Ändere die Position auf fixiert */
+    bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+    left: 50%; /* Zentriere den Button horizontal */
+    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    padding: 20px 30px;
+    font-size: 1rem;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 15;
+}
 
 
 .level {
@@ -246,7 +271,7 @@ div#skillContainer {
     left: 25%;
     width: 50%;
     height: 40%;
-    z-index: 10; /* Über allen anderen Inhalten */
+    z-index: 8; /* Über allen anderen Inhalten */
     color: white;
     display: grid;
     grid-template-columns: 60% 40%;
@@ -396,8 +421,6 @@ div.skillValue {
     /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
     body {
         height: 100vh;
-        overflow: hidden;
-        touch-action: none;
     }
     header h1 {
         text-align: center;
@@ -413,10 +436,10 @@ div.skillValue {
     header img {
         width: 150px;
     }
-    #startButton {
+    #startButton, #resetButton {
         font-size: 1rem;
         position: absolute; /* Ändere die Position auf absolut */
-        bottom: 2.5%; /* Platziere den Button 25px über dem unteren Rand */
+        bottom: 1%; /* Platziere den Button 25px über dem unteren Rand */
         transform-origin: center center;
         left: 50%; /* Zentriere den Button horizontal */
         transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
@@ -430,6 +453,7 @@ div.skillValue {
     .copilot {
         height: 40vh;
         width: 40vh;
+
     }
     .copilot_container {
         right: -25%;
@@ -438,7 +462,6 @@ div.skillValue {
     .textfeld {
         left:0%;
         width: 100%;
-
     }
     #text {
         margin-right: 0;
@@ -455,7 +478,7 @@ div.skillValue {
         top: 25%;
         width: 80%;
         height: 40%;
-        z-index: 10; /* Über allen anderen Inhalten */
+        z-index: 5; /* Über allen anderen Inhalten */
         color: white;
         display: flex;
         flex-direction: column;
@@ -533,7 +556,7 @@ div.skillValue {
     } 
     
     .cloud {
-        display: block;
+        display: none;
         animation: kaboom 0.4s ease alternate infinite;
         transform-origin: center center;
         opacity: 0.9;
@@ -572,4 +595,16 @@ div.skillValue {
         opacity: 1;
       
       }
+    #skillbars {
+        left: 80%;
+        font-size: 4vh;
+        width:50px;
+        height: 50px;
+    }
+
+    .menu#close {
+        left: 85%;
+    }
+
+      
 }

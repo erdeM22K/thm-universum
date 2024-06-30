@@ -1,9 +1,18 @@
 
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Nicht präfixierte Versionen */
+}
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+    -webkit-overflow-scrolling: touch;
     overflow: hidden;
     font-family: "Press Start 2P";
 }
@@ -24,22 +33,17 @@ main {
     z-index: -1;
     transition: transform 0.3s ease;
   }
-
   #qrbutton {
     font-family: "Press Start 2P";
     color: white;
-    font-size: 36px;
-    width: 40px;
-    height: 35px;
-    position: absolute;
-    margin: 15px;
-    top: 0%;
-    left: 2%;
+    font-size: 37px;
     z-index: 5 ;
     background-color: #ffffff00;
     border-style: none;
     cursor: pointer;
+    left: 6%;
   }
+
   #qrbutton:hover {
     color: #80ba24;
   }
@@ -424,6 +428,7 @@ div.skillValue {
     color: white;
     z-index: 20;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 #coordinateWindow button {
@@ -434,10 +439,12 @@ div.skillValue {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    overflow: hidden;
 }
 
 #coordinateWindow h1 {
     margin: 0;
+    overflow: hidden;
 }
 
 #coordinateContainer {
@@ -446,6 +453,7 @@ div.skillValue {
     flex-wrap: nowrap;
     gap: 0.5rem;
     margin: 2em 0;
+    overflow: hidden;
 }
 
 .coordinateInput {
@@ -459,6 +467,23 @@ div.skillValue {
     border-bottom:  2px solid white;
     background-color: transparent; /* Hintergrundfarbe transparent setzen */
     /* Weitere Stile nach Bedarf anpassen */
+    overflow: hidden;
+}
+
+#resetButton {
+    font-family: "Press Start 2P";
+    position: absolute; /* Ändere die Position auf fixiert */
+    bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+    left: 50%; /* Zentriere den Button horizontal */
+    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    padding: 20px 30px;
+    font-size: 1rem;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 15;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -493,6 +518,11 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 @media (min-width: 481px) {
+    #qrbutton {
+        left: 1%;
+        top:0%;
+      }
+
     #planeten_container {
         display: flex;
         flex-direction: row;
@@ -566,10 +596,13 @@ input[type=number]::-webkit-outer-spin-button {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        -webkit-overflow-scrolling: touch;
+  overflow: hidden;
     }
     header {
         margin:0;
         padding: 0;
+        overflow: hidden;
     }
     header #title {
         margin-top: 0.5em;
@@ -636,9 +669,9 @@ input[type=number]::-webkit-outer-spin-button {
         font-size: 1.5rem;
     }
     body {
-        position: fixed;
         height: 100vh;
         background-repeat: no-repeat;
+        -webkit-overflow-scrolling: touch;
         overflow: hidden;
 
         }
@@ -744,15 +777,17 @@ line-height: 8vw;
         padding: 5em 2em;
         background-color: #1d1d1b;
         color: white;
-        z-index: 20;
+        z-index: 10;
         border-radius: 10px;
+        overflow: hidden;
     }
 
     #coordinateHeadline {
         font-size: 1.7em;
+        overflow: hidden;
     }
     .transition-overlay {
-            display: block;
+            display: none;
             background-image: url(./bilder/rocket.svg);
             width: 85vh;
             height: 85vh;
@@ -785,7 +820,7 @@ line-height: 8vw;
         }
         
         .cloud {
-            display: block;
+            display: none;
             animation: kaboom 0.4s ease alternate infinite;
             transform-origin: center center;
             opacity: 0.9;
@@ -826,13 +861,13 @@ line-height: 8vw;
           }
           footer {
             width: 100%;
-            height: 3%; /* Adjust height as needed */
+            height: 4%; /* Adjust height as needed */
             display: flex;
             align-items: center;
             justify-content: center;
             color: rgb(255, 255, 255); /* Optional: text color */
             position: absolute;
-            top: 97.5%;
+            top: 96%;
             left: 0%;
             background-color: rgba(255, 255, 255, 0.507);
         }
@@ -876,20 +911,6 @@ line-height: 8vw;
             transition: transform 0.3s ease;
           }
 
-          #qrbutton {
-            font-family: "Press Start 2P";
-            color: white;
-            font-size: 36px;
-            width: 40px;
-            height: 35px;
-            position: absolute;
-            margin: 15px;
-            top: 0%;
-            left: 2%;
-            z-index: 5 ;
-            background-color: #ffffff00;
-            border-style: none;
-          }
           #qrbutton:hover {
             color: #80ba24;
           }
@@ -905,6 +926,7 @@ line-height: 8vw;
             justify-content: center;
             align-items: center;
         }
+        
 
     }
 

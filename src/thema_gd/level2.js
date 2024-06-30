@@ -1,23 +1,28 @@
 const whiteOverlay = document.querySelector('.white-overlay-start');
-var text1 = "Einleitung 1";
-var text2 = "Einleitung 2";
-var text3 = "Erklärung zu Shading 1";
-var text4 = "Erklärung zu Shading 2";
-var text5 = "Erklärung zu Shading 3";
-var text6 = "Erklärung zu Shading 4";
-var text7 = "Du bist am Ende des Levels angekommen. Über den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite";
+var text1 = "Willkommen im Bereich Shading der Grafischen Datenverarbeitung! Während des Studiums lernst du, wie du digitalen Objekten ein realistisches Aussehen verleihst.";
+var text2 = "Shading spielt dabei eine zentrale Rolle, indem es festlegt, wie die Oberfläche des Modells auf Licht reagiert. Dadurch wird das Modell erst lebendig und authentisch.";
+var text3 = "Lass mich dir schrittweise zeigen, wie das funktioniert."
+var text4 = "Fangen wir mit einem rohen 3D-Modell an. Dieses besitzt zu Beginn keine detaillierten Oberflächeneigenschaften oder Materialien, weshalb die Oberfläche grau ist.";
+var text5 = "Im nächsten Schritt erstellen wir Materialien, die Informationen über die Farbe, Textur, Glanz und Lichtdurchlässigkeit enthalten. Diese weisen wir dem Modell zu und definieren so seine Oberflächeneigenschaften.";
+var text6 = "Bevor wir das Modell mit seinen Oberflächeneigenschaften sehen können, müssen wir noch Lichtquellen einrichten, um es zu beleuchten.";
+var text7 = "Im letzten Schritt berechnet ein Shader, wie die Oberfläche die Lichtstrahlen reflektiert und erzeugt daraus ein fertiges Bild.";
+var text8 = "Du bist am Ende des Levels angekommen. Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du zurück zur Levelauswahl.";
 
-var title_bild1 = "Shading 1";
-var title_bild2 = "Shading 2";
-var title_bild3 = "Shading 3";
-var title_bild4 = "Shading 4";
+var title_bild1 = "Modell";
+var title_bild2 = "Shading";
+var title_bild3 = "Beleuchtung";
+var title_bild4 = "Final Render";
 var title_bild5 = "Vielen Dank!";
+
+const textAnimation = gsap.timeline();
 
 
 gsap.registerPlugin(TextPlugin);
 
+localStorage.setItem("lastLevel", "gd2");
+
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -36,29 +41,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3, ".bild1");
-            updateTitleText(title_bild1)
-        } else if (textElement.innerText === text3) {
-            clearText();
-            showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
-            updateTitleText(title_bild2); // Titeltext aktualisieren
-        } else if (textElement.innerText === text4) {
-            clearText();
-            showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild3); // Titeltext aktualisieren
-        } else if (textElement.innerText === text5) {
-            clearText();
-            showNextText(text6, ".bild4"); // Hier Bild 3 einblenden
-            updateTitleText(title_bild4); // Titeltext aktualisieren
-        } else if (textElement.innerText === text6) {
-            clearText();
-            showNextText(text7, ".bild5"); // Hier Bild 4 einblenden
-            updateTitleText(title_bild5); // Titeltext aktualisieren
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        } else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3);
+            } else if (textElement.innerText === text3) {
+                clearText();
+                showNextText(text4, ".bild1");
+                updateTitleText(title_bild1)
+            } else if (textElement.innerText === text4) {
+                clearText();
+                showNextText(text5, ".bild2"); // Hier Bild 1 einblenden
+                updateTitleText(title_bild2); // Titeltext aktualisieren
+            } else if (textElement.innerText === text5) {
+                clearText();
+                showNextText(text6, ".bild3"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild3); // Titeltext aktualisieren
+            } else if (textElement.innerText === text6) {
+                console.log("Text6 geklickt");
+                clearText();
+                showNextText(text7, ".bild4"); // Hier Bild 3 einblenden
+                updateTitleText(title_bild4); // Titeltext aktualisieren
+            } else if (textElement.innerText === text7) {
+                localStorage.setItem("gd_level2_done", "true");
+                clearText();
+                showNextText(text8); // Hier Bild 4 einblenden
+                updateTitleText(title_bild5); // Titeltext aktualisieren
+            } else if (textElement.innerText === text8) {
+                backPlanet("gd.html");
+            }
         }
     });
 });
@@ -125,12 +141,12 @@ function startLevel() {
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text, imageSelector) {
     // Zuerst das Text-Element aktualisieren
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3); // Hier entsprechenden letzten Text übergeben
+            startDotsAnimation(); // Hier entsprechenden letzten Text übergeben
             console.log("Text wird ausgeführt");
         }
     });
@@ -150,7 +166,7 @@ function showImage(imageSelector) {
 
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -165,13 +181,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });

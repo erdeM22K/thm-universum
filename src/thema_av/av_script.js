@@ -11,10 +11,10 @@ const levels = ["Licht", "Kamera", "Audio", "Editing"];
 let currentLevel = 0;
 let skillIcon = document.querySelector("#skillbars");
 let closeSkills = document.querySelector("#close");
-let startText = "Wir landen auf dem Planeten der Audiovisuellen Medien. Hier kannst du die Stationen \"Licht\", \"Kamera\", \"Audio\" und \"Editing\" besuchen.";
-let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Mobilen Anwendungen abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
-let finishText2 = "Als <i>App-Entwickler</i> kannst du innovative mobile Anwendungen für iOS und Android entwickeln. Als <i>Softwareentwickler</i> stehen dir allgemeinere Softwareprojekte offen, während du als <i>UX/UI Designer</i> an der Gestaltung benutzerfreundlicher und ästhetischer Interfaces arbeitest.";
-let finishText3 = "Bei der Erkundung des Planeten hast du die zweite Koordinate des Gamedevelopment-Planetens gefunden: 3.";
+let startText = "Wir landen auf dem Planeten der Audiovisuellen Medien. Hier kannst du die Stationen \"Licht\", \"Kamera\", \"Audio\" und \"Schnitt\" besuchen.";
+let finishText1 = "Herzlichen Glückwunsch, du hast alle Level der Audiovisuellen Medien abgeschlossen. Mit den Kenntnissen, die du während des Studiums sammelst, kannst du eine Vielzahl spannender beruflicher Wege einschlagen.";
+let finishText2 = "Als <i>Regisseur</i> kannst du kreative Visionen zum Leben erwecken und Film- und Fernsehproduktionen leiten. Als <i>Kameramann</i> hast du die Möglichkeit, beeindruckende visuelle Inhalte durch sorgfältige Bildgestaltung zu schaffen, während du als <i>Tontechniker</i> die auditive Atmosphäre und Klangqualität deiner Produktionen sicherstellst und als <i>Schnitttechniker</i> kannst du die Rohaufnahmen zu einer packenden Erzählung formen.";
+let finishText3 = "Bei der Erkundung des Planeten hast du die zweite Koordinate des Gamedevelopment-Planetens gefunden: 1.";
 let finishText4 = "Gehe zurück zur Startseite, um weitere Planeten des Medieninformatik-Universums zu erforschen.";
 let allPlanetsDoneText = "Wir haben alle Koordinaten erfolgreich gefunden! Unser Raumschiff ist bereit, zum Planeten des Gamedevelopments zu reisen.";
 const textAnimation = gsap.timeline();
@@ -198,13 +198,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });
@@ -239,7 +240,7 @@ function showSkills(delay) {
     let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
     let levelAnzahl = [3, 4, 3, 3, 3, 1];
     let levelAnzahlGesamt = 0;
-    for (let i = 0; i < levelAnzahl.length; i++) {
+    for (let i = 0; i < levelAnzahl.length - 1; i++) {
         levelAnzahlGesamt += levelAnzahl[i];
     }
     let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
@@ -340,14 +341,58 @@ function hideSkills() {
 
 setLastLevelBreakpoint()
 
+function addResetButton() {
+    let resetButton = document.createElement('button');
+    resetButton.id = "resetButton";
+    resetButton.innerText = "Zurücksetzen";
+    document.querySelector("body").appendChild(resetButton);
+
+    gsap.from('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    setButtonAnimation("#resetButton", resetButton);
+
+    resetButton.addEventListener('click', function() {
+        const confirmation = confirm("Bist du sicher, dass du deinen Fortschritt zurücksetzen willst?");
+        if (confirmation) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    });
+}
+
+function removeResetButton() {
+    document.querySelector('#resetButton').remove();
+    gsap.to('#resetButton', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: function () {
+            document.querySelector('#resetButton').remove();
+        }
+    });
+}
+
+
 skillIcon.addEventListener('click', function () {
     showSkills(0);
+
+    addResetButton();
+
     skillIcon.style.display = "none";
     closeSkills.style.display = "block";
 });
 
 closeSkills.addEventListener('click', function () {
     hideSkills();
+
+    removeResetButton();
+
     skillIcon.style.display = "block";
     closeSkills.style.display = "none";
 });
@@ -379,7 +424,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                     }
                 });
                 if (textElement.innerHTML === startText) {
-                    localStorage.setItem('wpr_visited', 'true');
+                    localStorage.setItem('av_visited', 'true');
                     gsap.to("#overlay", {
                         duration: 0.5,
                         opacity: 0,
@@ -390,7 +435,6 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 }
                 if (textElement.innerHTML === finishText4 || textElement.innerHTML === allPlanetsDoneText) {
                     hideSkills();
-                    localStorage.setItem('module0_done', 'true');
                 }
             } else if (textElement.innerHTML === finishText1) {
                 clearText();
@@ -400,6 +444,7 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 showNextText(finishText3);
             } else if (textElement.innerHTML === finishText3) {
                 clearText();
+                localStorage.setItem('module1_done', 'true');
                 if (allPlanetsDone()) {
                     showNextText(allPlanetsDoneText);
                 } else {

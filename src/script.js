@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let skillIcon = document.querySelector("#skillbars");
     let closeSkills = document.querySelector("#close");
     const text1 = "Willkommen an Bord unseres Raumschiffs, Entdecker des Medieninformatik-Universums! Ich bin dein Copilot und freue mich, dich auf dieser spannenden Reise zu begleiten. Gemeinsam werden wir die vielfältigen Welten der Medieninformatik erkunden.";
-    const text2 = "Jeder Planet in diesem Universum repräsentiert einen einzigartigen Bereich der Medieninformatik, den es zu erkunden gilt. Mehr zu dem jeweiligen Bereich erzähle ich dir, wenn wir zu dem Planeten fliegen.";
+    const text2 = "Jeder Planet in diesem Universum repräsentiert einen einzigartigen Bereich der Medieninformatik, den es zu erkunden gilt. Mehr zu dem jeweiligen Bereich erzähle ich dir auf den Planeten.";
     const text3 = "Oh, ein Fehler im Raumschiff hat die Koordinaten zum Planeten des Gamedevelopments gelöscht... Wir müssen wohl erst die anderen Planeten bereisen, um die benötigten Koordinaten wiederzufinden."
     const text4 = "Bist du bereit? Setze dich ans Steuer, aktiviere die Antriebe und lass uns gemeinsam die unendlichen Möglichkeiten der Medieninformatik erkunden!";
+    const text5 = "Herzlichen Glückwunsch, du hast das gesamte Medieninformatik-Universum erkundet! :) Ich muss leider schon dem nächsten Entdecker helfen, aber schau dich gern noch etwas um und bis bald!"
     const textAnimation = gsap.timeline();
     const whiteOverlayStart = document.querySelector('.white-overlay-start');
 
@@ -102,13 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("dots").style.display = "none";
         } else {
             document.getElementById("dots").style.display = "block";
-            gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+            document.getElementById("dots").innerText = "...>"
             gsap.to("#dots", {
-                duration: 2,
+                duration: 1,
                 repeat: -1,
-                text: "...",
+                yoyo: true,
+                ease: "power1.inOut",
+                x: "+=10",
                 onComplete: function() {
-
                     console.log("Textfeld geleert");
                 }
             });
@@ -155,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
         let levelAnzahl = [3, 4, 3, 3, 3, 1];
         let levelAnzahlGesamt = 0;
-        for (let i = 0; i < levelAnzahl.length; i++) {
+        for (let i = 0; i < levelAnzahl.length - 1; i++) {
             levelAnzahlGesamt += levelAnzahl[i];
         }
         let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
@@ -227,35 +229,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function setButtonAnimation(id, button) {
-        button.addEventListener("mouseenter", function () {
-            gsap.to(id, {
-                backgroundColor: "#f1f1f1",
-                duration: 0.2,
-                color: "#80ba24",
-            });
-            gsap.to(id, {
-                delay: 0.2,
-                backgroundColor: "#80ba24",
-                duration: 0.2,
-                color: "#f1f1f1",
-            });
-            gsap.to(id, {
-                scale: 1.05,
-                transformOrigin: "center center",
-                duration: 0.2,
-            });
-        });
-
-        button.addEventListener("mouseleave", function () {
-            gsap.to(id, {
-                scale: 1,
-                transformOrigin: "center center",
-                duration: 0.2,
-            });
-        });
-    }
-
     function hideSkills() {
         gsap.to("#overlay", {
             duration: 0.5,
@@ -279,172 +252,6 @@ document.addEventListener('DOMContentLoaded', function () {
             duration: 0.5,
             onComplete: function () {
                 document.querySelector("#skillHeadline").remove();
-            }
-        });
-    }
-
-    function showCoordinateInput() {
-        console.log("Koordinaten Hallo");
-        const coordinates = [7, 3, 9, 4, 2];
-        const coordinateWindow = document.createElement('div');
-        const anzahlKoordinaten = 5;
-        coordinateWindow.id = "coordinateWindow";
-        document.querySelector("body").appendChild(coordinateWindow);
-
-        const coordinateHeadline = document.createElement('h1');
-        coordinateHeadline.id = "coordinateHeadline";
-        coordinateHeadline.innerHTML = "Koordinaten";
-        coordinateWindow.appendChild(coordinateHeadline);
-
-        const coordinateContainer = document.createElement('div');
-        coordinateContainer.id = "coordinateContainer";
-        coordinateWindow.appendChild(coordinateContainer);
-
-        for (let i = 0; i < anzahlKoordinaten; i++) {
-            let coordinateInput = document.createElement('input');
-            coordinateInput.className = "coordinateInput";
-            coordinateInput.maxLength = 1;
-            coordinateInput.type = "number";
-            coordinateInput.pattern = "[0-9]";
-            if (localStorage.getItem("module" + i + "_done")) {
-                coordinateInput.value = coordinates[i];
-            }
-            coordinateContainer.appendChild(coordinateInput);
-        }
-
-        let coordinateInputs = document.querySelectorAll('.coordinateInput');
-
-        coordinateInputs.forEach((input, index) => {
-            input.addEventListener('input', function(ev) {
-                // Begrenze die Eingabe auf eine Ziffer
-                if (this.value.length > 1) {
-                    this.value = this.value.slice(0, 1);
-                }
-                if (index < coordinateInputs.length - 1 && !ev.inputType.includes('deleteContent')) {
-                    coordinateInputs[index + 1].focus();
-                }
-            });
-
-            input.addEventListener('keydown', function(event) {
-                if (event.key === 'ArrowLeft') {
-                    event.preventDefault();
-                    if (index > 0) {
-                        coordinateInputs[index - 1].focus();
-                    }
-                }
-
-                if (event.key === 'ArrowRight') {
-                    event.preventDefault();
-                    if (index < coordinateInputs.length - 1) {
-                        coordinateInputs[index + 1].focus();
-                    }
-                }
-            });
-        });
-
-
-
-        const coordinateSubmit = document.createElement('button');
-        coordinateSubmit.id = "coordinateSubmit";
-        coordinateSubmit.innerHTML = "Prüfen";
-        coordinateWindow.appendChild(coordinateSubmit);
-        setButtonAnimation("#coordinateSubmit", coordinateSubmit);
-
-        coordinateSubmit.addEventListener('click', function () {
-            let coordinateConfirmations = 0;
-            for (let i = 0; i < coordinates.length; i++) {
-                if (coordinates[i] == coordinateInputs[i].value) {
-                    coordinateConfirmations++;
-                }
-            }
-            if (coordinateConfirmations === coordinates.length) {
-                gsap.to(".coordinateInput", {
-                    color: "#80ba24",
-                    borderColor: "#80ba24",
-                    duration: 0.2,
-                    ease: "power2.out",
-                    stagger: 0.1,
-                    onComplete: function (){
-                        gsap.to("#coordinateContainer", {
-                            scale: 1.1,
-                            duration: 0.2,
-                            ease: "power2.out",
-                        })
-                        gsap.to("#coordinateContainer", {
-                            scale: 1,
-                            delay: 0.2,
-                            duration: 0.2,
-                            ease: "power2.out",
-                            onComplete: function () {
-                                window.location.href = "thema_gamedev/level1.html";
-                            }
-                        })
-                    }
-                });
-            }
-            else {
-                gsap.to("#coordinateSubmit", {
-                   backgroundColor: "red",
-                   duration: 0.2,
-                    ease: "power2.out",
-                });
-                gsap.to("#coordinateSubmit", {
-                    transform: "rotate(5deg)",
-                    duration: 0.1,
-                    ease: "power2.out",
-                });
-                gsap.to("#coordinateSubmit", {
-                    transform: "rotate(-5deg)",
-                    duration: 0.1,
-                    ease: "power2.out",
-                    delay: 0.1
-                });
-                gsap.to("#coordinateSubmit", {
-                    transform: "rotate(0)",
-                    duration: 0.1,
-                    ease: "power2.out",
-                    delay: 0.2
-                });
-                gsap.to("#coordinateSubmit", {
-                    backgroundColor: "#80ba24",
-                    duration: 0.1,
-                    delay: 0.5,
-                    ease: "power2.out",
-                });
-            }
-        });
-
-        document.querySelector("#overlay").addEventListener('click', function () {
-           hideCoordinateInput();
-        });
-
-        const coordinateClose = document.createElement('a');
-        coordinateClose.className = "menu";
-        coordinateClose.id = "coordinateClose";
-        coordinateClose.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 384 512\"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z\"/></svg>";
-        coordinateWindow.appendChild(coordinateClose);
-
-        coordinateClose.addEventListener('click', function () {
-           hideCoordinateInput();
-        });
-
-        document.querySelector("#overlay").style.display = "block";
-
-        gsap.from('#coordinateWindow', {
-            y: -50,
-            opacity: 0,
-            duration: 0.5
-        });
-    }
-
-    function hideCoordinateInput() {
-        gsap.to('#coordinateWindow', {
-            y: -50,
-            opacity: 0,
-            duration: 0.5,
-            onComplete: function () {
-                document.querySelector("#coordinateWindow").remove();
-                document.querySelector("#overlay").style.display = "none";
             }
         });
     }
@@ -479,6 +286,23 @@ document.addEventListener('DOMContentLoaded', function () {
             duration: 3,
             delay: 2,
             text: text1,
+            onComplete: function() {
+                startDotsAnimation();
+                console.log("Text 1 ausgeführt");
+            }
+        });
+    } else if (localStorage.getItem("gamedev_done") && !localStorage.getItem("finaltext_read")) {
+        document.querySelector("#overlay").style.display = "block";
+        gsap.to("#overlay", {
+            duration: 1,
+            delay: 1,
+            opacity: 0.5,
+        });
+        startAnimation();
+        textAnimation.to("#text", {
+            duration: 3,
+            delay: 2,
+            text: text5,
             onComplete: function() {
                 startDotsAnimation();
                 console.log("Text 1 ausgeführt");
@@ -522,9 +346,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         var title = $(this).find('title').text();
                         var image = $(this).find('image').text();
                         var link = $(this).find('link').text(); // Link aus XML holen
+
+                        var onClickFunction;
+                        if (id == 6) {
+                            onClickFunction = "showCoordinateInput()";
+                        } else {
+                            onClickFunction = "openPlanet('" + link + "')";
+                        }
     
                         // Create planet container
-                        var planetContainer = $('<div>', { class: 'planet_container', onclick: "openPlanet('" + link + "')" }).append(
+                        var planetContainer = $('<div>', { class: 'planet_container', onclick: onClickFunction }).append(
                             $('<h1>', { class: 'planet_title', text: title }),
                             $('<div>', { class: 'planet', id: 'planet' + id }).css('background-image', 'url(' + image + ')')
                         );
@@ -627,16 +458,58 @@ document.addEventListener('DOMContentLoaded', function () {
         loadPlanets();
     });
 
+    function addResetButton() {
+        let resetButton = document.createElement('button');
+        resetButton.id = "resetButton";
+        resetButton.innerText = "Zurücksetzen";
+        document.querySelector("body").appendChild(resetButton);
+
+        gsap.from('#resetButton', {
+            y: -50,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+
+        setButtonAnimation("#resetButton", resetButton);
+
+        resetButton.addEventListener('click', function() {
+            const confirmation = confirm("Bist du sicher, dass du deinen Fortschritt zurücksetzen willst?");
+            if (confirmation) {
+                localStorage.clear();
+                window.location.href = "index.html";
+            }
+        });
+    }
+
+    function removeResetButton() {
+        document.querySelector('#resetButton').remove();
+        gsap.to('#resetButton', {
+            y: -50,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out",
+            onComplete: function () {
+                document.querySelector('#resetButton').remove();
+            }
+        });
+    }
     
 
     skillIcon.addEventListener('click', function () {
         showSkills(0);
+
+        addResetButton();
+
         skillIcon.style.display = "none";
         closeSkills.style.display = "block";
     });
 
     closeSkills.addEventListener('click', function () {
         hideSkills();
+
+        removeResetButton();
+
         skillIcon.style.display = "block";
         closeSkills.style.display = "none";
     });
@@ -660,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     clearText();
                     showNextText(text4);
                 }
-                else if (textElement.innerHTML === text4  || textElement.innerHTML === allPlanetsDoneText) {
+                else if (textElement.innerHTML === text4 || textElement.innerHTML === text5) {
                     gsap.to(".textfeld", {
                         y: 1500,
                         duration: 3,
@@ -687,11 +560,219 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.querySelector("#overlay").style.display = "none";
                         }
                     });
+                    if (textElement.innerHTML === text5) {
+                        localStorage.setItem("finaltext_read", "true");
+                    }
                 }
             }
         });
     });
 });
+
+function setButtonAnimation(id, button) {
+    button.addEventListener("mouseenter", function () {
+        gsap.to(id, {
+            backgroundColor: "#f1f1f1",
+            duration: 0.2,
+            color: "#80ba24",
+        });
+        gsap.to(id, {
+            delay: 0.2,
+            backgroundColor: "#80ba24",
+            duration: 0.2,
+            color: "#f1f1f1",
+        });
+        gsap.to(id, {
+            scale: 1.05,
+            transformOrigin: "center center",
+            duration: 0.2,
+        });
+    });
+
+    button.addEventListener("mouseleave", function () {
+        gsap.to(id, {
+            scale: 1,
+            transformOrigin: "center center",
+            duration: 0.2,
+        });
+    });
+}
+
+function showCoordinateInput() {
+    const coordinates = [6, 1, 1, 6, 9];
+    const coordinateWindow = document.createElement('div');
+    const anzahlKoordinaten = 5;
+    coordinateWindow.id = "coordinateWindow";
+    document.querySelector("body").appendChild(coordinateWindow);
+
+    const coordinateHeadline = document.createElement('h1');
+    coordinateHeadline.id = "coordinateHeadline";
+    coordinateHeadline.innerHTML = "Koordinaten";
+    coordinateWindow.appendChild(coordinateHeadline);
+
+    const coordinateContainer = document.createElement('div');
+    coordinateContainer.id = "coordinateContainer";
+    coordinateWindow.appendChild(coordinateContainer);
+
+    for (let i = 0; i < anzahlKoordinaten; i++) {
+        let coordinateInput = document.createElement('input');
+        coordinateInput.className = "coordinateInput";
+        coordinateInput.maxLength = 1;
+        coordinateInput.type = "number";
+        coordinateInput.pattern = "[0-9]";
+        if (localStorage.getItem("module" + i + "_done")) {
+            coordinateInput.value = coordinates[i];
+        }
+        coordinateContainer.appendChild(coordinateInput);
+    }
+
+    let coordinateInputs = document.querySelectorAll('.coordinateInput');
+    coordinateInputs[0].focus();
+
+    coordinateInputs.forEach((input, index) => {
+        input.addEventListener('input', function(ev) {
+            // Begrenze die Eingabe auf eine Ziffer
+            if (this.value.length > 1) {
+                this.value = this.value.slice(0, 1);
+            }
+            if (index < coordinateInputs.length - 1 && !ev.inputType.includes('deleteContent')) {
+                coordinateInputs[index + 1].focus();
+            }
+        });
+
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                if (index > 0) {
+                    coordinateInputs[index - 1].focus();
+                }
+            }
+
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                if (index < coordinateInputs.length - 1) {
+                    coordinateInputs[index + 1].focus();
+                }
+            }
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                checkCoordinates(coordinates, coordinateInputs);
+            }
+            console.log(event.key);
+        });
+    });
+
+
+
+    const coordinateSubmit = document.createElement('button');
+    coordinateSubmit.id = "coordinateSubmit";
+    coordinateSubmit.innerHTML = "Prüfen";
+    coordinateWindow.appendChild(coordinateSubmit);
+    setButtonAnimation("#coordinateSubmit", coordinateSubmit);
+
+    coordinateSubmit.addEventListener('click', function () {
+       checkCoordinates(coordinates, coordinateInputs);
+    });
+
+    document.querySelector("#overlay").addEventListener('click', function () {
+        hideCoordinateInput();
+    });
+
+    const coordinateClose = document.createElement('a');
+    coordinateClose.className = "menu";
+    coordinateClose.id = "coordinateClose";
+    coordinateClose.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 384 512\"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z\"/></svg>";
+    coordinateWindow.appendChild(coordinateClose);
+
+    coordinateClose.addEventListener('click', function () {
+        hideCoordinateInput();
+    });
+
+    document.querySelector("#overlay").style.display = "block";
+
+    gsap.from('#coordinateWindow', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5
+    });
+}
+
+function checkCoordinates(coordinates, coordinateInputs) {
+    let coordinateConfirmations = 0;
+    for (let i = 0; i < coordinates.length; i++) {
+        if (coordinates[i] == coordinateInputs[i].value) {
+            coordinateConfirmations++;
+        }
+    }
+    if (coordinateConfirmations === coordinates.length) {
+        gsap.to(".coordinateInput", {
+            color: "#80ba24",
+            borderColor: "#80ba24",
+            duration: 0.2,
+            ease: "power2.out",
+            stagger: 0.1,
+            onComplete: function (){
+                gsap.to("#coordinateContainer", {
+                    scale: 1.1,
+                    duration: 0.2,
+                    ease: "power2.out",
+                })
+                gsap.to("#coordinateContainer", {
+                    scale: 1,
+                    delay: 0.2,
+                    duration: 0.2,
+                    ease: "power2.out",
+                    onComplete: function () {
+                        hideCoordinateInput();
+                        openPlanet("thema_gamedev/level1.html");
+                    }
+                })
+            }
+        });
+    }
+    else {
+        gsap.to("#coordinateSubmit", {
+            backgroundColor: "red",
+            duration: 0.2,
+            ease: "power2.out",
+        });
+        gsap.to("#coordinateSubmit", {
+            transform: "rotate(5deg)",
+            duration: 0.1,
+            ease: "power2.out",
+        });
+        gsap.to("#coordinateSubmit", {
+            transform: "rotate(-5deg)",
+            duration: 0.1,
+            ease: "power2.out",
+            delay: 0.1
+        });
+        gsap.to("#coordinateSubmit", {
+            transform: "rotate(0)",
+            duration: 0.1,
+            ease: "power2.out",
+            delay: 0.2
+        });
+        gsap.to("#coordinateSubmit", {
+            backgroundColor: "#80ba24",
+            duration: 0.1,
+            delay: 0.5,
+            ease: "power2.out",
+        });
+    }
+}
+
+function hideCoordinateInput() {
+    gsap.to('#coordinateWindow', {
+        y: -50,
+        opacity: 0,
+        duration: 0.5,
+        onComplete: function () {
+            document.querySelector("#coordinateWindow").remove();
+            document.querySelector("#overlay").style.display = "none";
+        }
+    });
+}
 function openPlanet(relativeUrl) {
     // Holen der Basis-URL des aktuellen Dokuments
     var baseUrl = window.location.href.split('/').slice(0, -1).join('/');
@@ -724,7 +805,7 @@ function openPlanet(relativeUrl) {
             console.log('Navigating to: ' + absoluteUrl);
             clouds.style.display ="none";
         }
-    });
+    })
     gsap.to(".white-overlay", {
         y: 0,
         duration: 1.5,
@@ -746,7 +827,7 @@ function openPlanet(relativeUrl) {
             console.log('Navigating to: ' + absoluteUrl);
             window.location.href = absoluteUrl;
         }
-    });
+    }); 
 }
 const starCount = 200;
         const stars = [];
@@ -778,7 +859,7 @@ const starCount = 200;
             createStar();
         }
 
-        animateStars();
+       animateStars(); 
 
         function showQr() {
             var qrcodeContainer = document.getElementById('qrcode-container');
@@ -834,3 +915,11 @@ const starCount = 200;
         document.getElementById('qrbutton').addEventListener('mouseleave', function() {
             hideQr();
         });
+
+        function adjustLayout() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        window.addEventListener('resize', adjustLayout);
+        window.addEventListener('load', adjustLayout);

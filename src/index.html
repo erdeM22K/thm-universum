@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -10,11 +10,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="./davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
 </head>
-<div class="white-overlay-start"></div>
-<div class="white-overlay"></div>
 <body id="body">
+    <div class="white-overlay-start"></div>
+    <div class="white-overlay"></div>
     <header>
-        <button id="qrbutton" onclick="showQr()"><i class="fa fa-qrcode"></i></button>
+    
         <div id="qrcode-container">
             <h1  id="qrtitle">SCAN ME:</h1>
             <div id="qrcode"></div>
@@ -23,6 +23,7 @@
         <h2 id="title2"></h2>
         <h1 id="title"></h1>
     </header>
+    <button id="qrbutton" class="menu" onclick="showQr()"><i class="fa fa-qrcode"></i></button>
     <a class="menu" id="skillbars" title="Zu deinen Skills">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 160H320V128H448v32zM48 64C21.5 64 0 85.5 0 112v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM448 352v32H192V352H448zM48 288c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48H48z"/></svg>
     </a>
@@ -35,7 +36,7 @@
     <footer>
         <div>
             <p class="footetext" id="copyright"></p>
-            <a class="footetext" id="impressum" href="/"></a>
+            <a class="footetext" id="impressum" onclick ="openPlanet('impressum/impressum.html')""></a>
         </div>
     </footer>
 

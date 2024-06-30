@@ -1,4 +1,4 @@
-document.getElementById('textInput').addEventListener('keydown', function(event) {
+document.getElementById('textInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {  // Überprüfen, ob die Enter-Taste gedrückt wurde
         var text = event.target.value;
         
@@ -7,40 +7,45 @@ document.getElementById('textInput').addEventListener('keydown', function(event)
         var reflection = document.getElementsByClassName('cls-9')[0];
         var color = document.getElementsByClassName('cls-11')[0];
 
-        if (text === 'red' || text === 'rot') {
-            changeColor('.cls-7', '#AA1A1A')
-            changeColor('.cls-9', '#E22424')
-            changeColor('.cls-11', '#C40808') 
+        if (text === 'red' || text === 'rot' || text === 'Red' || text === 'Rot') {
+            changeColor('.cls-7', '#AA1A1A');
+            changeColor('.cls-9', '#E22424');
+            changeColor('.cls-11', '#C40808');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
-        } else if (text === 'blue' || text === 'blau') {
-            changeColor('.cls-7', '#4B69E2')
-            changeColor('.cls-9', '#8DABFF')
-            changeColor('.cls-11', '#5A89FF') 
+        } else if (text === 'blue' || text === 'blau' || text === 'Blue' || text === 'Blau') {
+            changeColor('.cls-7', '#4B69E2');
+            changeColor('.cls-9', '#8DABFF');
+            changeColor('.cls-11', '#5A89FF');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
-        } else if (text === 'yellow' || text === 'gelb') {
-            changeColor('.cls-7', '#EDD529')
-            changeColor('.cls-9', '#FFF86C')
-            changeColor('.cls-11', '#FCEB1D') 
+        } else if (text === 'yellow' || text === 'gelb' || text === 'Yellow' || text === 'Gelb') {
+            changeColor('.cls-7', '#EDD529');
+            changeColor('.cls-9', '#FFF86C');
+            changeColor('.cls-11', '#FCEB1D');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
-        } else if (text === 'green' || text === 'gruen' || text === 'grün') {
-            changeColor('.cls-7', '#47D647')
-            changeColor('.cls-9', '#95FF83')
-            changeColor('.cls-11', '#4BF752') 
+        } else if (text === 'green' || text === 'gruen' || text === 'grün' ||  text === 'Green' || text === 'Gruen' || text === 'Grün') {
+            changeColor('.cls-7', '#47D647');
+            changeColor('.cls-9', '#95FF83');
+            changeColor('.cls-11', '#4BF752');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
-        } else if (text === 'orange') {
-            changeColor('.cls-7', '#F2AE40')
-            changeColor('.cls-9', '#FFD85C')
-            changeColor('.cls-11', '#FFC840') 
+        } else if (text === 'orange' || text === 'Orange') {
+            changeColor('.cls-7', '#F2AE40');
+            changeColor('.cls-9', '#FFD85C');
+            changeColor('.cls-11', '#FFC840');
+            localStorage.setItem("wpr_level2_done", "true");
             clearText();
-            showNextText(text5);
+            showNextText(text5, "off", "none");
             showInputField("off");
         }
     }

@@ -6,6 +6,7 @@ var text4 = "Serifenlose Schriftarten fehlen diese zusätzlichen Linien und sind
 var text5 = "Handgeschriebene Schriftarten ahmen oft menschliche Handschrift nach und vermitteln ein persönliches und kreatives Gefühl in Designs.";
 var text6 = "Monospace-Schriftarten haben eine feste Breite für jeden Buchstaben, was sie ideal für Programmierungen und Quelltexte macht, da sie eine klare Struktur bieten.";
 var text7 = "Serifen können einen signifikanten Einfluss auf die Wahrnehmung von Texten und Produkten haben. Sie werden häufig in Printmedien und Logos verwendet, um Eleganz und Tradition zu vermitteln, während serifenlose Schriften für ihre Lesbarkeit auf Bildschirmen geschätzt werden.";
+var text8 = "Du bist am Ende des Levels angekommen. Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite.";
 
 var title_bild1 = "Serifen-Schriftart";
 var title_bild2 = "Serifenlose-Schriftart";
@@ -14,11 +15,14 @@ var title_bild4 = "Monospace";
 var title_bild5 = "Anwendung in der Praxis";
 var title_bild6 = "Vielen Dank!";
 
+const textAnimation = gsap.timeline();
+
 
 gsap.registerPlugin(TextPlugin);
 
+localStorage.setItem("lastLevel", "md1");
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -37,33 +41,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3, ".bild1");
-            updateTitleText(title_bild1)
-        } else if (textElement.innerText === text3) {
-            clearText();
-            showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
-            updateTitleText(title_bild2); // Titeltext aktualisieren
-        } else if (textElement.innerText === text4) {
-            clearText();
-            showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild3); // Titeltext aktualisieren
-        } else if (textElement.innerText === text5) {
-            clearText();
-            showNextText(text6, ".bild4"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild4); // Titeltext aktualisieren
-        } else if (textElement.innerText === text6) {
-            clearText();
-            showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild5); // Titeltext aktualisieren
-        } else if (textElement.innerText === text7) {
-            clearText();
-            showNextText(text8, ".bild6"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild6); // Titeltext aktualisieren
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        } else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3, ".bild1");
+                updateTitleText(title_bild1)
+            } else if (textElement.innerText === text3) {
+                clearText();
+                showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
+                updateTitleText(title_bild2); // Titeltext aktualisieren
+            } else if (textElement.innerText === text4) {
+                clearText();
+                showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild3); // Titeltext aktualisieren
+            } else if (textElement.innerText === text5) {
+                clearText();
+                showNextText(text6, ".bild4"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild4); // Titeltext aktualisieren
+            } else if (textElement.innerText === text6) {
+                clearText();
+                showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild5); // Titeltext aktualisieren
+            } else if (textElement.innerText === text7) {
+                clearText();
+                showNextText(text8); // Hier Bild 2 einblenden
+                updateTitleText(title_bild6); // Titeltext aktualisieren
+                localStorage.setItem("md_level1_done", 'true');
+            } else if (textElement.innerText === text8) {
+                backPlanet("md.html");
+            }
         }
     });
 });
@@ -130,12 +141,12 @@ function startLevel() {
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text, imageSelector) {
     // Zuerst das Text-Element aktualisieren
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3); // Hier entsprechenden letzten Text übergeben
+            startDotsAnimation(); // Hier entsprechenden letzten Text übergeben
             console.log("Text wird ausgeführt");
         }
     });
@@ -155,7 +166,7 @@ function showImage(imageSelector) {
 
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -170,13 +181,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });

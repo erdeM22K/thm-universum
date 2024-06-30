@@ -40,7 +40,9 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
             if (textElement.innerText === text1) {
                 clearText();
                 showNextText(text2);
-            }
+            } else if (textElement.innerHTML === "Sehr gut, deine Eingabe war korrekt :) <br> Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du zurück zur Levelauswahl.") {
+            backPlanet("av.html");
+        }
         }
     });
 });
@@ -185,13 +187,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });
@@ -238,7 +241,7 @@ function stopSelectionAnimation(id) {
 function testBeideVerbunden() {
     if (speakerConnected[0] && speakerConnected[1]) {
         localStorage.setItem("av_level3_done", 'true');
-        textRichtig = "Herzlichen Glückwunsch, du hast es geschafft!";
+        textRichtig = "Sehr gut, deine Eingabe war korrekt :) <br> Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du zurück zur Levelauswahl.";
     }
 }
 function backPlanet(relativeUrl) {

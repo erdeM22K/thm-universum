@@ -1,3 +1,11 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Nicht präfixierte Versionen */
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -51,11 +59,12 @@ body {
 .textfeld {
     position: absolute;
     bottom: 1%;
+    left: 10%;
     width: 80%;
     height: 25%;
     max-height: 25%; /* maximal erlaubte Höhe */
     background-color: rgba(255, 255, 255, 0.5);
-    z-index: 1;
+    z-index: 10;
     border: 2px solid #000; /* Korrektur der Border-Deklaration */
     border-radius: 1em;
     overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
@@ -65,7 +74,22 @@ body {
 
 
 .textfeld::-webkit-scrollbar {
-    display: none; /* Für Webkit-basierte Browser (Chrome, Safari) */
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
 }
 
 .copilot {
@@ -200,6 +224,7 @@ body {
     }
     .textfeld {
         width: 100%;
+        left: 0%;
     }
     #text {
         margin-right: 2em;

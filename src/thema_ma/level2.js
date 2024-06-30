@@ -5,7 +5,7 @@ var text3 = "Eine Hamburger-Menüleiste ist ein Symbol, das aus drei horizontale
 var text4 = "Die Listenfunktion ist ein wesentliches UI-Element, das verwendet wird, um eine Reihe von Einträgen in einer strukturierten, leicht lesbaren Weise anzuzeigen. Sie findet Anwendung in verschiedenen Kontexten wie Aufgabenlisten, Menüauswahlen und Datenanzeigen, wodurch Benutzer Informationen effizient durchsuchen und auswählen können.";
 var text5 = "Die Swipefunktion ermöglicht es Benutzern, durch horizontales oder vertikales Wischen auf einem Touchscreen verschiedene Inhalte oder Aktionen auszulösen. Diese Geste wird häufig in Galerien, Nachrichtenseiten und mobilen Apps verwendet, um eine intuitive und flüssige Navigation zu gewährleisten.";
 var text6 = "Mobile Rotation bezieht sich auf die automatische Anpassung des Bildschirms eines mobilen Geräts (wie Smartphones oder Tablets) zwischen Hoch- und Querformat, basierend auf der physischen Ausrichtung des Geräts. Diese Funktion nutzt Sensoren wie den Beschleunigungsmesser und das Gyroskop, um die Position des Geräts zu erkennen und den Bildschirminhalt entsprechend zu drehen."
-var text7 = "Du bist am Ende des Levels angekommen. Über den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite"
+var text7 = "Du bist am Ende des Levels angekommen. Über einen Klick oder den Pfeil in der oberen linken Ecke kommst du wieder zur Startseite.";
 
 var title_bild1 = "Hamburger-Menüleiste";
 var title_bild2 = "Listenfunktion";
@@ -64,10 +64,12 @@ document.querySelectorAll('.textfeld').forEach(function(element) {
                 updateTitleText(title_bild4); // Titeltext aktualisieren
             } else if (textElement.innerText === text6) {
                 clearText();
-                showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
+                showNextText(text7); // Hier Bild 2 einblenden
                 updateTitleText(title_bild5); // Titeltext aktualisieren
                 console.log("MA Level 2 fertig");
                 localStorage.setItem("ma_level2_done", 'true');
+            } else if (textElement.innerText === text7) {
+                backPlanet("ma.html");
             }
         }
     });
@@ -140,7 +142,7 @@ function showNextText(text, imageSelector) {
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3); // Hier entsprechenden letzten Text übergeben
+            startDotsAnimation(); // Hier entsprechenden letzten Text übergeben
             console.log("Text wird ausgeführt");
         }
     });
@@ -175,13 +177,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });

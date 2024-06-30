@@ -14,6 +14,8 @@ var title_bild5 = "Game Development"
 
 const whiteOverlay = document.querySelector('.white-overlay-start');
 
+const textAnimation = gsap.timeline();
+
 gsap.registerPlugin(TextPlugin);
 
 gsap.to(".white-overlay-start", {
@@ -27,7 +29,7 @@ gsap.to(".white-overlay-start", {
 });
 
 // Anfangs Text anzeigen
-gsap.to("#text", {
+textAnimation.to("#text", {
     duration: 3,
     delay: 2,
     text: text1,
@@ -46,29 +48,37 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelectorAll('.textfeld').forEach(function(element) {
     element.addEventListener('click', function() {
         const textElement = document.getElementById("text");
-        if (textElement.innerText === text1) {
-            clearText();
-            showNextText(text2);
-        } else if (textElement.innerText === text2) {
-            clearText();
-            showNextText(text3, ".bild1");
-            updateTitleText(title_bild1)
-        } else if (textElement.innerText === text3) {
-            clearText();
-            showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
-            updateTitleText(title_bild2); // Titeltext aktualisieren
-        } else if (textElement.innerText === text4) {
-            clearText();
-            showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild3); // Titeltext aktualisieren
-        } else if (textElement.innerText === text5) {
-            clearText();
-            showNextText(text6, ".bild4"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild4); // Titeltext aktualisieren
-        } else if (textElement.innerText === text6) {
-            clearText();
-            showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
-            updateTitleText(title_bild5); // Titeltext aktualisieren
+        if (textAnimation.isActive() && textAnimation.progress() < 1) {
+            textAnimation.progress(1);
+        }
+        else {
+            if (textElement.innerText === text1) {
+                clearText();
+                showNextText(text2);
+            } else if (textElement.innerText === text2) {
+                clearText();
+                showNextText(text3, ".bild1");
+                updateTitleText(title_bild1)
+            } else if (textElement.innerText === text3) {
+                clearText();
+                showNextText(text4, ".bild2"); // Hier Bild 1 einblenden
+                updateTitleText(title_bild2); // Titeltext aktualisieren
+            } else if (textElement.innerText === text4) {
+                clearText();
+                showNextText(text5, ".bild3"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild3); // Titeltext aktualisieren
+            } else if (textElement.innerText === text5) {
+                clearText();
+                showNextText(text6, ".bild4"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild4); // Titeltext aktualisieren
+            } else if (textElement.innerText === text6) {
+                clearText();
+                showNextText(text7, ".bild5"); // Hier Bild 2 einblenden
+                updateTitleText(title_bild5); // Titeltext aktualisieren
+                localStorage.setItem("gamedev_done", "true");
+            } else if (textElement.innerText === text7) {
+                backPlanet("../index.html");
+            }
         }
     });
 });
@@ -125,12 +135,12 @@ function startLevel() {
 // Funktion zum Anzeigen des nächsten Textes
 function showNextText(text, imageSelector) {
     // Zuerst das Text-Element aktualisieren
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 3,
         delay: 1,
         text: text,
         onComplete: function() {
-            startDotsAnimation(text3); // Hier entsprechenden letzten Text übergeben
+            startDotsAnimation(); // Hier entsprechenden letzten Text übergeben
             console.log("Text wird ausgeführt");
         }
     });
@@ -150,7 +160,7 @@ function showImage(imageSelector) {
 
 
 function clearText() {
-    gsap.to("#text", {
+    textAnimation.to("#text", {
         duration: 0.5,
         text: "",
         onComplete: function() {
@@ -165,13 +175,14 @@ function startDotsAnimation(lastText) {
         document.getElementById("dots").style.display = "none";
     } else {
         document.getElementById("dots").style.display = "block";
-        gsap.to("#dots", { duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", x: "+=10" });
+        document.getElementById("dots").innerText = "...>"
         gsap.to("#dots", {
-            duration: 2,
+            duration: 1,
             repeat: -1,
-            text: "...",
+            yoyo: true,
+            ease: "power1.inOut",
+            x: "+=10",
             onComplete: function() {
-
                 console.log("Textfeld geleert");
             }
         });

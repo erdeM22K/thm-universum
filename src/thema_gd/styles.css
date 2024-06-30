@@ -1,3 +1,11 @@
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Nicht präfixierte Versionen */
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -58,7 +66,27 @@ html, body {
     z-index: 1;
     border: #000 solid;
     border-radius: 1em;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
   }
+
+.textfeld::-webkit-scrollbar {
+  width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+  border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
+}
 
   .copilot {
     height: 60vh;
@@ -93,7 +121,7 @@ html, body {
 }
 
 .modes {
-  width: 30em;
+  width: 25em;
 }
 .image_container {
   display: flex;
@@ -104,7 +132,7 @@ html, body {
   height: 100%;
 }
 .modes_container {
-  display: flex;
+  display: none;
   position: absolute;
   justify-content: center;
   align-items: center;
@@ -127,7 +155,7 @@ html, body {
 }
 
 .arrows_container {
-  display: flex;
+  display: none;
   position: absolute;
   justify-content: space-between;
   z-index: 3;

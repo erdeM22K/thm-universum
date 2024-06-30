@@ -105,6 +105,22 @@ svg {
     opacity: 0;
 }
 
+#resetButton {
+    font-family: "Press Start 2P";
+    position: absolute; /* Ändere die Position auf fixiert */
+    bottom: 25px; /* Platziere den Button 25px über dem unteren Rand */
+    left: 50%; /* Zentriere den Button horizontal */
+    transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
+    padding: 20px 30px;
+    font-size: 1rem;
+    background-color: #80ba24;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 15;
+}
+
 .level {
     cursor: pointer;
 }
@@ -115,12 +131,30 @@ svg {
     bottom: 1%;
     width: 80%;
     height: 25%;
-    left: 10%;
     background-color: rgba(255, 255, 255, 0.5); /* Schwarz mit 50% Transparenz */
-    z-index: 10;
+    z-index: 1;
     border: #000 solid;
     border-radius: 1em;
-    display: none;
+    overflow-y: auto; /* Scrollbalken bei Bedarf anzeigen */
+}
+
+.textfeld::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollleiste */
+}
+
+.textfeld::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Hintergrund der Scrollleiste */
+    border-radius: 10px;
+}
+
+.textfeld::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* Farbe des Scrollbalkens */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Rand um den Scrollbalken */
+}
+
+.textfeld::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Farbe des Scrollbalkens bei Hover */
 }
 
 .copilot {

@@ -1,3 +1,11 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Nicht präfixierte Versionen */
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -221,20 +229,24 @@ body {
         font-size: 16px;
     }
     .bild1_container .bild1{
-        width: 245px;
-        height: 420px;
+        width: 90%;
+        height: 90%;
     }
     .bild1_container .bild2{
-        width: 245px;
-        height: 420px;
+        width: 90%;
+        height: 90%;
     }
     .bild1_container .bild3{
-        width: 300px;
-        height: 420px;
+        width: 90%;
+        height: 90%;
     }
     .bild1_container .bild4{
-        width: 300px;
-        height: 420px;
+        width: 90%;
+        height: 90%;
+    }
+    .bild1_container .bild5{
+        width: 90%;
+        height: 90%;
     }
     .transition-overlay-back {
         display: block;
@@ -330,18 +342,25 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-.bild1_container .bild3{
-    width: 300px;
-    height: 420px;
-}
-
-.bild1_container .bild4{
-    width: 300px;
-    height: 420px;
-}
-
-.bild1_container .bild5{
-    width: 400px;
-    height: 200px;
+@media (min-width: 581px) {
+    .bild1_container .bild1{
+        width: 60%;
+        height: 60%;
+    }
+    .bild1_container .bild2{
+        width: 60%;
+        height: 60%;
+    }
+    .bild1_container .bild3{
+        width: 60%;
+        height: 60%;
+    }
+    .bild1_container .bild4{
+        width: 60%;
+        height: 60%;
+    }
+    .bild1_container .bild5{
+        width: 60%;
+        height: 60%;
+    }
 }
