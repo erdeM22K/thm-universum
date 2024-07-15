@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: "power1.inOut",
         onComplete: () => {
             whiteOverlayStart.style.display ="none";
-    }
-});
+        }
+    });
 
     localStorage.setItem("lastLevel", "0");
     // Funktion, um die Inhalte am Ende zu duplizieren
@@ -153,54 +153,72 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showSkills(delay) {
-        let skills = ["Webentwicklung", "Audiovisuelle Medien", "Grafische Datenverarbeitung", "Mobile Apps", "Mediendesign", "Game Development"];
-        let skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"]
-        let levelAnzahl = [3, 4, 3, 3, 3, 1];
-        let levelAnzahlGesamt = 0;
-        for (let i = 0; i < levelAnzahl.length - 1; i++) {
-            levelAnzahlGesamt += levelAnzahl[i];
-        }
-        let skillValues = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+        const skills = ["Webentwicklung", "Audiovisuelle Medien", "Grafische Datenverarbeitung", "Mobile Apps", "Mediendesign", "Game Development"];
+        const skillsShort = ["wpr", "av", "gd", "ma", "md", "gamedev"];
+        const levelCounts = [3, 4, 3, 3, 3, 1];
+        const baseSkillValue = 0.05;
+        const totalSkillValue = 0.95;
+        const gameDesignIndex = 5;
 
+        let totalLevels = calculateTotalLevels(levelCounts);
+        let skillValues = initializeSkillValues(skills.length, baseSkillValue);
+
+        createSkillDisplay(skills);
+        updateSkillValues(skills, skillsShort, levelCounts, skillValues, totalSkillValue, totalLevels, gameDesignIndex);
+        animateSkills(delay, skillValues);
+    }
+
+    function calculateTotalLevels(levelCounts) {
+        return levelCounts.reduce((total, count) => total + count, 0);
+    }
+
+    function initializeSkillValues(length, baseValue) {
+        return Array(length).fill(baseValue);
+    }
+
+    function createSkillDisplay(skills) {
         const skillHeadline = document.createElement('h1');
         skillHeadline.id = "skillHeadline";
         skillHeadline.innerHTML = "Deine Skills";
-        document.querySelector("body").appendChild(skillHeadline);
+        document.body.appendChild(skillHeadline);
+
         const skillContainer = document.createElement('div');
         skillContainer.id = "skillContainer";
-        document.querySelector("body").appendChild(skillContainer);
+        document.body.appendChild(skillContainer);
 
-        for (let i = 0; i < skills.length; i++) {
+        skills.forEach(skill => {
             let skillName = document.createElement('div');
             skillName.className = "skillName";
-            skillName.className = "skillName";
-            skillName.innerHTML = skills[i];
+            skillName.innerHTML = skill;
             skillContainer.appendChild(skillName);
+
             let skillValue = document.createElement('div');
             skillValue.className = "skillValue";
             skillContainer.appendChild(skillValue);
+        });
+    }
 
-            //Prüfen, ob ein Modul fertig ist und Eintragen des skillValues
+    function updateSkillValues(skills, skillsShort, levelCounts, skillValues, totalSkillValue, totalLevels, gameDesignIndex) {
+        let skillBonus = totalSkillValue / totalLevels;
 
-
-        }
-        for (let modul = 0; modul < skills.length - 1; modul++) {
-            let skillBonusGameDesign = 0.95/levelAnzahlGesamt;
-            for (let level = 1; level <= levelAnzahl[modul]; level++) {
-                if(localStorage.getItem(skillsShort[modul] + "_level" + level + '_done')) {
-                    console.log(skills[modul] + " Level " + level + " fertig.");
-                    skillValues[modul] += 0.95/levelAnzahl[modul];
-                    skillValues[5] += skillBonusGameDesign;
+        for (let i = 0; i < skills.length; i++) {
+            for (let level = 1; level <= levelCounts[i]; level++) {
+                if (localStorage.getItem(`${skillsShort[i]}_level${level}_done`)) {
+                    console.log(`${skills[i]} Level ${level} fertig.`);
+                    skillValues[i] += totalSkillValue / levelCounts[i];
+                    skillValues[gameDesignIndex] += skillBonus;
                 }
             }
         }
+    }
 
+    function animateSkills(delay, skillValues) {
         document.querySelector("#overlay").style.display = "block";
+
         gsap.to("#overlay", {
             duration: 0.5,
             delay: delay,
             opacity: 0.9,
-
         });
 
         gsap.from('#skillHeadline', {
@@ -220,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         for (let i = 0; i < skillValues.length; i++) {
             let staggerFactor = 0.1;
-            gsap.to(".skillValue:nth-child(" + (i * 2 + 2) + ")", {
+            gsap.to(`.skillValue:nth-child(${i * 2 + 2})`, {
                 delay: delay + 0.3 + i * staggerFactor,
                 width: skillValues[i] * 100 + "%",
                 duration: 0.5,
@@ -320,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
         startAnimationDesktop();
     }
     mediaQuery2.addListener(handleMediaQueryChange2);
-    
+
     $(document).ready(function() {
         function loadPlanets() {
             $.ajax({
@@ -330,16 +348,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 success: function(xml) {
                     // Body
                     $('#body').css('background-image', 'url(' + $(xml).find('background').text() + ')');
-    
+
                     // Header
                     $('#logo').attr('src', $(xml).find('logo').text());
                     $('#title2').text($(xml).find('title1').text());
                     $('#title').text($(xml).find('title2').text());
-    
+
                     // Clouds
                     var cloudsSvg = $(xml).find('clouds').html(); // Get the SVG content as HTML string
                     $('.clouds-wrapper').html(cloudsSvg); // Inject SVG into the clouds-wrapper
-    
+
                     // Planets
                     $(xml).find('planet').each(function(index) {
                         var id = $(this).attr('id');
@@ -353,46 +371,46 @@ document.addEventListener('DOMContentLoaded', function () {
                         } else {
                             onClickFunction = "openPlanet('" + link + "')";
                         }
-    
+
                         // Create planet container
                         var planetContainer = $('<div>', { class: 'planet_container', onclick: onClickFunction }).append(
                             $('<h1>', { class: 'planet_title', text: title }),
                             $('<div>', { class: 'planet', id: 'planet' + id }).css('background-image', 'url(' + image + ')')
                         );
-    
+
                         $('#planeten_container').append(planetContainer);
                     });
-    
+
                     // Footer
                     $('#copyright').text($(xml).find('links > copyright').text());
                     $('#impressum').text($(xml).find('links > impressum').text());
-    
+
                     // Call animation functions based on media queries
                     const mediaQuery = window.matchMedia('(max-width: 480px)');
                     const mediaQuery2 = window.matchMedia('(min-width: 481px)');
-    
+
                     function handleMediaQueryChange(event) {
                         if (event.matches) {
                             animatePlanetsMobile();
                         }
                     }
-    
+
                     function handleMediaQueryChange2(event) {
                         if (event.matches) {
                             animatePlanetsDesktop();
                         }
                     }
-    
+
                     if (mediaQuery.matches) {
                         animatePlanetsMobile();
                     }
                     mediaQuery.addListener(handleMediaQueryChange);
-    
+
                     if (mediaQuery2.matches) {
                         animatePlanetsDesktop();
                     }
                     mediaQuery2.addListener(handleMediaQueryChange2);
-    
+
                     // Infinite scroll
                     let loading = false;
                     $(window).on('scroll', function() {
@@ -413,47 +431,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-    
+
         // Function to start animation on desktop
         function animatePlanetsDesktop() {
             if(!localStorage.getItem("landingpage_visited")) {
-            gsap.from('.planet', {
-                y: -2500,
-                duration: 2,
-                stagger: 0.5,
-                ease: 'power4.out',
-                delay: 3
-            });
-            gsap.from('.planet_title', {
-                y: -2500,
-                duration: 2.5,
-                stagger: 0.5,
-                ease: 'power4.out',
-                delay: 3
-            });
+                gsap.from('.planet', {
+                    y: -2500,
+                    duration: 2,
+                    stagger: 0.5,
+                    ease: 'power4.out',
+                    delay: 3
+                });
+                gsap.from('.planet_title', {
+                    y: -2500,
+                    duration: 2.5,
+                    stagger: 0.5,
+                    ease: 'power4.out',
+                    delay: 3
+                });
+            }
         }
-        }
-    
+
         // Function to start animation on mobile
         function animatePlanetsMobile() {
             if(!localStorage.getItem("landingpage_visited")) {
-            gsap.from('.planet', {
-                x: -2500,
-                duration: 2,
-                stagger: 0.5,
-                ease: 'power4.out',
-                delay: 1.5
-            });
-            gsap.from('.planet_title', {
-                x: -2500,
-                duration: 2.5,
-                stagger: 0.5,
-                ease: 'power4.out',
-                delay: 1.5
-            });
+                gsap.from('.planet', {
+                    x: -2500,
+                    duration: 2,
+                    stagger: 0.5,
+                    ease: 'power4.out',
+                    delay: 1.5
+                });
+                gsap.from('.planet_title', {
+                    x: -2500,
+                    duration: 2.5,
+                    stagger: 0.5,
+                    ease: 'power4.out',
+                    delay: 1.5
+                });
+            }
         }
-        }
-    
+
         // Call the function to load planets and initiate animations
         loadPlanets();
     });
@@ -494,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    
+
 
     skillIcon.addEventListener('click', function () {
         showSkills(0);
@@ -600,10 +618,20 @@ function setButtonAnimation(id, button) {
 
 function showCoordinateInput() {
     const coordinates = [6, 1, 1, 6, 9];
+    const totalCoordinates = 5;
+
+    createCoordinateWindow();
+    const coordinateInputs = createCoordinateInputs(totalCoordinates, coordinates);
+    setInputFocusAndNavigation(coordinateInputs);
+    createCoordinateSubmitButton(coordinates, coordinateInputs);
+    createCoordinateCloseButton();
+    showOverlay();
+}
+
+function createCoordinateWindow() {
     const coordinateWindow = document.createElement('div');
-    const anzahlKoordinaten = 5;
     coordinateWindow.id = "coordinateWindow";
-    document.querySelector("body").appendChild(coordinateWindow);
+    document.body.appendChild(coordinateWindow);
 
     const coordinateHeadline = document.createElement('h1');
     coordinateHeadline.id = "coordinateHeadline";
@@ -613,14 +641,18 @@ function showCoordinateInput() {
     const coordinateContainer = document.createElement('div');
     coordinateContainer.id = "coordinateContainer";
     coordinateWindow.appendChild(coordinateContainer);
+}
 
-    for (let i = 0; i < anzahlKoordinaten; i++) {
+function createCoordinateInputs(totalCoordinates, coordinates) {
+    const coordinateContainer = document.getElementById('coordinateContainer');
+
+    for (let i = 0; i < totalCoordinates; i++) {
         let coordinateInput = document.createElement('input');
         coordinateInput.className = "coordinateInput";
         coordinateInput.maxLength = 1;
         coordinateInput.type = "number";
         coordinateInput.pattern = "[0-9]";
-        if (localStorage.getItem("module" + i + "_done")) {
+        if (localStorage.getItem(`module${i}_done`)) {
             coordinateInput.value = coordinates[i];
         }
         coordinateContainer.appendChild(coordinateInput);
@@ -628,32 +660,18 @@ function showCoordinateInput() {
 
     let coordinateInputs = document.querySelectorAll('.coordinateInput');
     coordinateInputs[0].focus();
+    return coordinateInputs;
+}
 
+function setInputFocusAndNavigation(coordinateInputs) {
     coordinateInputs.forEach((input, index) => {
-        input.addEventListener('input', function(ev) {
-            // Begrenze die Eingabe auf eine Ziffer
-            if (this.value.length > 1) {
-                this.value = this.value.slice(0, 1);
-            }
-            if (index < coordinateInputs.length - 1 && !ev.inputType.includes('deleteContent')) {
-                coordinateInputs[index + 1].focus();
-            }
+        input.addEventListener('input', function (ev) {
+            limitInputToSingleDigit(this);
+            focusNextInput(ev, index, coordinateInputs);
         });
 
-        input.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') {
-                event.preventDefault();
-                if (index > 0) {
-                    coordinateInputs[index - 1].focus();
-                }
-            }
-
-            if (event.key === 'ArrowRight') {
-                event.preventDefault();
-                if (index < coordinateInputs.length - 1) {
-                    coordinateInputs[index + 1].focus();
-                }
-            }
+        input.addEventListener('keydown', function (event) {
+            handleArrowKeys(event, index, coordinateInputs);
             if (event.key === 'Enter') {
                 event.preventDefault();
                 checkCoordinates(coordinates, coordinateInputs);
@@ -661,41 +679,76 @@ function showCoordinateInput() {
             console.log(event.key);
         });
     });
+}
 
+function limitInputToSingleDigit(input) {
+    if (input.value.length > 1) {
+        input.value = input.value.slice(0, 1);
+    }
+}
 
+function focusNextInput(ev, index, coordinateInputs) {
+    if (index < coordinateInputs.length - 1 && !ev.inputType.includes('deleteContent')) {
+        coordinateInputs[index + 1].focus();
+    }
+}
 
+function handleArrowKeys(event, index, coordinateInputs) {
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        if (index > 0) {
+            coordinateInputs[index - 1].focus();
+        }
+    }
+
+    if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        if (index < coordinateInputs.length - 1) {
+            coordinateInputs[index + 1].focus();
+        }
+    }
+}
+
+function createCoordinateSubmitButton(coordinates, coordinateInputs) {
     const coordinateSubmit = document.createElement('button');
     coordinateSubmit.id = "coordinateSubmit";
     coordinateSubmit.innerHTML = "Prüfen";
-    coordinateWindow.appendChild(coordinateSubmit);
+    document.getElementById('coordinateWindow').appendChild(coordinateSubmit);
     setButtonAnimation("#coordinateSubmit", coordinateSubmit);
 
     coordinateSubmit.addEventListener('click', function () {
-       checkCoordinates(coordinates, coordinateInputs);
+        checkCoordinates(coordinates, coordinateInputs);
     });
+}
 
-    document.querySelector("#overlay").addEventListener('click', function () {
-        hideCoordinateInput();
-    });
-
+function createCoordinateCloseButton() {
     const coordinateClose = document.createElement('a');
     coordinateClose.className = "menu";
     coordinateClose.id = "coordinateClose";
-    coordinateClose.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 384 512\"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z\"/></svg>";
-    coordinateWindow.appendChild(coordinateClose);
+    coordinateClose.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>`;
+    document.getElementById('coordinateWindow').appendChild(coordinateClose);
 
     coordinateClose.addEventListener('click', function () {
         hideCoordinateInput();
     });
+}
 
+function showOverlay() {
     document.querySelector("#overlay").style.display = "block";
-
     gsap.from('#coordinateWindow', {
         y: -50,
         opacity: 0,
         duration: 0.5
     });
+
+    document.querySelector("#overlay").addEventListener('click', function () {
+        hideCoordinateInput();
+    });
 }
+
 
 function checkCoordinates(coordinates, coordinateInputs) {
     let coordinateConfirmations = 0;
@@ -827,99 +880,99 @@ function openPlanet(relativeUrl) {
             console.log('Navigating to: ' + absoluteUrl);
             window.location.href = absoluteUrl;
         }
-    }); 
+    });
 }
 const starCount = 200;
-        const stars = [];
+const stars = [];
 
-        function createStar() {
-            const star = document.createElement('div');
-            star.classList.add('star');
+function createStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.top = -10 + 'px';
+    star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
+    document.body.appendChild(star);
+    stars.push(star);
+}
+
+function animateStars() {
+    stars.forEach(star => {
+        const top = parseFloat(star.style.top);
+        if (top > window.innerHeight) {
+            star.style.top = -100 + 'px';
             star.style.left = Math.random() * window.innerWidth + 'px';
-            star.style.top = -10 + 'px';
-            star.speed = Math.random() * 200 + 50;  // Geschwindigkeit zwischen 1 und 4
-            document.body.appendChild(star);
-            stars.push(star);
+            star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
+        } else {
+            star.style.top = top + star.speed + 'px';
         }
+    });
+    requestAnimationFrame(animateStars);
+}
+for (let i = 0; i < starCount; i++) {
+    createStar();
+}
 
-        function animateStars() {
-            stars.forEach(star => {
-                const top = parseFloat(star.style.top);
-                if (top > window.innerHeight) {
-                    star.style.top = -100 + 'px';
-                    star.style.left = Math.random() * window.innerWidth + 'px';
-                    star.speed = Math.random() * 200 + 50;  // Neue Geschwindigkeit zuweisen
-                } else {
-                    star.style.top = top + star.speed + 'px';
-                }
-            });
-            requestAnimationFrame(animateStars);
-        }
-        for (let i = 0; i < starCount; i++) {
-            createStar();
-        }
+animateStars();
 
-       animateStars(); 
+function showQr() {
+    var qrcodeContainer = document.getElementById('qrcode-container');
+    var qrcode = document.getElementById('qrcode');
+    var qrTitle = document.getElementById('qrtitle');
+    qrcode.style.display = "block";
+    qrTitle.style.display = "block";
 
-        function showQr() {
-            var qrcodeContainer = document.getElementById('qrcode-container');
-            var qrcode = document.getElementById('qrcode');
-            var qrTitle = document.getElementById('qrtitle');
-            qrcode.style.display = "block";
-            qrTitle.style.display = "block";
-            
-            // Den QR-Code unsichtbar machen und Container einblenden
-            qrcode.style.transform = 'scale(0)';
-            qrTitle.style.transform = 'scale(0)';
-            qrcodeContainer.style.display = 'flex';
-            
-            // Timeout verwenden, um die Skalierung nach der Anzeige zu animieren
-            setTimeout(function() {
-                // Skalierung des QR-Codes auf 1 für die volle Größe
-                qrcode.style.transform = 'scale(2)';
-                qrTitle.style.transform = 'scale(1)';
-            }, 50); // Eine kurze Verzögerung für die Animation
-        }
-        
-        // Event-Listener hinzufügen, um den QR-Code beim Klick außerhalb des QR-Codes zu schließen
-        document.getElementById('qrcode-container').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideQr();
-            }
-        });
+    // Den QR-Code unsichtbar machen und Container einblenden
+    qrcode.style.transform = 'scale(0)';
+    qrTitle.style.transform = 'scale(0)';
+    qrcodeContainer.style.display = 'flex';
 
-        
+    // Timeout verwenden, um die Skalierung nach der Anzeige zu animieren
+    setTimeout(function() {
+        // Skalierung des QR-Codes auf 1 für die volle Größe
+        qrcode.style.transform = 'scale(2)';
+        qrTitle.style.transform = 'scale(1)';
+    }, 50); // Eine kurze Verzögerung für die Animation
+}
 
-        
-        // Funktion, um den QR-Code zu verbergen
-        function hideQr() {
-            var qrcodeContainer = document.getElementById('qrcode-container');
-            var qrcode = document.getElementById('qrcode');
-            var qrTitle = document.getElementById('qrtitle');
-            
-            // Skalierung des QR-Codes auf 0 für das Verstecken
-            qrcode.style.transform = 'scale(0)';
-            qrTitle.style.transform = 'scale(0)';
-            
-            // Den Container nach einer kurzen Verzögerung ausblenden, um die Animation abzuschließen
-            setTimeout(function() {
-                qrcodeContainer.style.display = 'none';
-            }, 150); // Zeit entsprechend der CSS-Transition-Dauer anpassen
-        }
-        
-        document.getElementById('qrbutton').addEventListener('mouseenter', function() {
-            showQr();
-            
-        });
-        
-        document.getElementById('qrbutton').addEventListener('mouseleave', function() {
-            hideQr();
-        });
+// Event-Listener hinzufügen, um den QR-Code beim Klick außerhalb des QR-Codes zu schließen
+document.getElementById('qrcode-container').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideQr();
+    }
+});
 
-        function adjustLayout() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        
-        window.addEventListener('resize', adjustLayout);
-        window.addEventListener('load', adjustLayout);
+
+
+
+// Funktion, um den QR-Code zu verbergen
+function hideQr() {
+    var qrcodeContainer = document.getElementById('qrcode-container');
+    var qrcode = document.getElementById('qrcode');
+    var qrTitle = document.getElementById('qrtitle');
+
+    // Skalierung des QR-Codes auf 0 für das Verstecken
+    qrcode.style.transform = 'scale(0)';
+    qrTitle.style.transform = 'scale(0)';
+
+    // Den Container nach einer kurzen Verzögerung ausblenden, um die Animation abzuschließen
+    setTimeout(function() {
+        qrcodeContainer.style.display = 'none';
+    }, 150); // Zeit entsprechend der CSS-Transition-Dauer anpassen
+}
+
+document.getElementById('qrbutton').addEventListener('mouseenter', function() {
+    showQr();
+
+});
+
+document.getElementById('qrbutton').addEventListener('mouseleave', function() {
+    hideQr();
+});
+
+function adjustLayout() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+window.addEventListener('resize', adjustLayout);
+window.addEventListener('load', adjustLayout);
