@@ -1,12 +1,22 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Nicht präfixierte Versionen */
+}
 body, html {
-    padding: 0;
+    height: 100%;
+    width: 100%;
     margin: 0;
+    padding: 0;
+    overflow: hidden;
     font-family: "Press Start 2P";
-    position: relative; /* Ändere die Position auf relativ */
 }
 
 body {
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     background-image: url("bilder/background.jpg");
     background-size: cover;
@@ -411,12 +421,10 @@ div.skillValue {
     /* Media Query für Bildschirme mit einer maximalen Breite von 480px */
     body {
         height: 100vh;
-        overflow: hidden;
-        touch-action: none;
     }
     header h1 {
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         color: #f1f1f1;
         text-shadow:
                 -2px -2px 0 #000,
@@ -431,7 +439,7 @@ div.skillValue {
     #startButton, #resetButton {
         font-size: 1rem;
         position: absolute; /* Ändere die Position auf absolut */
-        bottom: 2.5%; /* Platziere den Button 25px über dem unteren Rand */
+        bottom: 1%; /* Platziere den Button 25px über dem unteren Rand */
         transform-origin: center center;
         left: 50%; /* Zentriere den Button horizontal */
         transform: translateX(-50%); /* Verschiebe den Button um 50% seiner eigenen Breite nach links */
@@ -445,6 +453,7 @@ div.skillValue {
     .copilot {
         height: 40vh;
         width: 40vh;
+
     }
     .copilot_container {
         right: -25%;
@@ -453,7 +462,6 @@ div.skillValue {
     .textfeld {
         left:0%;
         width: 100%;
-
     }
     #text {
         margin-right: 0;
@@ -548,7 +556,7 @@ div.skillValue {
     } 
     
     .cloud {
-        display: block;
+        display: none;
         animation: kaboom 0.4s ease alternate infinite;
         transform-origin: center center;
         opacity: 0.9;
@@ -587,4 +595,16 @@ div.skillValue {
         opacity: 1;
       
       }
+    #skillbars {
+        left: 80%;
+        font-size: 4vh;
+        width:50px;
+        height: 50px;
+    }
+
+    .menu#close {
+        left: 85%;
+    }
+
+      
 }

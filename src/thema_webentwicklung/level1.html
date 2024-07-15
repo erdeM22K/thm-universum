@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="styles_webentwicklung.css">
     <title>Webentwicklung Level 1: HTML</title>
 </head>
-<div class="transition-overlay-back"></div>
-<div class="white-overlay-start"></div>
-<div class="white-overlay"></div>
 <body>
+    <div class="transition-overlay-back"></div>
+    <div class="white-overlay-start"></div>
+    <div class="white-overlay"></div>
     <div class="black_transparent">
 
         <a onclick="backPlanet('../thema_webentwicklung/wpr.html')" class="back-to-home" title="Zurück zur Startseite">
@@ -28,7 +28,7 @@
         </div>
         <button class="button" onclick="checkOrder()">Check Order</button>
         <div class="copilot_container">
-            <img class="copilot" src="../bilder/webentwicklung/copilot_sad.svg" alt="copilot_sad">
+            <img class="copilot" src="../bilder/webentwicklung/copilot_lachen.svg" alt="copilot_sad">
         </div>
         <div class="textfeld">
             <div id="text"></div>
@@ -158,7 +158,7 @@
         }
 
         function clearText() {
-            gsap.to("#text", {
+            textAnimation.to("#text", {
                 duration: 0.2,
                 text: "",
                 onComplete: function() {

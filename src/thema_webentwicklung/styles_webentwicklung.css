@@ -1,5 +1,12 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Nicht präfixierte Versionen */
+}
 html, body {
   margin: 0;
   padding: 0;
@@ -262,6 +269,7 @@ transition: transform 0.1s ease-in-out;
 #semicolon {
   display: none;
   line-height: 8%;
+  visibility: visible;
 }
 
 .transition-overlay-back {
@@ -345,6 +353,7 @@ transition: transform 0.1s ease-in-out;
   .copilot {
       height: 40vh;
       width: 20vh;
+      z-index: -2;
   }
   .copilot_container {
       top: 30%;
@@ -374,7 +383,7 @@ transition: transform 0.1s ease-in-out;
     background-color:rgba(255, 255, 255, 0.623);
     margin-bottom: 2.5em;
     margin-top: 0;
-    padding-top: 2vh;
+    padding-top: 0vh;
 
   }
   #columns li span {
